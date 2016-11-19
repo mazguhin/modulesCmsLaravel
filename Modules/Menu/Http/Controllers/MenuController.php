@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Modules\Menu\Entities\Menu;
+
 class MenuController extends Controller
 {
     /**
@@ -14,7 +16,17 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('menu::index');
+        return view('menu::index', [
+          'menu' => Menu::where('id',1)->firstOrFail()
+        ]);
+    }
+
+    public function render($menu_id)
+    {
+
+      return view('menu::render', [
+        'menu' => Menu::where('id',$menu_id)->firstOrFail()
+      ]);
     }
 
     /**
