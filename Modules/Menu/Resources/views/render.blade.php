@@ -6,5 +6,5 @@
     </ul>
   @endforeach
 @else
-
+  @include ('menu::partials.render.none')
 @endif
