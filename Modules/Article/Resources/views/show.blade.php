@@ -1,4 +1,4 @@
-@extends ('template::templates.'.TemplateInfo::active().'.layouts.main')
+@extends ('template::templates.'.Settings::get('activeTemplate').'.layouts.main')
 
 @section ('content')
 <div class="panel panel-default col-sm-5 col-sm-offset-3">
