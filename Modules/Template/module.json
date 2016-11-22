@@ -6,9 +6,12 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\Template\\Providers\\TemplateServiceProvider"
+        "Modules\\Template\\Providers\\TemplateServiceProvider",
+        "Modules\\Template\\Providers\\TemplateInfoServiceProvider"
     ],
-    "aliases":{},
+    "aliases":{
+      "TemplateInfo": "Modules\\Template\\Facades\\TemplateInfo"
+    },
     "files": [
         "start.php"
     ]
