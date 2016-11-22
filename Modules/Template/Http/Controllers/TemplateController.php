@@ -1,13 +1,12 @@
 <?php
 
-namespace Modules\Article\Http\Controllers;
+namespace Modules\Template\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Article\Entities\Article;
 
-class ArticleController extends Controller
+class TemplateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,21 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('article::index');
-    }
-
-    public function showId($id_article)
-    {
-      return view('article::show', [
-        'article' => Article::where('id',$id_article)->firstOrFail()
-      ]);
-    }
-
-    public function showSlug($slug_article)
-    {
-      return view('article::show', [
-        'article' => Article::where('slug',$slug_article)->firstOrFail()
-      ]);
+        return view('template::index');
     }
 
     /**
@@ -38,7 +23,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('article::create');
+        return view('template::create');
     }
 
     /**
@@ -56,7 +41,7 @@ class ArticleController extends Controller
      */
     public function edit()
     {
-        return view('article::edit');
+        return view('template::edit');
     }
 
     /**

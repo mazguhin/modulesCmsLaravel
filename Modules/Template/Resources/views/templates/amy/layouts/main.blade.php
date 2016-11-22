@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Test App</title>
+    <title>Amy / Template</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-      
+
 
         @yield('content')
     </div>

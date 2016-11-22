@@ -1,0 +1,15 @@
+{
+    "name": "Template",
+    "alias": "template",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Template\\Providers\\TemplateServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

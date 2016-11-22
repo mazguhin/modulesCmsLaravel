@@ -1,14 +1,5 @@
-<h1>Menu start</h1>
-@foreach ($menu->menuActivatedItems as $item)
-  <ul>
-    <li>{{ $item->title }}</li>
+@extends ('layouts.app')
 
-    @if (count($item->childrenActivated)>0)
-      <ul>
-        @foreach ($item->childrenActivated as $child)
-          <li>{{ $child->title }}</li>
-        @endforeach
-      </ul>
-    @endif
-  </ul>
-@endforeach
+@section ('content')
+  @include ('menu::partials.render.none')
+@stop
