@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Article\Entities\Article;
+use Settings;
 
 class ArticleController extends Controller
 {
@@ -13,6 +14,14 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
+
+     protected $frontTemplate = '';
+
+     public function __construct()
+     {
+       $this->frontTemplate = Settings::getFrontTemplate();
+     }
+
     public function index()
     {
         return view('article::index');
@@ -20,14 +29,14 @@ class ArticleController extends Controller
 
     public function showId($id_article)
     {
-      return view('article::show', [
+      return view('template::front.'.$this->frontTemplate.'.article.showArticle', [
         'article' => Article::where('id',$id_article)->firstOrFail()
       ]);
     }
 
     public function showSlug($slug_article)
     {
-      return view('article::show', [
+      return view('template::front.'.$this->frontTemplate.'.article.showArticle', [
         'article' => Article::where('slug',$slug_article)->firstOrFail()
       ]);
     }

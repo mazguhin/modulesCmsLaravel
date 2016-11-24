@@ -1,4 +1,4 @@
-@extends (Settings::getFrontTemplatePath())
+@extends ('template::front.amy.layouts.main')
 
 @section ('content')
 

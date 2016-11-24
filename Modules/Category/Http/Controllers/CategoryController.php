@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Category\Entities\Category;
+use Settings;
 
 class CategoryController extends Controller
 {
@@ -13,13 +14,18 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
+     protected $frontTemplate = '';
 
-    
+     public function __construct()
+     {
+       $this->frontTemplate = Settings::getFrontTemplate();
+     }
+
 
      public function showId($id_category)
      {
        $category = Category::where('id',$id_category)->firstOrFail();
-       return view('category::show', [
+       return view('template::front.'.$this->frontTemplate.'.category.showCategory', [
          'category' => $category,
          'articles' => $category->articles
        ]);
@@ -28,7 +34,7 @@ class CategoryController extends Controller
      public function showSlug($slug_category)
      {
        $category = Category::where('slug',$slug_category)->firstOrFail();
-       return view('category::show', [
+       return view('template::front.'.$this->frontTemplate.'.category.showCategory', [
          'category' => $category,
          'articles' => $category->articles
        ]);
@@ -36,7 +42,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return view('category::index');
+
     }
 
     /**
@@ -45,7 +51,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category::create');
+
     }
 
     /**
@@ -63,7 +69,7 @@ class CategoryController extends Controller
      */
     public function edit()
     {
-        return view('category::edit');
+
     }
 
     /**

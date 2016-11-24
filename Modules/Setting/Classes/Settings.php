@@ -6,6 +6,8 @@ use Modules\Setting\Entities\Setting;
 
 class Settings
 {
+
+  //get value of settings
   public function get($name)
   {
     return Setting::where('name',$name)->firstOrFail()->value;

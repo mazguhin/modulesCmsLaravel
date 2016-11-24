@@ -1,4 +1,4 @@
-@extends (Settings::getFrontTemplatePath())
+@extends ('template::front.amy.layouts.main')
 
 @section ('content')
 <div class="panel panel-default col-sm-5 col-sm-offset-3">
