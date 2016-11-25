@@ -2,13 +2,17 @@
 
 @section ('content')
 
+<h1 class="page-header">
+    {{ $category->name }}
+</h1>
 @foreach ($articles as $article)
-<div class="panel panel-default col-sm-5 col-sm-offset-3">
-  <div class="panel-heading">
-    <div class="panel-title">{{ $article->title }}</div>
-  </div>
-  <div class="panel-body">{{ $article->body }}</div>
-</div>
+<h2>
+    <a href="/article/{{ $article->slug }}">{{ $article->title }}</a>
+</h2>
+<p><i class="fa fa-bullhorn" aria-hidden="true"></i> Опубликовано {{ $article->created_at->format('d.m.Y') }}</p>
+<p>{!! $article->body !!}</p>
+<a class="btn btn-primary" href="/article/{{ $article->slug }}">Читать далее...</a>
+<hr>
 @endforeach
 
 @stop

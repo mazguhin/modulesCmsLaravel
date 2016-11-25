@@ -8,7 +8,9 @@
     "providers": [
         "Modules\\Menu\\Providers\\MenuServiceProvider"
     ],
-    "aliases":{},
+    "aliases":{
+      "MenuHelper": "Modules\\Menu\\Facades\\MenuHelper"
+    },
     "files": [
         "start.php"
     ]

@@ -11,7 +11,9 @@
     <title>Amy / Template</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ elixir('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ elixir('/css/front/amy/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <!-- Scripts -->
     <script>
@@ -22,12 +24,47 @@
 </head>
 <body>
     <div id="app">
+      @includeIf ('template::front.amy.menu.main', ['menu' => MenuHelper::getMenuByRole('main')])
+      <div class="container">
 
+          <div class="row">
 
-        @yield('content')
+              <!-- Blog Entries Column -->
+              <div class="col-md-8">
+                  @yield('content')
+              </div>
+
+              <!-- Blog Sidebar Widgets Column -->
+              <div class="col-md-4">
+
+                  <!-- Blog Search Well -->
+                  @includeIf('template::front.amy.search.show')
+
+                  <!-- Categories Well -->
+                  @includeIf ('template::front.amy.category.list', ['categories'=>CategoryHelper::getAll()])
+
+                  <!-- Side Widget Well -->
+                  @includeIf('template::front.amy.widget.show')
+
+              </div>
+
+          </div>
+          <!-- /.row -->
+
+          <hr>
+
+          <!-- Footer -->
+          <footer>
+
+          </footer>
+
+      </div>
+      <!-- /.container -->
+
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+
+    <script src="{{ elixir('/js/app.js') }}"></script>
 </body>
 </html>

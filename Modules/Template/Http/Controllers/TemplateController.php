@@ -14,7 +14,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return view('template::index');
+        return view('template::front.amy.layouts.main');
     }
 
     /**

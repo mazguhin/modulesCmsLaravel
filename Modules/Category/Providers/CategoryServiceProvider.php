@@ -2,6 +2,7 @@
 
 namespace Modules\Category\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class CategoryServiceProvider extends ServiceProvider
@@ -32,7 +33,9 @@ class CategoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        App::bind('CategoryHelper', function() {
+          return new \Modules\Category\Classes\CategoryHelper;
+        });
     }
 
     /**

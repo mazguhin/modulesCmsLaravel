@@ -1,7 +1,7 @@
 <?php
 
 namespace Modules\Menu\Providers;
-
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class MenuServiceProvider extends ServiceProvider
@@ -23,6 +23,11 @@ class MenuServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+
+        // View Composers
+        // View::composer(
+        //     'view', 'App\Http\ViewComposers\ProfileComposer'
+        // );
     }
 
     /**
@@ -32,7 +37,10 @@ class MenuServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+      App::bind('menuHelper', function()
+      {
+          return new \Modules\Menu\Classes\MenuHelper;
+      });
     }
 
     /**

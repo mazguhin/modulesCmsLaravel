@@ -8,7 +8,9 @@
     "providers": [
         "Modules\\Category\\Providers\\CategoryServiceProvider"
     ],
-    "aliases":{},
+    "aliases":{
+      "CategoryHelper": "Modules\\Category\\Facades\\CategoryHelper"
+    },
     "files": [
         "start.php"
     ]
