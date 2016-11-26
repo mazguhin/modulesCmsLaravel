@@ -14,5 +14,5 @@
 <a class="btn btn-primary" href="/article/{{ $article->slug }}">Читать далее...</a>
 <hr>
 @endforeach
-
+{{ $articles->links() }}
 @stop

@@ -16,6 +16,6 @@ class CategoryDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call("\Modules\Category\Database\Seeders\CategoriesTableSeeder");
     }
 }
