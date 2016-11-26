@@ -15,7 +15,6 @@ class DashboardDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        // $this->call("OthersTableSeeder");
+        $this->call("\Modules\Dashboard\Database\Seeders\RolesTableSeeder");
     }
 }

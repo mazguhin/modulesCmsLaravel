@@ -29,6 +29,11 @@ class User extends Authenticatable
 
     public function articles()
     {
-      return $this->hasMany('Modules/Article/Entities/Article');
+      return $this->hasMany('Modules\Article\Entities\Article');
+    }
+
+    public function role()
+    {
+      return $this->belongsTo('Modules\Dashboard\Entities\Role');
     }
 }

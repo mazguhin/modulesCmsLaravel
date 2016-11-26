@@ -8,7 +8,9 @@
     "providers": [
         "Modules\\Dashboard\\Providers\\DashboardServiceProvider"
     ],
-    "aliases":{},
+    "aliases":{
+      "RoleHelper": "Modules\\Dashboard\\Facades\\RoleHelper"
+    },
     "files": [
         "start.php"
     ]

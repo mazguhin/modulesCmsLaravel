@@ -11,15 +11,26 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-      $faker = \Faker\Factory::create('App\User');
+      //create admin
+      DB::table('users')->insert([
+        'name' => 'admin',
+        'email' => 'admin@admin.loc',
+        'password' => bcrypt('admin'),
+        'role_id' => 3,
+        'created_at' => \Carbon\Carbon::now(),
+        'updated_at' => \Carbon\Carbon::now(),
+      ]);
 
-      $limit = 5;
+      //generate users
+      $faker = \Faker\Factory::create('App\User');
+      $limit = 4;
 
       for ($i = 0; $i < $limit; $i++) {
           DB::table('users')->insert([
             'name' => $faker->name,
             'email' => $faker->unique()->email,
             'password' => bcrypt('test'),
+            'role_id' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
           ]);

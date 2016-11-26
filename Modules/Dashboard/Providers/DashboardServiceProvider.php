@@ -2,6 +2,7 @@
 
 namespace Modules\Dashboard\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class DashboardServiceProvider extends ServiceProvider
@@ -32,7 +33,10 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+      App::bind('RoleHelper', function()
+      {
+          return new \Modules\Dashboard\Classes\RoleHelper;
+      });
     }
 
     /**
