@@ -27,10 +27,17 @@
                 <li>
                     <a href="{{ $item->url }}">{{ $item->title }}</a>
                 </li>
-                @endforeach
+              @endforeach
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              @if (Auth::check())
+                <li><a href="/logout">Выйти</a></li>
+              @else
+                <li><a href="/login">Вход</a></li>
+                <li><a href="/register">Регистрация</a></li>
+              @endif
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
 </nav>

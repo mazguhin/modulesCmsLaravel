@@ -49,7 +49,6 @@
               </div>
 
           </div>
-          <!-- /.row -->
 
           <hr>
 
@@ -59,7 +58,6 @@
           </footer>
 
       </div>
-      <!-- /.container -->
 
     </div>
 
