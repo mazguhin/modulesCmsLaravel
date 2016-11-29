@@ -5,6 +5,7 @@ namespace Modules\Dashboard\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Settings;
 
 class DashboardController extends Controller
 {
@@ -12,9 +13,17 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
+
+     protected $frontTemplate = '';
+
+     public function __construct()
+     {
+       $this->frontTemplate = Settings::getFrontTemplate();
+     }
+
     public function index()
     {
-        return view('dashboard::index');
+      return view('template::back.'.$this->frontTemplate.'.index');
     }
 
     /**

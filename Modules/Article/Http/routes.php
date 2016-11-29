@@ -7,12 +7,21 @@ Route::group(['middleware' => 'web', 'prefix' => 'article', 'namespace' => 'Modu
     Route::get ('/{slug_article}', 'ArticleController@showSlug');
 });
 
-// FRONT Routes
+// BACK Routes
 Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
 {
     // edit article
     Route::get ('/edit/id/{id_article}', 'BackArticleController@edit')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin','Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
     Route::get ('/edit/{slug_article}', 'BackArticleController@edit')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin','Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
+    // create article
+    Route::get ('/create', 'BackArticleController@create')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
+    // store article
+    Route::post ('/create', 'BackArticleController@store')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
 });

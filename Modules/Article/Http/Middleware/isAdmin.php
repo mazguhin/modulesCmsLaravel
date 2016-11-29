@@ -4,7 +4,7 @@ namespace Modules\Article\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
+use RoleHelper;
 
 class isAdmin
 {
@@ -17,7 +17,7 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role->name=="administrator") {
+        if (RoleHelper::isAdmin()) {
           return $next($request);
         }
         return redirect('/');

@@ -14,7 +14,7 @@
     <link href="{{ elixir('/css/app.css') }}" rel="stylesheet">
     <link href="{{ elixir('/css/front/amy/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
-
+ 
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

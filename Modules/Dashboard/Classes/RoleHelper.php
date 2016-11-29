@@ -6,11 +6,11 @@ use Auth;
 class RoleHelper {
     public function isAdmin()
     {
-        if (Auth::check()) {
-          return Auth::user()->role->name=="administrator";
-        }
-        else {
-          return 0;
-        }
+        return (Auth::check() && Auth::user()->role->name=="administrator");
+    }
+
+    public function isModer()
+    {
+        return (Auth::check() && Auth::user()->role->name=="moderator");
     }
 }

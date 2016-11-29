@@ -4,7 +4,7 @@ namespace Modules\Article\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
+use RoleHelper;
 
 class isModer
 {
@@ -17,7 +17,7 @@ class isModer
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role->name=="moderator") {
+        if (RoleHelper::isModer()) {
           return $next($request);
         }
         return redirect('/');
