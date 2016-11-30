@@ -8,11 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Amy / Template</title>
+    <title>Smans / Панель управления</title>
 
     <!-- Styles -->
     <link href="{{ elixir('/css/app.css') }}" rel="stylesheet">
-    <!-- <link href="{{ elixir('/css/front/amy/app.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <!-- Scripts -->
@@ -34,7 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Smans</a>
+          <a class="navbar-brand" href="/dashboard">Smans</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
@@ -42,7 +41,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статьи <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="/dashboard/article/create">Создать</a></li>
-                <li><a href="#">Список</a></li>
+                <li><a href="/dashboard/article">Список</a></li>
               </ul>
             </li>
           </ul>

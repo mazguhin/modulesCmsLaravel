@@ -3,7 +3,7 @@
 @section ('content')
  <div class="panel panel-default">
    <div class="panel-heading">
-     <div class="panel-title">Создать новую статью</div>
+     <div class="panel-title">Редактирование статьи</div>
    </div>
 
   @if (session('result'))
@@ -29,15 +29,15 @@
   @include ('template::back.amy.article.errors')
 
    <div class="panel-body">
-     <form role="form" method="POST" action="/dashboard/article/create">
+     <form role="form" method="POST" action="/dashboard/article/edit/id/{{ $article->id }}">
        <div class="form-group">
         <label for="title">Заголовок*</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Введите заголовок">
+        <input type="text" value="{{ $article->title }}" class="form-control" id="title" name="title" placeholder="Введите заголовок">
        </div>
 
        <div class="form-group">
         <label for="description">Описание</label>
-        <input type="text" class="form-control" id="description" name="description" placeholder="Введите описание">
+        <input type="text" value="{{ $article->description }}" class="form-control" id="description" name="description" placeholder="Введите описание">
         <p class="help-block">Описание может видеть только администратор</p>
        </div>
 
@@ -45,7 +45,9 @@
          <label for="permission">Категория*</label>
          <select class="form-control" id="category" name="category">
             @foreach ($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>
+              <option value="{{ $category->id }}"
+                @if ($category->id==$article->category_id) selected @endif
+              >{{ $category->name }}</option>
             @endforeach
           </select>
        </div>
@@ -54,17 +56,19 @@
          <label for="permission">Доступ*</label>
          <select class="form-control" id="permission" name="permission">
            @foreach ($roles as $role)
-             <option value="{{ $role->id }}">{{ $role->name }}</option>
+           <option value="{{ $role->id }}"
+             @if ($role->id==$article->permission) selected @endif
+           >{{ $role->name }}</option>
            @endforeach
           </select>
        </div>
 
        <div class="form-group">
-         <textarea id="editor" name="editor"></textarea>
+         <textarea id="editor" name="editor">{{ $article->body }}</textarea>
        </div>
 
        {{ csrf_field() }}
-       <button type="submit" class="btn btn-success">Создать</button>
+       <button type="submit" class="btn btn-success">Применить</button>
       </form>
    </div>
  </div>

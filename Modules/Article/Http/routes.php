@@ -10,13 +10,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'article', 'namespace' => 'Modu
 // BACK Routes
 Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
 {
-    // edit article
-    Route::get ('/edit/id/{id_article}', 'BackArticleController@edit')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
-    Route::get ('/edit/{slug_article}', 'BackArticleController@edit')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
-
-    // create article
+      // create article
     Route::get ('/create', 'BackArticleController@create')
     ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
 
@@ -24,4 +18,21 @@ Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/article', 'namespa
     Route::post ('/create', 'BackArticleController@store')
     ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
 
+    // show form for edit article
+    Route::get ('/edit/id/{id_article}', 'BackArticleController@editById')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    Route::get ('/edit/{slug_article}', 'BackArticleController@editBySlug')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
+    // update article
+    Route::post ('/edit/id/{id_article}', 'BackArticleController@update')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
+    // show all articles
+    Route::get ('/', 'BackArticleController@show')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
+    // destroy article
+    Route::delete ('/{id_article}', 'BackArticleController@destroy')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
 });

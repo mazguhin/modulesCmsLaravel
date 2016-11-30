@@ -29,7 +29,13 @@ class BackArticleController extends Controller
 
     public function index()
     {
-        echo Auth::user()->role->name;
+    }
+
+    public function show()
+    {
+      return view('template::back.'.$this->frontTemplate.'.article.show',[
+        'articles' => Article::orderBy('created_at', 'desc')->paginate(10)
+      ]);
     }
 
     /**
@@ -39,7 +45,8 @@ class BackArticleController extends Controller
     public function create()
     {
       return view('template::back.'.$this->frontTemplate.'.article.create',[
-        'categories' => \Modules\Category\Entities\Category::all()
+        'categories' => \Modules\Category\Entities\Category::all(),
+        'roles' => \Modules\Dashboard\Entities\Role::all()
       ]);
     }
 
@@ -70,12 +77,11 @@ class BackArticleController extends Controller
       $article->description = $request->description;
       $article->body = $request->editor;
       $article->permission = $request->permission;
-      // $article->user_id = Auth::user()->id;
       $article->category_id = $request->category;
 
       // generation slug
       $slug = str_slug($request->title);
-      if (Article::where('slug', $slug)->count())
+      if (Article::where('slug', $slug)->count()>0)
         $article->slug = $slug.'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s');
       else
         $article->slug = $slug;
@@ -93,9 +99,23 @@ class BackArticleController extends Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit()
+
+    public function editById($id_article)
     {
-        echo 'OK';
+      return view('template::back.'.$this->frontTemplate.'.article.edit',[
+        'categories' => \Modules\Category\Entities\Category::all(),
+        'article' => Article::where('id',$id_article)->firstOrFail(),
+        'roles' => \Modules\Dashboard\Entities\Role::all()
+      ]);
+    }
+
+    public function editBySlug($slug_article)
+    {
+      return view('template::back.'.$this->frontTemplate.'.article.edit',[
+        'categories' => \Modules\Category\Entities\Category::all(),
+        'article' => Article::where('slug',$slug_article)->firstOrFail(),
+        'roles' => \Modules\Dashboard\Entities\Role::all()
+      ]);
     }
 
     /**
@@ -103,15 +123,42 @@ class BackArticleController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id_article)
     {
+      $article = Article::where('id',$id_article)->firstOrFail();
+      $article->title = $request->title;
+      $article->description = $request->description;
+      $article->body = $request->editor;
+      $article->permission = $request->permission;
+      $article->category_id = $request->category;
+
+      // generation slug
+      $slug = str_slug($request->title);
+      if ($slug!=$article->slug) {
+        if (Article::where('slug', $slug)->count()>0)
+          $article->slug = $slug.'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s');
+        else
+         $article->slug = $slug;
+      }
+
+      if ($article->save())
+        return redirect()->back()->with([
+          'result' => 'Статья успешно обновлена',
+          'slug' => $article->slug
+        ]);
+      else
+        return redirect()->back()->with('result', 'Возникла ошибка');
     }
 
     /**
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function destroy()
+
+    //  TODO: do do
+    public function destroy($id_article)
     {
+      Article::where('id',$id_article)->firstOrFail()->delete();
+      return redirect()->back()->with(['result'=>'Статья успешно удалена']);
     }
 }
