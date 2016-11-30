@@ -28,6 +28,7 @@ class CategoriesTableSeeder extends Seeder
             'description' => $faker->sentence,
             'permission' => 'all',
             'slug' => $name,
+            'user_id' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
           ]);

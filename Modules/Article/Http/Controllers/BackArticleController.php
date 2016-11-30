@@ -20,11 +20,11 @@ class BackArticleController extends Controller
 
      use ValidatesRequests;
 
-     protected $frontTemplate = '';
+     protected $backTemplate = '';
 
      public function __construct()
      {
-       $this->frontTemplate = Settings::getFrontTemplate();
+       $this->backTemplate = Settings::getBackTemplate();
      }
 
     public function index()
@@ -33,7 +33,7 @@ class BackArticleController extends Controller
 
     public function show()
     {
-      return view('template::back.'.$this->frontTemplate.'.article.show',[
+      return view('template::back.'.$this->backTemplate.'.article.show',[
         'articles' => Article::orderBy('created_at', 'desc')->paginate(10)
       ]);
     }
@@ -44,7 +44,7 @@ class BackArticleController extends Controller
      */
     public function create()
     {
-      return view('template::back.'.$this->frontTemplate.'.article.create',[
+      return view('template::back.'.$this->backTemplate.'.article.create',[
         'categories' => \Modules\Category\Entities\Category::all(),
         'roles' => \Modules\Dashboard\Entities\Role::all()
       ]);
@@ -102,18 +102,9 @@ class BackArticleController extends Controller
 
     public function editById($id_article)
     {
-      return view('template::back.'.$this->frontTemplate.'.article.edit',[
+      return view('template::back.'.$this->backTemplate.'.article.edit',[
         'categories' => \Modules\Category\Entities\Category::all(),
         'article' => Article::where('id',$id_article)->firstOrFail(),
-        'roles' => \Modules\Dashboard\Entities\Role::all()
-      ]);
-    }
-
-    public function editBySlug($slug_article)
-    {
-      return view('template::back.'.$this->frontTemplate.'.article.edit',[
-        'categories' => \Modules\Category\Entities\Category::all(),
-        'article' => Article::where('slug',$slug_article)->firstOrFail(),
         'roles' => \Modules\Dashboard\Entities\Role::all()
       ]);
     }
@@ -153,12 +144,20 @@ class BackArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      * @return Response
-     */
+     */ 
 
-    //  TODO: do do
-    public function destroy($id_article)
+    public function destroy(Request $request, $id_article)
     {
-      Article::where('id',$id_article)->firstOrFail()->delete();
-      return redirect()->back()->with(['result'=>'Статья успешно удалена']);
+      $article = Article::where('id',$id_article)->firstOrFail();
+      if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
+        // request from dashboard
+        $article->delete();
+        return redirect()->back()->with(['result'=>'Статья успешно удалена']);
+      } else {
+        // request from front
+        $category = $article->category->id;
+        $article->delete();
+        return redirect('/category/id/'.$category)->with(['result'=>'Статья успешно удалена']);
+      }
     }
 }

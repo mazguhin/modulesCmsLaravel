@@ -27,7 +27,7 @@ class CategoryController extends Controller
        $category = Category::where('id',$id_category)->firstOrFail();
        return view('template::front.'.$this->frontTemplate.'.category.showCategory', [
          'category' => $category,
-         'articles' => $category->articles()->paginate(5)
+         'articles' => $category->articles()->orderBy('created_at', 'desc')->paginate(5)
        ]);
      }
 
@@ -36,14 +36,14 @@ class CategoryController extends Controller
        $category = Category::where('slug',$slug_category)->firstOrFail();
        return view('template::front.'.$this->frontTemplate.'.category.showCategory', [
          'category' => $category,
-         'articles' => $category->articles()->paginate(5)
+         'articles' => $category->articles()->orderBy('created_at', 'desc')->paginate(5)
        ]);
      }
 
     public function index()
     {
       return view('template::front.'.$this->frontTemplate.'.category.index', [
-        'categories' => Category::paginate(5)
+        'categories' => Category::orderBy('created_at', 'desc')->paginate(5)
       ]);
     }
 

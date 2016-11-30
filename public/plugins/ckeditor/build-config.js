@@ -19,7 +19,6 @@
  * (3) http://ckeditor.com/builder/download/40c425ed2fa12159c4b74a7f6bbc282f
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
- * NOTE:
  *    This file is not used by CKEditor, you may remove it.
  *    Changing this file will not change your CKEditor configuration.
  */

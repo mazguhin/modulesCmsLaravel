@@ -21,8 +21,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/article', 'namespa
     // show form for edit article
     Route::get ('/edit/id/{id_article}', 'BackArticleController@editById')
     ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
-    Route::get ('/edit/{slug_article}', 'BackArticleController@editBySlug')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
 
     // update article
     Route::post ('/edit/id/{id_article}', 'BackArticleController@update')

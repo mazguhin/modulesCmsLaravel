@@ -28,6 +28,7 @@
 
   @include ('template::back.amy.article.errors')
 
+  <!-- TODO: добавить получение ранее введеных значений -->
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/article/create">
        <div class="form-group">

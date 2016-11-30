@@ -37,11 +37,20 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статьи <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="/dashboard/article/create">Создать</a></li>
                 <li><a href="/dashboard/article">Список</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Категории <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/dashboard/category/create">Создать</a></li>
+                <li><a href="/dashboard/category">Список</a></li>
               </ul>
             </li>
           </ul>

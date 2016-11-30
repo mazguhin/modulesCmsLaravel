@@ -38,4 +38,9 @@ class User extends Authenticatable
     {
       return $this->belongsTo('Modules\Dashboard\Entities\Role');
     }
+
+    public function categories()
+    {
+      return $this->hasMany('Modules\Category\Entities\Category');
+    }
 }

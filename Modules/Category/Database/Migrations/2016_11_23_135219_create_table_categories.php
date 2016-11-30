@@ -18,6 +18,7 @@ class CreateTableCategories extends Migration
             $table->string('description');
             $table->string('permission');
             $table->string('slug');
+            $table->integer('user_id')->unsigned()->default(0);
             $table->timestamps();
         });
     }
