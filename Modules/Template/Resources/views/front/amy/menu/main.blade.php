@@ -8,7 +8,7 @@
   @include ('template::front.amy.menu.partials.main.none')
 @endif -->
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -31,11 +31,48 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              @if (Auth::check())
-                <li><a href="/logout">Выйти</a></li>
+              @if (Auth::guest())
+                  <li><a href="{{ url('/login') }}">Войти</a></li>
+                  <li><a href="{{ url('/register') }}">Регистрация</a></li>
               @else
-                <li><a href="/login">Вход</a></li>
-                <li><a href="/register">Регистрация</a></li>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+
+                      <ul class="dropdown-menu" role="menu">
+
+                        <!-- dashboard for admin -->
+                        @if (RoleHelper::isAdmin())
+                        <li>
+                            <a href="{{ url('/dashboard') }}">
+                                Панель управления
+                            </a>
+                        </li>
+                        @endif
+
+                        <!-- Profile -->
+                        <li>
+                            <a href="{{ url('/profile') }}">
+                                Профиль
+                            </a>
+                        </li>
+
+                          <!-- Logout -->
+                          <li>
+                              <a href="{{ url('/logout') }}"
+                                  onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                  Выход
+                              </a>
+
+                              <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                  {{ csrf_field() }}
+                              </form>
+                          </li>
+
+                      </ul>
+                  </li>
               @endif
             </ul>
         </div>
