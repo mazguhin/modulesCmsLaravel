@@ -24,7 +24,7 @@ class MenusTableSeeder extends Seeder
           'description' => 'Описание главного меню',
           'activated' => 1,
           'role' => 'main',
-          'permission' => 'all',
+          'role_id' => 1,
           'created_at' => \Carbon\Carbon::now(),
           'updated_at' => \Carbon\Carbon::now(),
         ]);

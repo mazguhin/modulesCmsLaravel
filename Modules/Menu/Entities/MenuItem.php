@@ -24,4 +24,9 @@ class MenuItem extends Model
     {
       return $this->hasMany($this, 'parent_id', 'id')->where('activated',1);
     }
+
+    public function role()
+    {
+      return $this->belongsTo('Modules\Dashboard\Entities\Role');
+    }
 }

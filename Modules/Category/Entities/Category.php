@@ -18,4 +18,9 @@ class Category extends Model
     {
       return $this->belongsTo('App\User');
     }
+
+    public function role()
+    {
+      return $this->belongsTo('Modules\Dashboard\Entities\Role');
+    }
 }

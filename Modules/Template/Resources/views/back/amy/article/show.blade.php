@@ -30,8 +30,7 @@
                 <td>{{ $article->title }}</td>
                 <td>{{ $article->description }}</td>
                 <td>{{ $article->category->name }}</td>
-                <!-- TODO: исправить права и роли на нормальное отображение -->
-                <td>{{ $article->permission }}</td>
+                <td>{{ $article->role->title }}</td>
                 <td>{{ $article->user->name }}</td>
                 <td>{{ $article->created_at->format('d/m/Y h:m:s') }}</td>
                 <td>{{ $article->updated_at->format('d/m/Y h:m:s') }}</td>

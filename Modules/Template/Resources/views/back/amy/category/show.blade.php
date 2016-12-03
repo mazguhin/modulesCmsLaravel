@@ -28,8 +28,7 @@
             <tr>
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->description }}</td>
-                <!-- TODO: исправить права и роли на нормальное отображение -->
-                <td>{{ $category->permission }}</td>
+                <td>{{ $category->role->title }}</td>
                 <td>{{ $category->user->name }}</td>
                 <td>{{ $category->created_at->format('d/m/Y h:m:s') }}</td>
                 <td>{{ $category->updated_at->format('d/m/Y h:m:s') }}</td>

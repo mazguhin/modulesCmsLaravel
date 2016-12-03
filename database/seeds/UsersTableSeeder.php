@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         'name' => 'admin',
         'email' => 'admin@admin.loc',
         'password' => bcrypt('admin'),
-        'role_id' => 3,
+        'role_id' => 4,
         'created_at' => \Carbon\Carbon::now(),
         'updated_at' => \Carbon\Carbon::now(),
       ]);
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             'name' => $faker->name,
             'email' => $faker->unique()->email,
             'password' => bcrypt('test'),
-            'role_id' => 1,
+            'role_id' => 2,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
           ]);

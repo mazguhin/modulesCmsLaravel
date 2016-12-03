@@ -30,4 +30,9 @@ class Menu extends Model
         'parent_id' => 0
       ]);
     }
+
+    public function role()
+    {
+      return $this->belongsTo('Modules\Dashboard\Entities\Role');
+    }
 }

@@ -18,4 +18,9 @@ class Article extends Model
     {
       return $this->belongsTo('Modules\Category\Entities\Category');
     }
+
+    public function role()
+    {
+      return $this->belongsTo('Modules\Dashboard\Entities\Role');
+    }
 }

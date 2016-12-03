@@ -27,7 +27,7 @@ class ArticlesTableSeeder extends Seeder
               'title' => $name,
               'description' => $faker->sentence,
               'body' => implode($faker->paragraphs(15)),
-              'permission' => 'all',
+              'role_id' => 1,
               'slug' => str_slug($name),
               'user_id' => $faker->numberBetween(1,5),
               'category_id' => $faker->numberBetween(1,10),

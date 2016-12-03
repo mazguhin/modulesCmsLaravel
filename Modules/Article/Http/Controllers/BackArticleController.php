@@ -62,13 +62,13 @@ class BackArticleController extends Controller
         'title' => 'required|max:255',
         'description' => 'max:255',
         'editor' => 'required',
-        'permission' => 'required|max:255',
+        'role' => 'required|max:255',
         'category' => 'required|max:255',
       ],[
         'title.required' => 'Заполните заголовок',
         'editor.required' => 'Заполните основной текст',
         'category.required' => 'Выберите категорию',
-        'permission.required' => 'Назначьте доступ',
+        'role.required' => 'Назначьте доступ',
         'max' => 'Макс. кол-во символов: 255 (Заголовок, Описание)'
       ]);
 
@@ -76,7 +76,7 @@ class BackArticleController extends Controller
       $article->title = $request->title;
       $article->description = $request->description;
       $article->body = $request->editor;
-      $article->permission = $request->permission;
+      $article->role_id = $request->role;
       $article->category_id = $request->category;
 
       // generation slug
@@ -116,11 +116,27 @@ class BackArticleController extends Controller
      */
     public function update(Request $request, $id_article)
     {
+      // validation
+      // TODO: избавиться от повторного блока кода валидации формы
+      $this->validate($request, [
+        'title' => 'required|max:255',
+        'description' => 'max:255',
+        'editor' => 'required',
+        'role' => 'required|max:255',
+        'category' => 'required|max:255',
+      ],[
+        'title.required' => 'Заполните заголовок',
+        'editor.required' => 'Заполните основной текст',
+        'category.required' => 'Выберите категорию',
+        'role.required' => 'Назначьте доступ',
+        'max' => 'Макс. кол-во символов: 255 (Заголовок, Описание)'
+      ]);
+
       $article = Article::where('id',$id_article)->firstOrFail();
       $article->title = $request->title;
       $article->description = $request->description;
       $article->body = $request->editor;
-      $article->permission = $request->permission;
+      $article->role_id = $request->role;
       $article->category_id = $request->category;
 
       // generation slug
@@ -144,7 +160,7 @@ class BackArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      * @return Response
-     */ 
+     */
 
     public function destroy(Request $request, $id_article)
     {

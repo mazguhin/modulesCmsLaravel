@@ -18,7 +18,7 @@ class CreateMenusTable extends Migration
             $table->string('description');
             $table->integer('activated');
             $table->string('role');
-            $table->string('permission');
+            $table->integer('role_id')->unsigned()->default(1);
             $table->timestamps();
         });
     }

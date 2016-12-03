@@ -42,12 +42,12 @@
        </div>
 
        <div class="form-group">
-         <label for="permission">Доступ*</label>
-         <select class="form-control" id="permission" name="permission">
+         <label for="role">Доступ*</label>
+         <select class="form-control" id="role" name="role">
            @foreach ($roles as $role)
            <option value="{{ $role->id }}"
-             @if ($role->id==$category->permission) selected @endif
-           >{{ $role->name }}</option>
+             @if ($role->id==$category->role->id) selected @endif
+           >{{ $role->title }}</option>
            @endforeach
           </select>
        </div>

@@ -13,4 +13,15 @@ class RoleHelper {
     {
         return (Auth::check() && Auth::user()->role->name=="moderator");
     }
+
+    public function validatePermissionForPage($pagePermission)
+    {
+        $permission = 0;
+        if (Auth::check()) {
+          $permission = Auth::user()->role->permission;
+        } else {
+          $permission = 1;
+        }
+        return $permission>=$pagePermission;
+    }
 }

@@ -32,20 +32,20 @@
      <form role="form" method="POST" action="/dashboard/category/create">
        <div class="form-group">
         <label for="name">Название*</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Введите название">
+        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Введите название" required>
        </div>
 
        <div class="form-group">
         <label for="description">Описание</label>
-        <input type="text" class="form-control" id="description" name="description" placeholder="Введите описание">
+        <input type="text" class="form-control" id="description" name="description" value="{{ old('description') }}" placeholder="Введите описание">
         <p class="help-block">Описание может видеть только администратор</p>
        </div>
 
        <div class="form-group">
-         <label for="permission">Доступ*</label>
-         <select class="form-control" id="permission" name="permission">
+         <label for="role">Доступ*</label>
+         <select class="form-control" id="role" name="role">
            @foreach ($roles as $role)
-             <option value="{{ $role->id }}">{{ $role->name }}</option>
+             <option value="{{ $role->id }}">{{ $role->title }}</option>
            @endforeach
           </select>
        </div>

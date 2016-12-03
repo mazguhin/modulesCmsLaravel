@@ -26,7 +26,7 @@ class CategoriesTableSeeder extends Seeder
           DB::table('categories')->insert([
             'name' => $name,
             'description' => $faker->sentence,
-            'permission' => 'all',
+            'role_id' => 1,
             'slug' => $name,
             'user_id' => 1,
             'created_at' => \Carbon\Carbon::now(),

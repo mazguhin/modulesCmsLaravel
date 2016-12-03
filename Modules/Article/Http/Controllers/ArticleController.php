@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Article\Entities\Article;
 use Settings;
+use RoleHelper;
 
 class ArticleController extends Controller
 {
@@ -29,6 +30,7 @@ class ArticleController extends Controller
 
     public function showId($id_article)
     {
+
       return view('template::front.'.$this->frontTemplate.'.article.showArticle', [
         'article' => Article::where('id',$id_article)->firstOrFail()
       ]);
@@ -36,8 +38,13 @@ class ArticleController extends Controller
 
     public function showSlug($slug_article)
     {
+      $article = Article::where('slug',$slug_article)->firstOrFail();
+
+      if (!RoleHelper::validatePermissionForPage($article->role->permission) || !RoleHelper::validatePermissionForPage($article->category->role->permission))
+        return view('template::front.'.$this->frontTemplate.'.article.accsesDenied');
+
       return view('template::front.'.$this->frontTemplate.'.article.showArticle', [
-        'article' => Article::where('slug',$slug_article)->firstOrFail()
+        'article' => $article
       ]);
     }
 

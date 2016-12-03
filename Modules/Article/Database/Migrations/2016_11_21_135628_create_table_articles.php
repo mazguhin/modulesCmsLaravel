@@ -18,7 +18,7 @@ class CreateTableArticles extends Migration
             $table->string('description');
             $table->text('body');
             $table->string('slug');
-            $table->string('permission');
+            $table->integer('role_id')->unsigned()->default(1);
             $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned()->default(0);
             $table->timestamps();

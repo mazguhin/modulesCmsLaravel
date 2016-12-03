@@ -60,17 +60,17 @@ class BackCategoryController extends Controller
       $this->validate($request, [
         'name' => 'required|max:255',
         'description' => 'max:255',
-        'permission' => 'required|max:255',
+        'role' => 'required|max:255',
       ],[
         'name.required' => 'Заполните название',
-        'permission.required' => 'Назначьте доступ',
+        'role.required' => 'Назначьте доступ',
         'max' => 'Макс. кол-во символов: 255 (Название, Описание)'
       ]);
 
       $category = new Category;
       $category->name = $request->name;
       $category->description = $request->description;
-      $category->permission = $request->permission;
+      $category->role_id = $request->role;
 
       // generation slug
       $slug = str_slug($request->name);
@@ -108,10 +108,22 @@ class BackCategoryController extends Controller
      */
      public function update(Request $request, $id_category)
      {
+       // validation
+       // TODO: избавиться от повторного блока кода валидации формы
+     $this->validate($request, [
+         'name' => 'required|max:255',
+         'description' => 'max:255',
+         'role' => 'required|max:255',
+       ],[
+         'name.required' => 'Заполните название',
+         'role.required' => 'Назначьте доступ',
+         'max' => 'Макс. кол-во символов: 255 (Название, Описание)'
+       ]);
+
        $category = Category::where('id',$id_category)->firstOrFail();
        $category->name = $request->name;
        $category->description = $request->description;
-       $category->permission = $request->permission;
+       $category->role_id = $request->role;
 
        // generation slug
        $slug = str_slug($request->name);
