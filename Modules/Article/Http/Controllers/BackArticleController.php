@@ -31,6 +31,23 @@ class BackArticleController extends Controller
     {
     }
 
+    public function validateForm(Request $request)
+    {
+      return ($this->validate($request, [
+        'title' => 'required|max:255',
+        'description' => 'max:255',
+        'editor' => 'required',
+        'role' => 'required|max:255',
+        'category' => 'required|max:255',
+      ],[
+        'title.required' => 'Заполните заголовок',
+        'editor.required' => 'Заполните основной текст',
+        'category.required' => 'Выберите категорию',
+        'role.required' => 'Назначьте доступ',
+        'max' => 'Макс. кол-во символов: 255 (Заголовок, Описание)'
+      ]));
+    }
+
     public function show()
     {
       return view('template::back.'.$this->backTemplate.'.article.show',[
@@ -58,19 +75,7 @@ class BackArticleController extends Controller
     public function store(Request $request)
     {
       //validation
-      $this->validate($request, [
-        'title' => 'required|max:255',
-        'description' => 'max:255',
-        'editor' => 'required',
-        'role' => 'required|max:255',
-        'category' => 'required|max:255',
-      ],[
-        'title.required' => 'Заполните заголовок',
-        'editor.required' => 'Заполните основной текст',
-        'category.required' => 'Выберите категорию',
-        'role.required' => 'Назначьте доступ',
-        'max' => 'Макс. кол-во символов: 255 (Заголовок, Описание)'
-      ]);
+      $this->validateForm($request);
 
       $article = new Article;
       $article->title = $request->title;
@@ -117,20 +122,7 @@ class BackArticleController extends Controller
     public function update(Request $request, $id_article)
     {
       // validation
-      // TODO: избавиться от повторного блока кода валидации формы
-      $this->validate($request, [
-        'title' => 'required|max:255',
-        'description' => 'max:255',
-        'editor' => 'required',
-        'role' => 'required|max:255',
-        'category' => 'required|max:255',
-      ],[
-        'title.required' => 'Заполните заголовок',
-        'editor.required' => 'Заполните основной текст',
-        'category.required' => 'Выберите категорию',
-        'role.required' => 'Назначьте доступ',
-        'max' => 'Макс. кол-во символов: 255 (Заголовок, Описание)'
-      ]);
+      $this->validateForm($request);
 
       $article = Article::where('id',$id_article)->firstOrFail();
       $article->title = $request->title;
