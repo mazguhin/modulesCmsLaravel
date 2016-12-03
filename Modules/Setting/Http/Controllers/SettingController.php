@@ -5,6 +5,9 @@ namespace Modules\Setting\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Setting\Entities\Setting;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Settings;
 
 class SettingController extends Controller
 {
@@ -12,9 +15,21 @@ class SettingController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
+
+     use ValidatesRequests;
+
+     protected $backTemplate = '';
+
+     public function __construct()
+     {
+       $this->backTemplate = Settings::getBackTemplate();
+     }
+
     public function index()
     {
-        return view('setting::index');
+      return view('template::back.'.$this->backTemplate.'.setting.show',[
+        'settings' => Setting::all()
+      ]);
     }
 
     /**
@@ -51,6 +66,23 @@ class SettingController extends Controller
      */
     public function update(Request $request)
     {
+      $this->validate($request, [
+        'frontTemplate' => 'required|max:255',
+        'backTemplate' => 'required|max:255',
+      ],[
+        'required' => 'Заполните все поля',
+      ]);
+
+      foreach ($request->all() as $setting => $value)
+      {
+          if($set = Setting::where('name', $setting)->first())
+          {
+            $set->value=$value;
+            $set->save();
+          }
+      }
+
+      return redirect()->back()->with(['result' => 'Настройки успешно обновлены']);
     }
 
     /**

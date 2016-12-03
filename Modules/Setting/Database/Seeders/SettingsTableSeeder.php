@@ -23,12 +23,16 @@ class SettingsTableSeeder extends Seeder
         [
           'name' => 'frontTemplate',
           'value' => 'amy',
+          'title' => 'Шаблон сайта',
+          'description' => 'Данная опция отвечает за выбор шаблона отображения контента на сайте',
           'created_at' => \Carbon\Carbon::now(),
           'updated_at' => \Carbon\Carbon::now(),
         ],
         [
           'name' => 'backTemplate',
           'value' => 'amy',
+          'title' => 'Шаблон панели управления',
+          'description' => 'Данная опция отвечает за выбор шаблона отображения контента в панели управления',
           'created_at' => \Carbon\Carbon::now(),
           'updated_at' => \Carbon\Carbon::now(),
         ]

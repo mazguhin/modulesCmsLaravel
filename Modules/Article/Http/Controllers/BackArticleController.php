@@ -39,12 +39,13 @@ class BackArticleController extends Controller
         'editor' => 'required',
         'role' => 'required|max:255',
         'category' => 'required|max:255',
+        'slug' => 'max:255',
       ],[
         'title.required' => 'Заполните заголовок',
         'editor.required' => 'Заполните основной текст',
         'category.required' => 'Выберите категорию',
         'role.required' => 'Назначьте доступ',
-        'max' => 'Макс. кол-во символов: 255 (Заголовок, Описание)'
+        'max' => 'Макс. кол-во символов: 255 (Заголовок, Описание, URL)'
       ]));
     }
 
@@ -85,7 +86,9 @@ class BackArticleController extends Controller
       $article->category_id = $request->category;
 
       // generation slug
-      $slug = str_slug($request->title);
+      if (empty($request->slug)) $slug=str_slug($request->title);
+        else $slug = $request->slug;
+
       if (Article::where('slug', $slug)->count()>0)
         $article->slug = $slug.'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s');
       else
@@ -132,7 +135,9 @@ class BackArticleController extends Controller
       $article->category_id = $request->category;
 
       // generation slug
-      $slug = str_slug($request->title);
+      if (empty($request->slug)) $slug=str_slug($request->title);
+        else $slug = $request->slug;
+
       if ($slug!=$article->slug) {
         if (Article::where('slug', $slug)->count()>0)
           $article->slug = $slug.'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s');

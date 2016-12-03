@@ -37,10 +37,11 @@ class BackCategoryController extends Controller
         'name' => 'required|max:255',
         'description' => 'max:255',
         'role' => 'required|max:255',
+        'slug' => 'max:255',
       ],[
         'name.required' => 'Заполните название',
         'role.required' => 'Назначьте доступ',
-        'max' => 'Макс. кол-во символов: 255 (Название, Описание)'
+        'max' => 'Макс. кол-во символов: 255 (Название, Описание, URL)'
       ]));
     }
 
@@ -78,7 +79,9 @@ class BackCategoryController extends Controller
       $category->role_id = $request->role;
 
       // generation slug
-      $slug = str_slug($request->name);
+      if (empty($request->slug)) $slug=str_slug($request->name);
+        else $slug = $request->slug;
+
       if (Category::where('slug', $slug)->count()>0)
         $category->slug = $slug.'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s');
       else
@@ -122,7 +125,9 @@ class BackCategoryController extends Controller
        $category->role_id = $request->role;
 
        // generation slug
-       $slug = str_slug($request->name);
+       if (empty($request->slug)) $slug=str_slug($request->name);
+         else $slug = $request->slug;
+
        if ($slug!=$category->slug) {
          if (Category::where('slug', $slug)->count()>0)
            $category->slug = $slug.'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s');

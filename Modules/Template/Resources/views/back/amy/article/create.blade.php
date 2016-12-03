@@ -42,6 +42,12 @@
        </div>
 
        <div class="form-group">
+        <label for="slug">URL</label>
+        <input type="text" class="form-control" id="slug" value="{{ old('slug') }}" name="slug" placeholder="Введите URL">
+        <p class="help-block">Если вы не знаете предназначение данного поля, то оставьте его неизменным</p>
+       </div>
+
+       <div class="form-group">
          <label for="category">Категория*</label>
          <select class="form-control" id="category" name="category">
             @foreach ($categories as $category)
