@@ -14,16 +14,16 @@ class DashboardController extends Controller
      * @return Response
      */
 
-     protected $frontTemplate = '';
+     protected $backTemplate = '';
 
      public function __construct()
      {
-       $this->frontTemplate = Settings::getFrontTemplate();
+       $this->backTemplate = Settings::getBackTemplate();
      }
 
     public function index()
     {
-      return view('template::back.'.$this->frontTemplate.'.index');
+      return view('template::back.'.$this->backTemplate.'.index');
     }
 
     /**

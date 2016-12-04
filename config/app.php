@@ -151,7 +151,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
-        
+        Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
     /*
     |--------------------------------------------------------------------------
@@ -197,6 +198,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Module' => Nwidart\Modules\Facades\Module::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 ];

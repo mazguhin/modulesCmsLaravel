@@ -54,9 +54,18 @@
               </ul>
             </li>
 
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Пользователи <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/dashboard/user/create">Создать</a></li>
+                <li><a href="/dashboard/user">Список</a></li>
+              </ul>
+            </li>
+
             <li>
               <a href="/dashboard/setting">Настройки</a>
             </li>
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
