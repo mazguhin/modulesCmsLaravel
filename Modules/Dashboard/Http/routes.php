@@ -23,6 +23,14 @@ Route::group(['middleware' => ['web','Modules\Article\Http\Middleware\isAdmin'],
   Route::post ('/edit/id/{id_user}', 'BackUserController@update')
   ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
 
+  // ban user
+  Route::post ('/ban/id/{id_user}', 'BackUserController@ban')
+  ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
+  // unban user
+  Route::post ('/unban/id/{id_user}', 'BackUserController@unban')
+  ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
   // show all users
   Route::get ('/', 'BackUserController@show')
   ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
