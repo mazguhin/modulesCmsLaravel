@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/category/news');
+    return redirect(Settings::get('startPage'));
 });
 
 Auth::routes();

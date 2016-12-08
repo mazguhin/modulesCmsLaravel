@@ -26,21 +26,50 @@
         <tbody>
             @foreach ($categories as $category)
             <tr>
-                <td>{{ $category->name }}</td>
+                <td>
+                  {{ $category->name }}
+                  @if ($category->id==$startPageId)
+                  <i class="fa fa-home" aria-hidden="true"></i>
+                  @endif
+                </td>
                 <td>{{ $category->description }}</td>
                 <td>{{ $category->role->title }}</td>
                 <td>{{ $category->user->name }}</td>
                 <td>{{ $category->created_at->format('d/m/Y h:m:s') }}</td>
                 <td>{{ $category->updated_at->format('d/m/Y h:m:s') }}</td>
                 <td>
+
+                  <p>
                   <a href="/dashboard/category/edit/id/{{ $category->id }}">
-                    <button type="button" class="btn btn-primary btn-sm">Редактировать</button>
+                    <button type="button" class="btn btn-primary btn-sm">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
                   </a>
+                </p>
+
+                  @if ($category->id!=$startPageId)
+                  <p>
+                  <!-- setStartPage -->
+                  <a href="/dashboard/setting/startpage/{{ $category->id }}">
+                    <a class="btn btn-default btn-sm" href="/dashboard/setting/startpage/{{ $category->id }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('setStartPage-form{{ $category->id }}').submit();">
+                                 <i class="fa fa-home" aria-hidden="true"></i>
+                    </a>
+
+                    <form id="setStartPage-form{{ $category->id }}" action="/dashboard/setting/startpage/{{ $category->id }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="type" value="category">
+                    </form>
+                  </a>
+                </p>
+
+                <p>
                   <a href="/dashboard/category/delete/id/{{ $category->id }}">
                     <a class="btn btn-danger btn-sm" href="/dashboard/category/{{ $category->id }}"
                         onclick="event.preventDefault();
                                  document.getElementById('destroy-form{{ $category->id }}').submit();">
-                        Удалить
+                        <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
 
                     <form id="destroy-form{{ $category->id }}" action="/dashboard/category/{{ $category->id }}" method="POST" style="display: none;">
@@ -48,6 +77,9 @@
                         {{ method_field('DELETE') }}
                     </form>
                   </a>
+                </p>
+                @endif
+
                 </td>
             </tr>
             @endforeach

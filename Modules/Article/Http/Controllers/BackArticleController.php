@@ -51,8 +51,13 @@ class BackArticleController extends Controller
 
     public function show()
     {
+      $arrayFromStartPageString = explode("/",Settings::get('startPage'));
+      if ($arrayFromStartPageString[1]!='article')
+        $arrayFromStartPageString[3]=0;
+
       return view('template::back.'.$this->backTemplate.'.article.show',[
-        'articles' => Article::orderBy('created_at', 'desc')->paginate(10)
+        'articles' => Article::orderBy('created_at', 'desc')->paginate(10),
+        'startPageId' => $arrayFromStartPageString[3]
       ]);
     }
 
@@ -161,6 +166,14 @@ class BackArticleController extends Controller
 
     public function destroy(Request $request, $id_article)
     {
+      // check start page
+      $arrayFromStartPageString = explode("/",Settings::get('startPage'));
+      if ($arrayFromStartPageString[1]!='article')
+        $arrayFromStartPageString[3]=0;
+
+      if ($arrayFromStartPageString[3]==$id_article)
+        return redirect()->back()->with(['result'=>'Нельзя удалить главную страницу']); 
+
       $article = Article::where('id',$id_article)->firstOrFail();
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
         // request from dashboard

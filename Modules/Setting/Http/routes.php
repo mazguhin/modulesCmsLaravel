@@ -7,4 +7,7 @@ Route::group(['middleware' => 'web', 'prefix' => '/dashboard/setting', 'namespac
 
     Route::post('/', 'SettingController@update')
     ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+
+    Route::post('/startpage/{id}', 'SettingController@setStartPage')
+    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
 });

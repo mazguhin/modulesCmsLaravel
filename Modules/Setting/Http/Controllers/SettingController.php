@@ -69,8 +69,10 @@ class SettingController extends Controller
       $this->validate($request, [
         'frontTemplate' => 'required|max:255',
         'backTemplate' => 'required|max:255',
+        'projectName' => 'required|max:20',
       ],[
         'required' => 'Заполните все поля',
+        'max' => 'Превышен допустимый лимит символов',
       ]);
 
       foreach ($request->all() as $setting => $value)
@@ -84,6 +86,25 @@ class SettingController extends Controller
 
       return redirect()->back()->with(['result' => 'Настройки успешно обновлены']);
     }
+
+    public function setStartPage(Request $request, $id=1)
+    {
+      $this->validate($request, [
+        'type' => 'required|max:255'
+      ],[
+        'required' => 'Заполните все поля',
+      ]);
+
+      $type = $request->type;
+      $id;
+
+      $startPage = \Modules\Setting\Entities\Setting::where('name','startPage')->firstOrFail();
+      $startPage->value='/'.$type.'/id/'.$id;
+
+      if ($startPage->save())
+      return redirect()->back()->with(['result' => 'Главная страница установлена']);
+    }
+
 
     /**
      * Remove the specified resource from storage.

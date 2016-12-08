@@ -35,6 +35,22 @@ class SettingsTableSeeder extends Seeder
           'description' => 'Данная опция отвечает за выбор шаблона отображения контента в панели управления',
           'created_at' => \Carbon\Carbon::now(),
           'updated_at' => \Carbon\Carbon::now(),
+        ],
+        [
+          'name' => 'startPage',
+          'value' => '/category/id/1',
+          'title' => 'Главная страница',
+          'description' => 'Данная опция отвечает за выбор главной страницы, которая будет отображаться при входе на сайт',
+          'created_at' => \Carbon\Carbon::now(),
+          'updated_at' => \Carbon\Carbon::now(),
+        ],
+        [
+          'name' => 'projectName',
+          'value' => 'Smans',
+          'title' => 'Название проекта',
+          'description' => 'Отображается в главном меню и ведет на главную страницу. Макс. кол-во символов: 20',
+          'created_at' => \Carbon\Carbon::now(),
+          'updated_at' => \Carbon\Carbon::now(),
         ]
       ]);
 

@@ -45,10 +45,23 @@ class BackCategoryController extends Controller
       ]));
     }
 
+    public function getStartPage()
+    {
+      // /{type}/id/{id}
+      // [1] - type (article/category etc.)
+      // [3] - id
+      return explode("/",Settings::get('startPage'));
+    }
+
     public function show()
     {
+      $startPage = $this->getStartPage();
+      if ($startPage[1]!='category')
+        $startPage[3] = 0;
+
       return view('template::back.'.$this->backTemplate.'.category.show',[
-        'categories' => Category::orderBy('created_at', 'desc')->paginate(10)
+        'categories' => Category::orderBy('created_at', 'desc')->paginate(10),
+        'startPageId' => $startPage[3]
       ]);
     }
 
@@ -151,8 +164,20 @@ class BackCategoryController extends Controller
 
     public function destroy(Request $request, $id_category)
     {
+      $startPage = $this->getStartPage();
+
+      // if this start page (category)
+      if ($startPage[1]=='category' && $startPage[3]==$id_category)
+        return redirect()->back()->with(['result'=>'Нельзя удалить главную страницу']);
+
       $category = Category::where('id',$id_category)->firstOrFail();
-      foreach ($category->articles as $article) {
+      $articles = $category->articles;
+
+      // if this start page (article)
+      if ($startPage[1]=='article' && count($articles->where('id',$startPage[3])->first())>0)
+        return redirect()->back()->with(['result'=>'Нельзя удалить категорию, содержащую в себе статью на главной странице']);
+
+      foreach ($articles as $article) {
         $article->delete();
       }
       $category->delete();
