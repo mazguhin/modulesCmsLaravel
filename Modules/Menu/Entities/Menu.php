@@ -31,8 +31,8 @@ class Menu extends Model
       ]);
     }
 
-    public function role()
+    public function access()
     {
-      return $this->belongsTo('Modules\Dashboard\Entities\Role');
+      return $this->belongsTo('Modules\Dashboard\Entities\Role','role_id','id');
     }
 }

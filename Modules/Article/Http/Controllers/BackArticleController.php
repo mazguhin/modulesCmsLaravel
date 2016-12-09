@@ -13,10 +13,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
 
      use ValidatesRequests;
 
@@ -172,7 +168,7 @@ class BackArticleController extends Controller
         $arrayFromStartPageString[3]=0;
 
       if ($arrayFromStartPageString[3]==$id_article)
-        return redirect()->back()->with(['result'=>'Нельзя удалить главную страницу']); 
+        return redirect()->back()->with(['result'=>'Нельзя удалить главную страницу']);
 
       $article = Article::where('id',$id_article)->firstOrFail();
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {

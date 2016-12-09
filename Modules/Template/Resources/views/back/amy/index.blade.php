@@ -1,6 +1,7 @@
 @extends ('template::back.amy.layouts.main')
 
 @section ('content')
+<!-- TODO: сделать последние добавленные категории, статьи и т.д. -->
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Админка</div>

@@ -1,5 +1,7 @@
 <?php
 
+// TODO: переместить middleware "isAdmin" в модуль Dashboard
+
 // FRONT Routes
 Route::group(['middleware' => 'web', 'prefix' => 'article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
 {
