@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Settings;
+use Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
+    protected $frontTemplate = '';
+
     public function __construct()
     {
         $this->middleware('auth');
+        $this->frontTemplate = Settings::getFrontTemplate();
     }
 
     /**
@@ -21,8 +22,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function profile()
     {
-        return view('home');
+      return view('template::front.'.$this->frontTemplate.'.user.profile', [
+        'user' => Auth::user()
+      ]);
     }
 }

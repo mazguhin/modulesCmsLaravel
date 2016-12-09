@@ -23,7 +23,11 @@ class DashboardController extends Controller
 
     public function index()
     {
-      return view('template::back.'.$this->backTemplate.'.index');
+      return view('template::back.'.$this->backTemplate.'.index',[
+        'users' => \App\User::orderBy('created_at','desc')->limit(10)->get(),
+        'categories' => \Modules\Category\Entities\Category::orderBy('created_at','desc')->limit(10)->get(),
+        'articles' => \Modules\Article\Entities\Article::orderBy('created_at','desc')->limit(10)->get(),
+      ]);
     }
 
     /**

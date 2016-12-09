@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ elixir('/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
-    
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -88,7 +88,7 @@
                   </li>
 
                   <li>
-                    <a href="/user/id/{{ Auth::user()->id }}">Профиль</a>
+                    <a href="/profile">Профиль</a>
                   </li>
 
                   <li>
