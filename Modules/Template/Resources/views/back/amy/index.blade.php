@@ -1,7 +1,7 @@
 @extends ('template::back.amy.layouts.main')
 
 @section ('content')
- <div class="panel panel-default col-sm-4">
+ <div class="panel panel-default col-lg-4">
    <div class="panel-heading">
      <div class="panel-title">Последние пользователи</div>
    </div>
@@ -23,7 +23,7 @@
    </div>
  </div>
 
- <div class="panel panel-default col-sm-4">
+ <div class="panel panel-default col-lg-4">
    <div class="panel-heading">
      <div class="panel-title">Последние статьи</div>
    </div>
@@ -43,7 +43,7 @@
    </div>
  </div>
 
- <div class="panel panel-default col-sm-4">
+ <div class="panel panel-default col-lg-4">
    <div class="panel-heading">
      <div class="panel-title">Последние категории</div>
    </div>
