@@ -16,25 +16,25 @@ Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/category', 'namesp
 {
       // create category
     Route::get ('/create', 'BackCategoryController@create')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // store category
     Route::post ('/create', 'BackCategoryController@store')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // show form for edit category
     Route::get ('/edit/id/{id_category}', 'BackCategoryController@editById')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // update category
     Route::post ('/edit/id/{id_category}', 'BackCategoryController@update')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // show all categories
     Route::get ('/', 'BackCategoryController@show')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // destroy category
     Route::delete ('/{id_category}', 'BackCategoryController@destroy')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 });

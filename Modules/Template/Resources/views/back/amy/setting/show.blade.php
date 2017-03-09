@@ -30,8 +30,26 @@
                    <td>{{ $setting->title }}</td>
                    <td>{{ $setting->description }}</td>
                    <td>
-                      <input type="text" class="form-control" value="{{ $setting->value }}" name="{{ $setting->name }}" placeholder="Введите значение" required>
-                   </td>
+                     @if ($setting->name=='frontTemplate')
+                       <select class="form-control" name="{{ $setting->name }}">
+                          @foreach ($frontTemplates as $template)
+                            <option value="{{ $template }}"
+                              @if ($template==$setting->value) selected @endif
+                            >{{ $template }}</option>
+                          @endforeach
+                        </select>
+                     @elseif ($setting->name=='backTemplate')
+                       <select class="form-control" name="{{ $setting->name }}">
+                          @foreach ($backTemplates as $template)
+                            <option value="{{ $template }}"
+                              @if ($template==$setting->value) selected @endif
+                            >{{ $template }}</option>
+                          @endforeach
+                        </select>
+                     @else
+                        <input type="text" class="form-control" value="{{ $setting->value }}" name="{{ $setting->name }}" placeholder="Введите значение" required>
+                     @endif
+                  </td>
                </tr>
               @endforeach
            </tbody>

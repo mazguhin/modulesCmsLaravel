@@ -1,6 +1,5 @@
 <?php
 
-// TODO: переместить middleware "isAdmin" в модуль Dashboard
 
 // FRONT Routes
 Route::group(['middleware' => 'web', 'prefix' => 'article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
@@ -14,25 +13,25 @@ Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/article', 'namespa
 {
       // create article
     Route::get ('/create', 'BackArticleController@create')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // store article
     Route::post ('/create', 'BackArticleController@store')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // show form for edit article
     Route::get ('/edit/id/{id_article}', 'BackArticleController@editById')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // update article
     Route::post ('/edit/id/{id_article}', 'BackArticleController@update')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // show all articles
     Route::get ('/', 'BackArticleController@show')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
     // destroy article
     Route::delete ('/{id_article}', 'BackArticleController@destroy')
-    ->middleware(['Modules\Article\Http\Middleware\isAdmin']);
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 });

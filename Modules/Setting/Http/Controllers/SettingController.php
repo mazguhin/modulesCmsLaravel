@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Setting\Entities\Setting;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Settings;
+use Storage;
 
 class SettingController extends Controller
 {
@@ -27,8 +28,24 @@ class SettingController extends Controller
 
     public function index()
     {
+      // получаем корень нашего сайта в файловой системе
+      $mainPath = explode('Modules'  , __DIR__)[0];
+
+      $backTemplates = scandir ($mainPath.'Modules/Template/Resources/views/back');
+      $backTemplatesCollection = collect([]);
+      for ($i = count($backTemplates)-1; $i>=2; $i--)
+        $backTemplatesCollection->push($backTemplates[$i]);
+
+      $frontTemplates = scandir ($mainPath.'Modules/Template/Resources/views/front');
+      $frontTemplatesCollection = collect([]);
+      for ($i = count($frontTemplates)-1; $i>=2; $i--)
+          $frontTemplatesCollection->push($frontTemplates[$i]);
+
+
       return view('template::back.'.$this->backTemplate.'.setting.show',[
-        'settings' => Setting::all()
+        'settings' => Setting::all(),
+        'frontTemplates' => $frontTemplatesCollection,
+        'backTemplates' => $backTemplatesCollection
       ]);
     }
 

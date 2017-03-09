@@ -18,7 +18,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>Ошибка авторизации</strong>
                                     </span>
                                 @endif
                             </div>
@@ -53,10 +53,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     Войти
                                 </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    Забыли пароль?
-                                </a>
                             </div>
                         </div>
                     </form>
