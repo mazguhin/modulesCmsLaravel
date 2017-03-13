@@ -22,7 +22,7 @@
     <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="/build/css/custom.min.css" rel="stylesheet">
+    <link href="/build/css/custom.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -38,20 +38,31 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Smans</span></a>
+              <a href="/" class="site_title"><i class="fa fa-home"></i> <span>Smans</span></a>
             </div>
 
             <div class="clearfix"></div>
 
+
             <!-- menu profile quick info -->
             <div class="profile">
-              <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>admin</h2>
-              </div>
+              @if (Auth::check())
+                <div class="profile_pic">
+                  <a href="/profile"><img src="/images/user.png" class="img-circle profile_img"></a>
+                </div>
+                <div class="profile_info">
+                  <span>Добро пожаловать,</span>
+                  <h2>{{ Auth::user()->name }}</h2>
+                </div>
+              @else
+                <div class="profile_pic">
+                  <a href="/login"><img src="/images/user.png" class="img-circle profile_img"></a>
+                </div>
+                <div class="profile_info">
+                  <span>Добро пожаловать,</span>
+                  <h2>гость</h2>
+                </div>
+              @endif
             </div>
             <!-- /menu profile quick info -->
 
@@ -91,19 +102,48 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    @if (Auth::check())
+                      <img src="/images/user.png" alt="">{{ Auth::user()->name }}
+                    @else
+                      <img src="/images/user.png" alt="">Гость
+                    @endif
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    @if (Auth::guest())
+                    <li><a href="{{ url('/login') }}">Войти</a></li>
+                    <li><a href="{{ url('/register') }}">Регистрация</a></li>
+                    @else
+                      <!-- dashboard for admin -->
+                      @if (RoleHelper::isAdmin())
+                      <li>
+                          <a href="{{ url('/dashboard') }}">
+                              Панель управления
+                          </a>
+                      </li>
+                      @endif
+
+                      <!-- Profile -->
+                      <li>
+                          <a href="{{ url('/profile') }}">
+                              Профиль
+                          </a>
+                      </li>
+
+                        <!-- Logout -->
+                        <li>
+                            <a href="{{ url('/logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out pull-right"></i> Выход
+                            </a>
+
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+
+                      @endif
                   </ul>
                 </li>
 
@@ -115,7 +155,7 @@
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="/images/user.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -127,7 +167,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="/images/user.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -139,7 +179,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="/images/user.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -151,7 +191,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="/images/user.png" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>

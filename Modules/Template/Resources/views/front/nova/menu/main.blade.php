@@ -1,7 +1,8 @@
 @if (count($menus)>0)
   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
-      <h3>Меню</h3>
+      <br>
+      <h3>Главное меню</h3>
       <ul class="nav side-menu">
       @foreach ($menus as $menu)
         @if ($menu->activated==1)
