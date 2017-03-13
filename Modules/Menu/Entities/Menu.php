@@ -16,18 +16,17 @@ class Menu extends Model
       return $this->hasMany(MenuItem::class);
     }
 
-    // Parent items
-    public function menuItems()
-    {
-      return $this->hasMany(MenuItem::class)->where('parent_id', 0);
-    }
+    // // Parent items
+    // public function menuItems()
+    // {
+    //   return $this->hasMany(MenuItem::class)->where('parent_id', 0);
+    // }
 
     // Parent activated items
     public function menuActivatedItems ()
     {
       return $this->hasMany(MenuItem::class)->where([
-        'activated' => 1,
-        'parent_id' => 0
+        'activated' => 1
       ]);
     }
 

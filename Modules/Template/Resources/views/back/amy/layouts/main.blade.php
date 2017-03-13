@@ -13,6 +13,13 @@
     <!-- Styles -->
     <link href="{{ elixir('/css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+    <style>
+      div#fa-select {
+        font-family: 'FontAwesome', 'sans-serif';
+      }
+    </style>
 
     <!-- Scripts -->
     <script>
@@ -115,5 +122,6 @@
   </main>
 
   <script src="{{ elixir('/js/app.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 </body>
 </html>

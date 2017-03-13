@@ -8,4 +8,8 @@ class MenuHelper {
     {
       return Menu::where('role',$role)->firstOrFail();
     }
+
+    public function getAll() {
+      return Menu::all();
+    }
 }

@@ -1,7 +1,14 @@
 @extends ('template::back.amy.layouts.main') @section ('content')
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="panel-title">Все меню</div>
+        <div class="panel-title">Все меню
+          <!-- CREATE -->
+          <a href="/dashboard/menu/create/">
+            <button type="button" class="btn btn-primary btn-sm">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </a>
+        </div>
     </div>
 
     @if (session('result'))
@@ -18,29 +25,22 @@
             <th>Описание</th>
             <th>Активно</th>
             <th>Доступ</th>
-            <th>Роль</th>
-            <th>Дата создания</th>
-            <th>Дата обновления</th>
+            <th>URL</th>
+
             <th>Действия</th>
         </thead>
 
         <tbody>
             @foreach ($menus as $menu)
             <tr>
-                <td>
-                  @if ($menu->role=='main')
-                  <i class="fa fa-home" aria-hidden="true"></i>
-                  @endif
-                  {{ $menu->title }}</td>
+                <td><i class="fa {{ $menu->icon }}"></i> {{ $menu->title }}</td>
                 <td>{{ $menu->description }}</td>
                 <td>
                   @if ($menu->activated==1) Активно @endif
-                  @if ($menu->activated==0) Неактивно @endif 
+                  @if ($menu->activated==0) Неактивно @endif
                 </td>
                 <td>{{ $menu->access->title }}</td>
-                <td>{{ $menu->role }}</td>
-                <td>{{ $menu->created_at->format('d/m/Y h:m:s') }}</td>
-                <td>{{ $menu->updated_at->format('d/m/Y h:m:s') }}</td>
+                <td>{{ $menu->url }}</td>
                 <td>
 
                   <p>
@@ -50,20 +50,19 @@
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </button>
                     </a>
-                  </p>
-
-                  <p>
-                  <!-- edit items menu -->
-                  <a href="/dashboard/menu/item/id/{{ $menu->id }}">
-                    <button type="button" class="btn btn-default btn-sm">
-                      <i class="fa fa-tasks" aria-hidden="true"></i>
-                    </button>
-                  </a>
-                </p>
 
 
-                  @if ($menu->role!='main')
-                  <p>
+                  @if (empty($menu->url))
+
+                    <!-- edit items menu -->
+                    <a href="/dashboard/menu/item/id/{{ $menu->id }}">
+                      <button type="button" class="btn btn-default btn-sm">
+                        <i class="fa fa-tasks" aria-hidden="true"></i>
+                      </button>
+                    </a>
+
+                  @endif
+
                     <!-- DELETE -->
                     <a href="/dashboard/menu/delete/id/{{ $menu->id }}">
                       <a class="btn btn-danger btn-sm" href="/dashboard/menu/{{ $menu->id }}"
@@ -78,7 +77,7 @@
                       </form>
                     </a>
                   </p>
-                @endif
+
 
                 </td>
             </tr>

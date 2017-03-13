@@ -23,7 +23,6 @@ class MenusTableSeeder extends Seeder
           'title' => 'Главное меню',
           'description' => 'Описание главного меню',
           'activated' => 1,
-          'role' => 'main',
           'role_id' => 1,
           'created_at' => \Carbon\Carbon::now(),
           'updated_at' => \Carbon\Carbon::now(),

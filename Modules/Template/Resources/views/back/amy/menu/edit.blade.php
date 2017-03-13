@@ -27,22 +27,28 @@
         <p class="help-block">Описание может видеть только администратор</p>
        </div>
 
-       <!-- TODO: disabled у роли не отдает значение в контроллер на валидацию -->
-       <div class="form-group">
-        <label for="role">Роль*</label>
-        <input type="text" value="{{ $menu->role }}" class="form-control" id="role" name="role" placeholder="Введите роль"
-        @if ($menu->role=='main')
-
-        @endif
-        >
-        <p class="help-block">Если вам неизвестно назначение данного поля, то не изменяйте его</p>
-       </div>
-
        <div class="form-group">
          <label for="activated">Активен*</label>
          <select class="form-control" id="activated" name="activated">
            <option value="1" @if ($menu->activated==1) selected @endif >Да</option>
            <option value="0" @if ($menu->activated==0) selected @endif >Нет</option>
+          </select>
+       </div>
+
+       <div class="form-group">
+         <label for="activated">URL*</label>
+         <select class="form-control" id="url" name="url">
+           <option value="">Отсутствует</option>
+           @foreach ($categories as $category)
+            <option value="/category/id/{{ $category->id }}"
+              @if ($arrayItemUrl[1]=='category' && $arrayItemUrl[3]==$category->id) selected @endif
+              >{{ $category->name }} [Категория]</option>
+           @endforeach
+           @foreach ($articles as $article)
+            <option value="/article/id/{{ $article->id }}"
+              @if ($arrayItemUrl[1]=='article' && $arrayItemUrl[3]==$article->id) selected @endif
+              >{{ $article->title }} [Статья]</option>
+           @endforeach
           </select>
        </div>
 
@@ -57,7 +63,10 @@
           </select>
        </div>
 
-
+       <div class="form-group" id="fa-select">
+         <label for="faselect">Иконка</label>
+         @includeIf('template::back.amy.menu.fa-select-edit')
+       </div>
 
        {{ csrf_field() }}
        <button type="submit" class="btn btn-success">Применить</button>

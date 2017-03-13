@@ -16,8 +16,9 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description');
+            $table->string('url')->default('');
+            $table->string('icon')->default('');
             $table->integer('activated');
-            $table->string('role');
             $table->integer('role_id')->unsigned()->default(1);
             $table->timestamps();
         });

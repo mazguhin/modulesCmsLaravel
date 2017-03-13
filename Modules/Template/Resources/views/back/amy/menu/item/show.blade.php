@@ -19,8 +19,8 @@
      </div>
     @endif
 
+    @if (count($items) > 0)
     <table class="table table-striped">
-
         <thead>
             <th>Заголовок</th>
             <th>Описание</th>
@@ -82,5 +82,6 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 </div>
 @stop

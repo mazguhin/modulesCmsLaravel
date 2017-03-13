@@ -15,7 +15,7 @@
   @include ('template::back.amy.article.errors')
 
    <div class="panel-body">
-     <form role="form" method="POST" action="/dashboard/article/create">
+     <form role="form" method="POST" action="/dashboard/menu/create">
        <div class="form-group">
         <label for="title">Заголовок*</label>
         <input type="text" class="form-control" id="title" value="{{ old('title') }}" name="title" placeholder="Введите заголовок" required>
@@ -28,31 +28,40 @@
        </div>
 
        <div class="form-group">
-        <label for="slug">URL</label>
-        <input type="text" class="form-control" id="slug" value="{{ old('slug') }}" name="slug" placeholder="Введите URL">
-        <p class="help-block">Если вы не знаете предназначение данного поля, то оставьте его неизменным</p>
-       </div>
-
-       <div class="form-group">
-         <label for="category">Категория*</label>
-         <select class="form-control" id="category" name="category">
-            @foreach ($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>
-            @endforeach
+         <label for="activated">Активен*</label>
+         <select class="form-control" id="activated" name="activated">
+           <option value="1">Да</option>
+           <option value="0">Нет</option>
           </select>
        </div>
 
        <div class="form-group">
-         <label for="role">Доступ*</label>
-         <select class="form-control" id="role" name="role">
-           @foreach ($roles as $role)
-             <option value="{{ $role->id }}">{{ $role->title }}</option>
+         <label for="activated">URL*</label>
+         <select class="form-control" id="url" name="url">
+           <option value="">Отсутствует</option>
+           @foreach ($categories as $category)
+            <option value="/category/id/{{ $category->id }}">{{ $category->name }} [Категория]</option>
+           @endforeach
+           @foreach ($articles as $article)
+            <option value="/article/id/{{ $article->id }}">{{ $article->title }} [Статья]</option>
            @endforeach
           </select>
        </div>
 
        <div class="form-group">
-         <textarea id="editor" name="editor">{{ old('editor') }}</textarea>
+         <label for="access">Доступ*</label>
+         <select class="form-control" id="access" name="access">
+           @foreach ($roles as $role)
+           <option value="{{ $role->id }}">
+            {{ $role->title }}
+           </option>
+           @endforeach
+          </select>
+       </div>
+
+       <div class="form-group" id="fa-select">
+         <label for="faselect">Иконка</label>
+         @includeIf('template::back.amy.menu.fa-select-create')
        </div>
 
        {{ csrf_field() }}
@@ -60,10 +69,4 @@
       </form>
    </div>
  </div>
-
-
- <script src="/plugins/ckeditor/ckeditor.js"></script>
- <script type="text/javascript">
-    CKEDITOR.replace('editor');
-  </script>
 @stop
