@@ -116,7 +116,12 @@ class BackMenuItemController extends Controller
 
  public function destroy(Request $request, $id_item)
  {
-     if (MenuItem::where('id',$id_item)->firstOrFail()->delete())
+   $menuItem = MenuItem::where('id',$id_item)->firstOrFail();
+   
+   if ($menuItem->required==1)
+    return redirect()->back()->with(['result'=>'Нельзя удалить обязательный пункт меню']);
+
+     if ($menuItem->delete())
       return redirect()->back()->with('result', 'Пункт меню успешно удален');
      else
       return redirect()->back()->with('result', 'Возникла ошибка');

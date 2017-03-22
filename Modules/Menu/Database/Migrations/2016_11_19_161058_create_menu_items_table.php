@@ -19,6 +19,7 @@ class CreateMenuItemsTable extends Migration
             $table->string('url');
             $table->integer('activated');
             $table->string('target');
+            $table->integer('required')->default(0);
             $table->integer('role_id')->unsigned()->default(1);
             $table->integer('menu_id')->unsigned()->default(0);
             $table->timestamps();

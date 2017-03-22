@@ -22,7 +22,7 @@ class SettingsTableSeeder extends Seeder
       DB::table('settings')->insert([
         [
           'name' => 'frontTemplate',
-          'value' => 'amy',
+          'value' => 'nova',
           'title' => 'Шаблон сайта',
           'description' => 'Данная опция отвечает за выбор шаблона отображения контента на сайте',
           'created_at' => \Carbon\Carbon::now(),

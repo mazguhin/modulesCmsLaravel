@@ -36,7 +36,7 @@
         <tbody>
             @foreach ($items as $item)
             <tr>
-                <td>{{ $item->title }}</td>
+                <td><i class="fa fa-get-pocket"></i> {{ $item->title }}</td>
                 <td>{{ $item->description }}</td>
                 <td>{{ $item->url }}</td>
                 <td>
@@ -61,6 +61,7 @@
                     </a>
                   </p>
 
+                  @if ($item->required==0)
                   <p>
                     <!-- DELETE -->
                     <a href="/dashboard/menu/item/{{ $item->id }}">
@@ -76,6 +77,7 @@
                       </form>
                     </a>
                   </p>
+                  @endif
 
                 </td>
             </tr>

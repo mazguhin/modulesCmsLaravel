@@ -63,6 +63,7 @@
 
                   @endif
 
+                  @if ($menu->required==0)
                     <!-- DELETE -->
                     <a href="/dashboard/menu/delete/id/{{ $menu->id }}">
                       <a class="btn btn-danger btn-sm" href="/dashboard/menu/{{ $menu->id }}"
@@ -77,7 +78,7 @@
                       </form>
                     </a>
                   </p>
-
+                  @endif
 
                 </td>
             </tr>

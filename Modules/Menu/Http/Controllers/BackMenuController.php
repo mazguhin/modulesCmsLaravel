@@ -120,6 +120,9 @@ class BackMenuController extends Controller
  {
      $menu = Menu::where('id',$id_menu)->firstOrFail();
 
+     if ($menu->required==1)
+      return redirect()->back()->with(['result'=>'Нельзя удалить обязательное меню']);
+
      foreach ($menu->menuAllItems() as $item) {
        $item->delete();
      }
