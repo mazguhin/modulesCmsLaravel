@@ -30,9 +30,13 @@ class ArticleController extends Controller
 
     public function showId($id_article)
     {
+      $article = Article::where('id',$id_article)->firstOrFail();
+
+      if (!RoleHelper::validatePermissionForPage($article->role->permission) || !RoleHelper::validatePermissionForPage($article->category->role->permission))
+        return view('template::front.'.$this->frontTemplate.'.article.accsesDenied');
 
       return view('template::front.'.$this->frontTemplate.'.article.showArticle', [
-        'article' => Article::where('id',$id_article)->firstOrFail()
+        'article' => $article
       ]);
     }
 

@@ -30,6 +30,11 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+    <!-- local styles -->
+    <style>
+      @yield('localcss')
+    </style>
   </head>
 
   <body class="nav-md">

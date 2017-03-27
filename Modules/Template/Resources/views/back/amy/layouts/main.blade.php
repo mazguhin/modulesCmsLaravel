@@ -19,7 +19,7 @@
       div#fa-select {
         font-family: 'FontAwesome', 'sans-serif';
       }
-    </style>
+    </style>    
 
     <!-- Scripts -->
     <script>
@@ -48,16 +48,11 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Статьи <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/dashboard/article/create">Создать</a></li>
-                <li><a href="/dashboard/article">Список</a></li>
-              </ul>
-            </li>
-
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Категории <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="/dashboard/category/create">Создать</a></li>
-                <li><a href="/dashboard/category">Список</a></li>
+                <li><a href="/dashboard/article/create">Создать статью</a></li>
+                <li><a href="/dashboard/article">Список статей</a></li>
+                <li class="divider"></li>
+                <li><a href="/dashboard/category/create">Создать категорию</a></li>
+                <li><a href="/dashboard/category">Список категорий</a></li>
               </ul>
             </li>
 
@@ -66,6 +61,17 @@
               <ul class="dropdown-menu">
                 <li><a href="/dashboard/user/create">Создать</a></li>
                 <li><a href="/dashboard/user">Список</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Сотрудники <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/dashboard/staff/create">Создать сотрудника</a></li>
+                <li><a href="/dashboard/staff">Список сотрудников</a></li>
+                <li class="divider"></li>
+                <li><a href="/dashboard/staff/category/create">Создать категорию</a></li>
+                <li><a href="/dashboard/staff/category">Список категорий</a></li>
               </ul>
             </li>
 

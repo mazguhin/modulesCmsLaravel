@@ -43,4 +43,14 @@ class User extends Authenticatable
     {
       return $this->hasMany('Modules\Category\Entities\Category');
     }
+
+    public function staffCategories()
+    {
+      return $this->hasMany('Modules\Staff\Entities\StaffCategory');
+    }
+
+    public function staffs()
+    {
+      return $this->hasMany('Modules\Staff\Entities\Staff');
+    }
 }
