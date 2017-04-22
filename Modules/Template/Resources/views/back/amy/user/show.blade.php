@@ -18,8 +18,8 @@
             <th>Имя</th>
             <th>E-mail</th>
             <th>Права</th>
-            <th>Дата создания</th>
             <th>Дата обновления</th>
+            <th></th>
         </thead>
 
         <tbody>
@@ -28,57 +28,57 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role->title }}</td>
-                <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
                 <td>{{ $user->updated_at->format('d/m/Y H:i:s') }}</td>
                 <td>
                   <p>
                   <!-- BAN / UNBAN -->
                   @if ($user->role->name=="banned")
-                    <a class="btn btn-warning btn-sm" href="/dashboard/user/ban/id/{{ $user->id }}"
+                    <a class="btn btn-default btn-sm" href="/dashboard/user/ban/id/{{ $user->id }}"
                         onclick="event.preventDefault();
                                  document.getElementById('unban-form{{ $user->id }}').submit();">
-                        Разблокировать
+                        <i class="fa fa-ban" aria-hidden="true"></i>
                     </a>
-
-
-                    <form id="unban-form{{ $user->id }}" action="/dashboard/user/unban/id/{{ $user->id }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
                   @else
 
-                    <p>
-                      <!-- EDIT -->
-                      <a href="/dashboard/user/edit/id/{{ $user->id }}">
-                        <button type="button" class="btn btn-primary btn-sm">Редактировать</button>
-                      </a>
-                    </p>
+
+                    <!-- EDIT -->
+                    <a href="/dashboard/user/edit/id/{{ $user->id }}">
+                      <button type="button" class="btn btn-primary btn-sm">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </button>
+                    </a>
+
 
                     <a class="btn btn-warning btn-sm" href="/dashboard/user/ban/id/{{ $user->id }}"
                         onclick="event.preventDefault();
                                  document.getElementById('ban-form{{ $user->id }}').submit();">
-                        Заблокировать
+                        <i class="fa fa-ban" aria-hidden="true"></i>
                     </a>
 
-                    <form id="ban-form{{ $user->id }}" action="/dashboard/user/ban/id/{{ $user->id }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                  @endif
-                  </p>
 
-                  <p>
+                  @endif
+
                     <!-- DELETE -->
                     <a href="/dashboard/user/delete/id/{{ $user->id }}">
                       <a class="btn btn-danger btn-sm" href="/dashboard/user/{{ $user->id }}"
                           onclick="event.preventDefault();
                                    document.getElementById('destroy-form{{ $user->id }}').submit();">
-                          Удалить
+                            <i class="fa fa-trash" aria-hidden="true"></i>
                       </a>
+                    </a>
 
                       <form id="destroy-form{{ $user->id }}" action="/dashboard/user/{{ $user->id }}" method="POST" style="display: none;">
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
                       </form>
-                    </a>
+
+                      <form id="ban-form{{ $user->id }}" action="/dashboard/user/ban/id/{{ $user->id }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                      </form>
+
+                      <form id="unban-form{{ $user->id }}" action="/dashboard/user/unban/id/{{ $user->id }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                      </form>
                   </p>
                 </td>
             </tr>

@@ -14,7 +14,6 @@
     <a class="btn btn-primary btn-sm" href="/dashboard/staff/category/edit/id/{{ $category->id }}">
       <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
-
     <a href="/dashboard/staff/category/delete/id/{{ $category->id }}">
       <a class="btn btn-danger btn-sm" href="/dashboard/staff/category/{{ $category->id }}"
           onclick="event.preventDefault();
