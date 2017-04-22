@@ -28,7 +28,7 @@
     @include ('template::back.amy.staff.errors')
 
    <div class="panel-body">
-     <form role="form" method="POST" action="/dashboard/staff/edit/id/{{ $staff->id }}">
+     <form role="form" method="POST" action="/dashboard/staff/edit/id/{{ $staff->id }}" enctype="multipart/form-data">
 
        <div class="form-group">
         <label for="fullName">ФИО*</label>
@@ -85,12 +85,6 @@
        </div>
 
        <div class="form-group">
-        <label for="photo">Фото</label>
-        <input type="text" id="photo" value="{{ $staff->photo }}" name="photo" class="form-control" placeholder="Введите описание">
-        <p class="help-block"></p>
-       </div>
-
-       <div class="form-group">
         <label for="slug">URL</label>
         <input type="text" class="form-control" id="slug" value="{{ $staff->slug }}" name="slug" placeholder="Введите URL">
         <p class="help-block">Если вы не знаете предназначение данного поля, то оставьте его неизменным</p>
@@ -110,6 +104,12 @@
               >{{ $category->name }}</option>
             @endforeach
           </select>
+       </div>
+
+       <div class="form-group">
+        <label for="photo">Фото</label>
+        <input type="file" name="photo" accept="image/*,image/jpeg">
+        <p class="help-block"><img src="{{ Storage::url($staff->photo) }}" class="img-responsive" alt="Фото"></p>
        </div>
 
        {{ csrf_field() }}

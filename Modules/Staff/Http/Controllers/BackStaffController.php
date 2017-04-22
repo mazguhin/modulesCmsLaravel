@@ -10,6 +10,7 @@ use RoleHelper;
 use Settings;
 use Modules\Staff\Entities\Staff;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Storage;
 
 class BackStaffController extends Controller
 {
@@ -82,7 +83,6 @@ class BackStaffController extends Controller
       $staff->training = $request->training;
       $staff->generalExperience = $request->generalExperience;
       $staff->specialtyExperience = $request->specialtyExperience;
-      $staff->photo = $request->photo;
       $staff->user_id = $request->user()->id;
 
       // generation slug
@@ -93,6 +93,12 @@ class BackStaffController extends Controller
         $staff->slug = $slug.'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s');
       else
         $staff->slug = $slug;
+
+        if ($request->photo!='') {
+          $file = $request->file('photo');
+          $ext = $file->extension();
+          $staff->photo = $file->storeAs('public/staff','avatar-'.str_slug($request->fullName).'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s').'.'.$ext);
+        }
 
       foreach($request->category as $cat) {
         \Modules\Staff\Entities\StaffCategory::findOrFail($cat)->staffs()->save($staff);
@@ -127,11 +133,10 @@ class BackStaffController extends Controller
       $staff->training = $request->training;
       $staff->generalExperience = $request->generalExperience;
       $staff->specialtyExperience = $request->specialtyExperience;
-      $staff->photo = $request->photo;
       $staff->user_id = $request->user()->id;
 
       // generation slug
-      if (empty($request->slug)) $slug=str_slug($request->title);
+      if (empty($request->slug)) $slug=str_slug($request->fullName);
         else $slug = $request->slug;
 
       if ($slug!=$staff->slug) {
@@ -140,6 +145,14 @@ class BackStaffController extends Controller
         else
          $staff->slug = $slug;
       }
+
+      if ($request->photo!='') {
+        $file = $request->file('photo');
+        $ext = $file->extension();
+        Storage::delete($staff->photo);
+        $staff->photo = $file->storeAs('public/staff','avatar-'.str_slug($request->fullName).'-'.\Carbon\Carbon::now()->format('d-m-Y-h-m-s').'.'.$ext);
+      }
+
 
       foreach($staff->categories as $category) {
         $category->pivot->delete();
@@ -161,6 +174,7 @@ class BackStaffController extends Controller
       foreach ($staff->categories as $category) {
         $category->pivot->delete();
       }
+      Storage::delete($staff->photo);
       $staff->delete();
 
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {

@@ -35,9 +35,9 @@
 <div class="staff">
   <p>
   @if ($staff->photo=="")
-    <img src="/images/user.png" alt="Фото">
+    <img src="/images/user.png" class="img-responsive" alt="Фото">
   @else
-    <img src="{{ $staff->photo }}" alt="Фото">
+    <img src="{{ Storage::url($staff->photo) }}" class="img-responsive" alt="Фото">
   @endif
   </p>
 
@@ -56,5 +56,9 @@
 @section ('localcss')
   .staff {
     text-align: center;
+  }
+
+  .staff .img-responsive {
+    margin: 0 auto;
   }
 @stop

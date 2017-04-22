@@ -36,7 +36,7 @@
       @if ($staff->photo=="")
         <img src="/images/user.png" alt="Фото">
       @else
-        <img src="{{ $staff->photo }}" alt="Фото">
+        <img src="{{ Storage::url($staff->photo) }}" class="img-responsive" alt="Фото">
       @endif
       <h2>{{ $staff->fullName }}</h2>
       {{ $staff->position }}
@@ -51,5 +51,9 @@
 @section('localcss')
   .staffs {
     text-align:center;
+  }
+
+  .staffs .img-responsive {
+    margin: 0 auto;
   }
 @stop
