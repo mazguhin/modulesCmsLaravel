@@ -37,18 +37,22 @@
 
        <div class="form-group">
          <label for="activated">URL*</label>
-         <select class="form-control" id="url" name="url">
+         <select class="form-control selectpicker" data-live-search="true" id="url" name="url">
            <option value="">Отсутствует</option>
+           <optgroup label="Категории">
            @foreach ($categories as $category)
             <option value="/category/id/{{ $category->id }}"
               @if ($arrayItemUrl[1]=='category' && $arrayItemUrl[3]==$category->id) selected @endif
-              >{{ $category->name }} [Категория]</option>
+              >{{ $category->name }}</option>
            @endforeach
+           </optgroup>
+           <optgroup label="Категории">
            @foreach ($articles as $article)
             <option value="/article/id/{{ $article->id }}"
               @if ($arrayItemUrl[1]=='article' && $arrayItemUrl[3]==$article->id) selected @endif
-              >{{ $article->title }} [Статья]</option>
+              >{{ $article->title }}</option>
            @endforeach
+           </optgroup>
           </select>
        </div>
 

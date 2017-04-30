@@ -1,4 +1,32 @@
 @extends ('template::back.amy.layouts.main') @section ('content')
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <div class="panel-title">Поиск</div>
+  </div>
+
+  <div class="panel-body">
+    <div class="input-group">
+      <input type="text" class="form-control" id="searchInput" placeholder="Введите текст для поиска...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="searchBtn">Найти</button>
+        <button class="btn btn-default" type="button" id="cancelBtn">Сбросить</button>
+      </span>
+    </div>
+    <table class="table table-striped" id="searchTable" style="display:none;">
+
+        <thead>
+            <th>Заголовок</th>
+            <th>Описание</th>
+        </thead>
+
+        <tbody id="searchTableBody">
+
+        </tbody>
+      </table>
+  </div>
+</div>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">Все статьи</div>
@@ -29,7 +57,7 @@
                   @if ($article->id==$startPageId)
                   <i class="fa fa-home" aria-hidden="true"></i>
                   @endif
-                  {{ $article->title }}
+                  <a href="/article/id/{{ $article->id }}">{{ $article->title }}</a>
                 </td>
                 <td>{{ $article->category->name }}</td>
                 <td>{{ $article->role->title }}</td>
@@ -87,4 +115,48 @@
     {{ $articles->links() }}
     @endif
 </div>
+@stop
+
+@section('localjs')
+$(function() {
+
+  // нажатие кнопки Поиск
+  $('#searchBtn').click(function() {
+        $('#searchTableBody').html('');
+        $.ajax({
+        dataType: "json",
+        url: '/dashboard/article/search',
+        data: {keyword: $('#searchInput').val()},
+        success: function (result) {
+          if (result.length>0) {
+            $.each(result, function(index,value) {
+              $('#searchTableBody').append('\
+              <tr>\
+                <td><a href="/article/id/'+value['id']+'">'+value['title']+'</a></td>\
+                <td>'+value['description']+'</td>\
+              </tr>\
+              ');
+            });
+          } else {
+            $('#searchTableBody').append('\
+            <tr>\
+              <td>Упс!</td>\
+              <td>Поиск не дал результатов. Попробуйте другой запрос.</td>\
+            </tr>\
+            ');
+          }
+        },
+    });
+
+    $('#searchTable').show();
+  });
+
+  // нажатие кнопки Сбросить
+  $('#cancelBtn').click(function() {
+    $('#searchInput').val('');
+    $('#searchTableBody').html('');
+    $('#searchTable').hide();
+  });
+
+});
 @stop

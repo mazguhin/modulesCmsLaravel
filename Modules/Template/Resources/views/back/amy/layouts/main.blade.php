@@ -19,7 +19,7 @@
       div#fa-select {
         font-family: 'FontAwesome', 'sans-serif';
       }
-    </style>    
+    </style>
 
     <!-- Scripts -->
     <script>
@@ -27,6 +27,11 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+    <!-- local styles -->
+    <style>
+      @yield('localcss')
+    </style>
 
 </head>
 <body>
@@ -129,5 +134,10 @@
 
   <script src="{{ elixir('/js/app.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+  <!-- local js -->
+  <script>
+    @yield('localjs')
+  </script>
 </body>
 </html>

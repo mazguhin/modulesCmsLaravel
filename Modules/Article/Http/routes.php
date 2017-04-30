@@ -34,4 +34,8 @@ Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/article', 'namespa
     // destroy article
     Route::delete ('/{id_article}', 'BackArticleController@destroy')
     ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+
+    // search article
+    Route::get ('/search', 'BackArticleController@search')
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 });

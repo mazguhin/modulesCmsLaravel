@@ -182,4 +182,15 @@ class BackArticleController extends Controller
         return redirect('/category/id/'.$category)->with(['result'=>'Статья успешно удалена']);
       }
     }
+
+    public function search(Request $request){
+        $member = $request->keyword;
+        $results = Article::where('title', 'like', "$member%")
+            ->orWhere('description', 'like', "$member%")->get();
+
+        //if (Request::wantsJson()) return $results;
+
+        return $results;
+    }
+
 }

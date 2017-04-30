@@ -28,15 +28,20 @@
 
        <div class="form-group">
          <label for="activated">URL*</label>
-         <select class="form-control" id="url" name="url">
+         <select class="form-control selectpicker" data-live-search="true" id="url" name="url">
+           <optgroup label="Категории">
            @foreach ($categories as $category)
-            <option value="/category/id/{{ $category->id }}">{{ $category->name }} [Категория]</option>
+            <option value="/category/id/{{ $category->id }}">{{ $category->name }}</option>
            @endforeach
+          </optgroup>
+          <optgroup label="Статьи">
            @foreach ($articles as $article)
-            <option value="/article/id/{{ $article->id }}">{{ $article->title }} [Статья]</option>
+            <option value="/article/id/{{ $article->id }}">{{ $article->title }}</option>
            @endforeach
+           </optgroup>
           </select>
        </div>
+
 
        <div class="form-group">
          <label for="activated">Активен*</label>
