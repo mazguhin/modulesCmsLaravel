@@ -1,4 +1,7 @@
 @extends ('template::back.amy.layouts.main') @section ('content')
+
+@includeIf('template::back.amy.layouts.sections.search')
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">Все сотрудники
@@ -52,7 +55,7 @@
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       </button>
                     </a>
-                
+
                     <!-- DELETE -->
                     <a href="/dashboard/staff/delete/id/{{ $staff->id }}">
                       <a class="btn btn-danger btn-sm" href="/dashboard/staff/{{ $staff->id }}"
@@ -76,4 +79,53 @@
     {{ $staffs->links() }}
     @endif
 </div>
+@stop
+
+@section('localjs')
+$(function() {
+
+  // инициализация заголовков таблицы
+  $('#searchTableHead').html('\
+    <th>ФИО</th>\
+  ');
+
+  // нажатие кнопки Поиск
+  $('#searchBtn').click(function() {
+        $('#searchTableBody').html('');
+        $.ajax({
+        dataType: "json",
+        url: '/dashboard/staff/search',
+        data: {keyword: $('#searchInput').val()},
+        success: function (result) {
+          if (result.length>0) {
+            $.each(result, function(index,value) {
+              $('#searchTableBody').append('\
+              <tr>\
+                <td><a href="/dashboard/staff/edit/id/'+value['id']+'">'+value['fullName']+'</a></td>\
+              </tr>\
+              ');
+            });
+          } else {
+            $('#searchTableBody').append('\
+            <tr>\
+              <td>Упс! Поиск не дал результатов. Попробуйте другой запрос.</td>\
+            </tr>\
+            ');
+          }
+        },
+    });
+
+    $('#searchTable').show();
+    $('#searchHr').show();
+  });
+
+  // нажатие кнопки Сбросить
+  $('#cancelBtn').click(function() {
+    $('#searchInput').val('');
+    $('#searchTableBody').html('');
+    $('#searchTable').hide();
+    $('#searchHr').hide();
+  });
+
+});
 @stop

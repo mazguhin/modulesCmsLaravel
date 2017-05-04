@@ -190,4 +190,14 @@ class BackCategoryController extends Controller
         return redirect('/category')->with(['result'=>'Категория успешно удалена']);
       }
     }
+
+    public function search(Request $request){
+        $member = $request->keyword;
+        $results = Category::where('name', 'like', "$member%")
+            ->orWhere('description', 'like', "$member%")->get();
+
+        //if (Request::wantsJson()) return $results;
+
+        return $results;
+    }
 }

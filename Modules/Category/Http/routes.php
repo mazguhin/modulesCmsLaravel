@@ -37,4 +37,8 @@ Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/category', 'namesp
     // destroy category
     Route::delete ('/{id_category}', 'BackCategoryController@destroy')
     ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+
+    // search article
+    Route::get ('/search', 'BackCategoryController@search')
+    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 });

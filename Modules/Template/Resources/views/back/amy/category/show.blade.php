@@ -1,7 +1,17 @@
 @extends ('template::back.amy.layouts.main') @section ('content')
+
+@includeIf('template::back.amy.layouts.sections.search')
+
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="panel-title">Все категории</div>
+        <div class="panel-title">Все категории
+          <!-- CREATE -->
+          <a href="/dashboard/category/create/">
+            <button type="button" class="btn btn-primary btn-sm">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </a>
+        </div>
     </div>
 
     @if (session('result'))
@@ -80,4 +90,56 @@
     </table>
     {{ $categories->links() }} @endif
 </div>
+@stop
+
+@section('localjs')
+$(function() {
+
+  // инициализация заголовков таблицы
+  $('#searchTableHead').html('\
+    <th>Заголовок</th>\
+    <th>Описание</th>\
+  ');
+
+  // нажатие кнопки Поиск
+  $('#searchBtn').click(function() {
+        $('#searchTableBody').html('');
+        $.ajax({
+        dataType: "json",
+        url: '/dashboard/category/search',
+        data: {keyword: $('#searchInput').val()},
+        success: function (result) {
+          if (result.length>0) {
+            $.each(result, function(index,value) {
+              $('#searchTableBody').append('\
+              <tr>\
+                <td><a href="/category/id/'+value['id']+'">'+value['name']+'</a></td>\
+                <td>'+value['description']+'</td>\
+              </tr>\
+              ');
+            });
+          } else {
+            $('#searchTableBody').append('\
+            <tr>\
+              <td>Упс!</td>\
+              <td>Поиск не дал результатов. Попробуйте другой запрос.</td>\
+            </tr>\
+            ');
+          }
+        },
+    });
+
+    $('#searchTable').show();
+    $('#searchHr').show();
+  });
+
+  // нажатие кнопки Сбросить
+  $('#cancelBtn').click(function() {
+    $('#searchInput').val('');
+    $('#searchTableBody').html('');
+    $('#searchTable').hide();
+    $('#searchHr').hide();
+  });
+
+});
 @stop

@@ -183,4 +183,12 @@ class BackUserController extends Controller
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
+
+    public function search(Request $request){
+        $member = $request->keyword;
+        $results = User::where('name', 'like', "$member%")
+            ->orWhere('email', 'like', "$member%")->get();
+
+        return $results;
+    }
 }

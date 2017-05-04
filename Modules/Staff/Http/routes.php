@@ -48,4 +48,6 @@ Route::group(['middleware' => ['web','Modules\Dashboard\Http\Middleware\isAdmin'
     Route::get ('/', 'BackStaffController@show');
     // destroy staff
     Route::delete ('/{id_staff}', 'BackStaffController@destroy');
+    // search user
+    Route::get ('/search', 'BackStaffController@search');
 });

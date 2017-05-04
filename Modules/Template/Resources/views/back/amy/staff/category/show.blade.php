@@ -1,7 +1,14 @@
 @extends ('template::back.amy.layouts.main') @section ('content')
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="panel-title">Все категории</div>
+        <div class="panel-title">Все категории
+          <!-- CREATE -->
+          <a href="/dashboard/staff/category/create/">
+            <button type="button" class="btn btn-primary btn-sm">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </a>
+        </div>
     </div>
 
     @if (session('result'))

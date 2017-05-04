@@ -1,8 +1,18 @@
 @extends ('template::back.amy.layouts.main')
 @section ('content')
+
+@includeIf('template::back.amy.layouts.sections.search')
+
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="panel-title">Все пользователи</div>
+        <div class="panel-title">Все пользователи
+          <!-- CREATE -->
+          <a href="/dashboard/user/create/">
+            <button type="button" class="btn btn-primary btn-sm">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </a>
+        </div>
     </div>
 
     @if (session('result'))
@@ -87,4 +97,56 @@
     </table>
     {{ $users->links() }} @endif
 </div>
+@stop
+
+@section('localjs')
+$(function() {
+
+  // инициализация заголовков таблицы
+  $('#searchTableHead').html('\
+    <th>Имя</th>\
+    <th>Email</th>\
+  ');
+
+  // нажатие кнопки Поиск
+  $('#searchBtn').click(function() {
+        $('#searchTableBody').html('');
+        $.ajax({
+        dataType: "json",
+        url: '/dashboard/user/search',
+        data: {keyword: $('#searchInput').val()},
+        success: function (result) {
+          if (result.length>0) {
+            $.each(result, function(index,value) {
+              $('#searchTableBody').append('\
+              <tr>\
+                <td><a href="/dashboard/user/edit/id/'+value['id']+'">'+value['name']+'</a></td>\
+                <td>'+value['email']+'</td>\
+              </tr>\
+              ');
+            });
+          } else {
+            $('#searchTableBody').append('\
+            <tr>\
+              <td>Упс!</td>\
+              <td>Поиск не дал результатов. Попробуйте другой запрос.</td>\
+            </tr>\
+            ');
+          }
+        },
+    });
+
+    $('#searchTable').show();
+    $('#searchHr').show();
+  });
+
+  // нажатие кнопки Сбросить
+  $('#cancelBtn').click(function() {
+    $('#searchInput').val('');
+    $('#searchTableBody').html('');
+    $('#searchTable').hide();
+    $('#searchHr').hide();
+  });
+
+});
 @stop

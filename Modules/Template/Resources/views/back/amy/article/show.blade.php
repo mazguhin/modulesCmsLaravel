@@ -1,35 +1,19 @@
-@extends ('template::back.amy.layouts.main') @section ('content')
+@extends ('template::back.amy.layouts.main')
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-      <div class="panel-title">Поиск</div>
-  </div>
+@section ('content')
 
-  <div class="panel-body">
-    <div class="input-group">
-      <input type="text" class="form-control" id="searchInput" placeholder="Введите текст для поиска...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" id="searchBtn">Найти</button>
-        <button class="btn btn-default" type="button" id="cancelBtn">Сбросить</button>
-      </span>
-    </div>
-    <table class="table table-striped" id="searchTable" style="display:none;">
-
-        <thead>
-            <th>Заголовок</th>
-            <th>Описание</th>
-        </thead>
-
-        <tbody id="searchTableBody">
-
-        </tbody>
-      </table>
-  </div>
-</div>
+@includeIf('template::back.amy.layouts.sections.search')
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="panel-title">Все статьи</div>
+        <div class="panel-title">Все статьи
+          <!-- CREATE -->
+          <a href="/dashboard/article/create/">
+            <button type="button" class="btn btn-primary btn-sm">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </a>
+        </div>
     </div>
 
     @if (session('result'))
@@ -120,6 +104,12 @@
 @section('localjs')
 $(function() {
 
+  // инициализация заголовков таблицы
+  $('#searchTableHead').html('\
+    <th>Заголовок</th>\
+    <th>Описание</th>\
+  ');
+
   // нажатие кнопки Поиск
   $('#searchBtn').click(function() {
         $('#searchTableBody').html('');
@@ -149,6 +139,7 @@ $(function() {
     });
 
     $('#searchTable').show();
+    $('#searchHr').show();
   });
 
   // нажатие кнопки Сбросить
@@ -156,6 +147,7 @@ $(function() {
     $('#searchInput').val('');
     $('#searchTableBody').html('');
     $('#searchTable').hide();
+    $('#searchHr').hide();
   });
 
 });

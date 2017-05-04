@@ -185,4 +185,11 @@ class BackStaffController extends Controller
         return redirect('/staff/category')->with(['result'=>'Сотрудник успешно удален']);
       }
     }
+
+    public function search(Request $request){
+        $member = $request->keyword;
+        $results = Staff::where('fullName', 'like', "$member%")->get();
+
+        return $results;
+    }
 }

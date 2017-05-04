@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Smans</title>
+    <title>{{ Settings::get('projectName') }}</title>
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/" class="site_title"><i class="fa fa-home"></i> <span>Smans</span></a>
+              <a href="/" class="site_title"><i class="fa fa-home"></i> <span>{{ Settings::get('projectName') }}</span></a>
             </div>
 
             <div class="clearfix"></div>

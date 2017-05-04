@@ -38,4 +38,8 @@ Route::group(['middleware' => ['web','Modules\Dashboard\Http\Middleware\isAdmin'
   // destroy user
   Route::delete ('/{id_user}', 'BackUserController@destroy')
   ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+
+  // search user
+  Route::get ('/search', 'BackUserController@search')
+  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 });
