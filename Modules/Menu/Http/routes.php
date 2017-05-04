@@ -8,57 +8,23 @@ Route::group(['middleware' => 'web', 'prefix' => 'menu', 'namespace' => 'Modules
 });
 
 // BACK MENU Routes
-Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/menu', 'namespace' => 'Modules\Menu\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/menu', 'namespace' => 'Modules\Menu\Http\Controllers'], function()
 {
-      // create menu
-    Route::get ('/create', 'BackMenuController@create')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // store menu
-    Route::post ('/create', 'BackMenuController@store')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // show form for edit menu
-    Route::get ('/edit/id/{id_menu}', 'BackMenuController@editById')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // update menu
-    Route::post ('/edit/id/{id_menu}', 'BackMenuController@update')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // show all menu
-    Route::get ('/', 'BackMenuController@show')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // destroy menu
-    Route::delete ('/{id_menu}', 'BackMenuController@destroy')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+    Route::get ('/create', 'BackMenuController@create'); // create menu
+    Route::post ('/create', 'BackMenuController@store'); // store menu
+    Route::get ('/edit/id/{id_menu}', 'BackMenuController@editById'); // show form for edit menu
+    Route::post ('/edit/id/{id_menu}', 'BackMenuController@update'); // update menu
+    Route::get ('/', 'BackMenuController@show'); // show all menu
+    Route::delete ('/{id_menu}', 'BackMenuController@destroy'); // destroy menu
 });
 
 // BACK MenuItems Routes
-Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/menu/item', 'namespace' => 'Modules\Menu\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/menu/item', 'namespace' => 'Modules\Menu\Http\Controllers'], function()
 {
-      // create item menu
-    Route::get ('/create/{id_menu}', 'BackMenuItemController@create')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // store item menu
-    Route::post ('/create/{id_menu}', 'BackMenuItemController@store')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // edit form for items menu
-    Route::get ('/edit/id/{id_item}', 'BackMenuItemController@editById')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // update item menu
-    Route::post ('/edit/id/{id_menu}', 'BackMenuItemController@update')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // show all items menu
-    Route::get ('/id/{id_menu}', 'BackMenuItemController@show')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // destroy item menu
-    Route::delete ('/{id_item}', 'BackMenuItemController@destroy')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+    Route::get ('/create/{id_menu}', 'BackMenuItemController@create'); // create item menu
+    Route::post ('/create/{id_menu}', 'BackMenuItemController@store'); // store item menu
+    Route::get ('/edit/id/{id_item}', 'BackMenuItemController@editById'); // edit form for items menu
+    Route::post ('/edit/id/{id_menu}', 'BackMenuItemController@update'); // update item menu
+    Route::get ('/id/{id_menu}', 'BackMenuItemController@show'); // show all items menu
+    Route::delete ('/{id_item}', 'BackMenuItemController@destroy'); // destroy item menu
 });

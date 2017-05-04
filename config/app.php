@@ -141,7 +141,9 @@ return [
         /*
          * Package Service Providers...
          */
-        //
+
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -199,6 +201,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Module' => Nwidart\Modules\Facades\Module::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
     ],
 ];

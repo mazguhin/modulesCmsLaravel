@@ -1,45 +1,26 @@
 <?php
 
-Route::group(['middleware' => ['web','Modules\Dashboard\Http\Middleware\isAdmin'], 'prefix' => 'dashboard', 'namespace' => 'Modules\Dashboard\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard', 'namespace' => 'Modules\Dashboard\Http\Controllers'], function()
 {
     Route::get('/', 'DashboardController@index');
 });
 
-Route::group(['middleware' => ['web','Modules\Dashboard\Http\Middleware\isAdmin'], 'prefix' => 'dashboard/user', 'namespace' => 'Modules\Dashboard\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/user', 'namespace' => 'Modules\Dashboard\Http\Controllers'], function()
 {
-  // create user
-  Route::get ('/create', 'BackUserController@create')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+  Route::get ('/create', 'BackUserController@create'); // create user
+  Route::post ('/create', 'BackUserController@store'); // store user
+  Route::get ('/edit/id/{id_user}', 'BackUserController@editById'); // show form for edit user
+  Route::post ('/edit/id/{id_user}', 'BackUserController@update'); // update user
+  Route::post ('/ban/id/{id_user}', 'BackUserController@ban'); // ban user
+  Route::post ('/unban/id/{id_user}', 'BackUserController@unban'); // unban user
+  Route::get ('/', 'BackUserController@show'); // show all users
+  Route::delete ('/{id_user}', 'BackUserController@destroy'); // destroy user
+  Route::get ('/search', 'BackUserController@search'); // search user
+});
 
-  // store user
-  Route::post ('/create', 'BackUserController@store')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
-  // show form for edit user
-  Route::get ('/edit/id/{id_user}', 'BackUserController@editById')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-  // update user
-  Route::post ('/edit/id/{id_user}', 'BackUserController@update')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-  // ban user
-  Route::post ('/ban/id/{id_user}', 'BackUserController@ban')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-  // unban user
-  Route::post ('/unban/id/{id_user}', 'BackUserController@unban')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-  // show all users
-  Route::get ('/', 'BackUserController@show')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-  // destroy user
-  Route::delete ('/{id_user}', 'BackUserController@destroy')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-  // search user
-  Route::get ('/search', 'BackUserController@search')
-  ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+// API
+Route::group(['middleware' => ['api','cors'], 'prefix' => 'api', 'namespace' => 'Modules\Dashboard\Http\Controllers'], function()
+{
+    Route::get('/auth', 'ApiController@authenticate');
 });

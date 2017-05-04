@@ -9,33 +9,21 @@ Route::group(['middleware' => 'web', 'prefix' => 'article', 'namespace' => 'Modu
 });
 
 // BACK Routes
-Route::group(['middleware' => ['web'], 'prefix' => 'dashboard/article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
 {
-      // create article
-    Route::get ('/create', 'BackArticleController@create')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+    Route::get ('/create', 'BackArticleController@create'); // create article
+    Route::post ('/create', 'BackArticleController@store'); // store article
+    Route::get ('/edit/id/{id_article}', 'BackArticleController@editById'); // show form for edit article
+    Route::post ('/edit/id/{id_article}', 'BackArticleController@update'); // update article
+    Route::get ('/', 'BackArticleController@show'); // show all articles
+    Route::delete ('/{id_article}', 'BackArticleController@destroy'); // destroy article
+    Route::get ('/search', 'BackArticleController@search'); // search article
+});
 
-    // store article
-    Route::post ('/create', 'BackArticleController@store')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
 
-    // show form for edit article
-    Route::get ('/edit/id/{id_article}', 'BackArticleController@editById')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // update article
-    Route::post ('/edit/id/{id_article}', 'BackArticleController@update')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // show all articles
-    Route::get ('/', 'BackArticleController@show')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // destroy article
-    Route::delete ('/{id_article}', 'BackArticleController@destroy')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
-
-    // search article
-    Route::get ('/search', 'BackArticleController@search')
-    ->middleware(['Modules\Dashboard\Http\Middleware\isAdmin']);
+// API Front
+Route::group(['middleware' => ['api','cors'], 'prefix' => 'api/article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
+{
+    Route::get ('/id/{id_article}', 'ApiArticleController@showId');
+    Route::get ('/{slug_article}', 'ApiArticleController@showSlug');
 });

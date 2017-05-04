@@ -20,34 +20,20 @@ Route::group(['middleware' => 'web', 'prefix' => 'staff', 'namespace' => 'Module
 });
 
 // BACK Routes
-Route::group(['middleware' => ['web','Modules\Dashboard\Http\Middleware\isAdmin'], 'prefix' => 'dashboard/staff', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/staff', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
 {
-    // create category
-    Route::get ('/category/create', 'BackStaffCategoryController@create');
-    // store category
-    Route::post ('/category/create', 'BackStaffCategoryController@store');
-    // show form for edit category
-    Route::get ('/category/edit/id/{id_category}', 'BackStaffCategoryController@editById');
-    // update category
-    Route::post ('/category/edit/id/{id_category}', 'BackStaffCategoryController@update');
-    // show all categories
-    Route::get ('/category', 'BackStaffCategoryController@show');
-    // destroy category
-    Route::delete ('/category/{id_category}', 'BackStaffCategoryController@destroy');
+    Route::get ('/category/create', 'BackStaffCategoryController@create'); // create category
+    Route::post ('/category/create', 'BackStaffCategoryController@store'); // store category
+    Route::get ('/category/edit/id/{id_category}', 'BackStaffCategoryController@editById'); // show form for edit category
+    Route::post ('/category/edit/id/{id_category}', 'BackStaffCategoryController@update'); // update category
+    Route::get ('/category', 'BackStaffCategoryController@show'); // show all categories
+    Route::delete ('/category/{id_category}', 'BackStaffCategoryController@destroy'); // destroy category
 
-
-    // create staff
-    Route::get ('/create', 'BackStaffController@create');
-    // store staff
-    Route::post ('/create', 'BackStaffController@store');
-    // show form for edit staff
-    Route::get ('/edit/id/{id_staff}', 'BackStaffController@editById');
-    // update staff
-    Route::post ('/edit/id/{id_staff}', 'BackStaffController@update');
-    // show all staff
-    Route::get ('/', 'BackStaffController@show');
-    // destroy staff
-    Route::delete ('/{id_staff}', 'BackStaffController@destroy');
-    // search user
-    Route::get ('/search', 'BackStaffController@search');
+    Route::get ('/create', 'BackStaffController@create'); // create staff
+    Route::post ('/create', 'BackStaffController@store'); // store staff
+    Route::get ('/edit/id/{id_staff}', 'BackStaffController@editById'); // show form for edit staff    
+    Route::post ('/edit/id/{id_staff}', 'BackStaffController@update'); // update staff
+    Route::get ('/', 'BackStaffController@show'); // show all staff
+    Route::delete ('/{id_staff}', 'BackStaffController@destroy'); // destroy staff
+    Route::get ('/search', 'BackStaffController@search'); // search user
 });
