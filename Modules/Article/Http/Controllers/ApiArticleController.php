@@ -19,9 +19,7 @@ class ApiArticleController extends Controller
       if (!RoleHelper::validatePermissionForPage($article->role->permission) || !RoleHelper::validatePermissionForPage($article->category->role->permission))
         return response('Отказано в доступе',403);
 
-      return ([
-        $article
-      ]);
+      return response()->json($article);
     }
 
     public function showSlug($slug_article)
@@ -31,8 +29,6 @@ class ApiArticleController extends Controller
       if (!RoleHelper::validatePermissionForPage($article->role->permission) || !RoleHelper::validatePermissionForPage($article->category->role->permission))
         return response('Отказано в доступе',403);
 
-      return ([
-        $article
-      ]);
+      return response()->json($article);
     }
 }

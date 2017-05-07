@@ -30,6 +30,15 @@ class Menu extends Model
       ]);
     }
 
+    // Activated and public menu_items
+    public function menuActivatedPublicItems ()
+    {
+      return $this->hasMany(MenuItem::class)->where([
+        'activated' => 1,
+        'role_id' => 1
+      ]);
+    }
+
     public function access()
     {
       return $this->belongsTo('Modules\Dashboard\Entities\Role','role_id','id');

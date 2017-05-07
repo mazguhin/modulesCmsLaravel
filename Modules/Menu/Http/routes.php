@@ -28,3 +28,9 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/menu/ite
     Route::get ('/id/{id_menu}', 'BackMenuItemController@show'); // show all items menu
     Route::delete ('/{id_item}', 'BackMenuItemController@destroy'); // destroy item menu
 });
+
+// API Front
+Route::group(['middleware' => ['api','cors'], 'prefix' => 'api/menu', 'namespace' => 'Modules\Menu\Http\Controllers'], function()
+{
+    Route::get('/', 'ApiMenuController@index');
+});

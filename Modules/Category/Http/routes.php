@@ -22,3 +22,11 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/category
     Route::delete ('/{id_category}', 'BackCategoryController@destroy'); // destroy category
     Route::get ('/search', 'BackCategoryController@search'); // search article
 });
+
+// API Front
+Route::group(['middleware' => ['api','cors'], 'prefix' => 'api/category', 'namespace' => 'Modules\Category\Http\Controllers'], function()
+{
+    Route::get('/', 'ApiCategoryController@index');
+    Route::get ('/id/{id_category}', 'ApiCategoryController@showId');
+    Route::get ('/{slug_category}', 'ApiCategoryController@showSlug');
+});

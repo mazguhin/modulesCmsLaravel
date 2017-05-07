@@ -31,9 +31,23 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/staff', 
 
     Route::get ('/create', 'BackStaffController@create'); // create staff
     Route::post ('/create', 'BackStaffController@store'); // store staff
-    Route::get ('/edit/id/{id_staff}', 'BackStaffController@editById'); // show form for edit staff    
+    Route::get ('/edit/id/{id_staff}', 'BackStaffController@editById'); // show form for edit staff
     Route::post ('/edit/id/{id_staff}', 'BackStaffController@update'); // update staff
     Route::get ('/', 'BackStaffController@show'); // show all staff
     Route::delete ('/{id_staff}', 'BackStaffController@destroy'); // destroy staff
     Route::get ('/search', 'BackStaffController@search'); // search user
+});
+
+// API Front
+Route::group(['middleware' => ['api','cors'], 'prefix' => 'api/staff', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
+{
+  Route::get('/category', 'ApiStaffCategoryController@index'); // show all categories
+
+  // show members in category
+  Route::get ('/category/id/{id_category}', 'ApiStaffCategoryController@showId');
+  Route::get ('/category/{slug_category}', 'ApiStaffCategoryController@showSlug');
+
+  // show staff
+  Route::get ('/id/{id_staff}', 'ApiStaffController@showId');
+  Route::get ('/{slug_staff}', 'ApiStaffController@showSlug');
 });
