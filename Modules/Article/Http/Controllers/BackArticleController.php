@@ -64,7 +64,7 @@ class BackArticleController extends Controller
     public function create()
     {
       return view('template::back.'.$this->backTemplate.'.article.create',[
-        'categories' => \Modules\Category\Entities\Category::all(),
+        'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
         'roles' => \Modules\Dashboard\Entities\Role::all()
       ]);
     }
@@ -112,7 +112,7 @@ class BackArticleController extends Controller
     public function editById($id_article)
     {
       return view('template::back.'.$this->backTemplate.'.article.edit',[
-        'categories' => \Modules\Category\Entities\Category::all(),
+        'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
         'article' => Article::where('id',$id_article)->firstOrFail(),
         'roles' => \Modules\Dashboard\Entities\Role::all()
       ]);
@@ -185,10 +185,14 @@ class BackArticleController extends Controller
 
     public function search(Request $request){
         $member = $request->keyword;
-        $results = Article::where('title', 'like', "$member%")
+        $preResults = Article::where('title', 'like', "$member%")
             ->orWhere('description', 'like', "$member%")->get();
 
-        //if (Request::wantsJson()) return $results;
+        $results = collect([]);
+
+        foreach ($preResults as $res) {
+            if ($res->category->club==false) $results->push($res);
+        }
 
         return $results;
     }

@@ -38,9 +38,17 @@
        <div class="form-group">
          <label for="activated">URL*</label>
          <select class="form-control selectpicker" data-live-search="true" id="url" name="url">
+           <option value="" selected>Отсутствует</option>
            <optgroup label="Категории">
            @foreach ($categories as $category)
             <option value="/category/id/{{ $category->id }}">{{ $category->name }}</option>
+           @endforeach
+          </optgroup>
+          <optgroup label="Сотрудники">
+           <option value="/staff/category">Список категорий</option>
+          <optgroup label="Клубы">
+           @foreach ($clubs as $club)
+            <option value="/club/id/{{ $club->id }}">{{ $club->name }}</option>
            @endforeach
           </optgroup>
           <optgroup label="Статьи">

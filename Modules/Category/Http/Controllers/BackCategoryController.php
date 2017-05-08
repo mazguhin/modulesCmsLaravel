@@ -60,7 +60,7 @@ class BackCategoryController extends Controller
         $startPage[3] = 0;
 
       return view('template::back.'.$this->backTemplate.'.category.show',[
-        'categories' => Category::orderBy('created_at', 'desc')->paginate(10),
+        'categories' => Category::where('club',false)->orderBy('created_at', 'desc')->paginate(10),
         'startPageId' => $startPage[3]
       ]);
     }
@@ -193,8 +193,14 @@ class BackCategoryController extends Controller
 
     public function search(Request $request){
         $member = $request->keyword;
-        $results = Category::where('name', 'like', "$member%")
+        $preResults = Category::where('name', 'like', "$member%")
             ->orWhere('description', 'like', "$member%")->get();
+
+        $results = collect([]);
+
+        foreach ($preResults as $res) {
+            if ($res->club==false) $results->push($res);
+        }
 
         //if (Request::wantsJson()) return $results;
 

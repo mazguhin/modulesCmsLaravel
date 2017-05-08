@@ -38,7 +38,17 @@
               >{{ $category->name }}</option>
            @endforeach
            </optgroup>
-           <optgroup label="Категории">
+           <optgroup label="Сотрудники">
+            <option value="/staff/category"
+            @if ($arrayItemUrl[1]=='staff' && $arrayItemUrl[2]=='category') selected @endif
+            >Список категорий</option>
+           <optgroup label="Клубы">
+            @foreach ($clubs as $club)
+             <option value="/club/id/{{ $club->id }}"
+             @if ($arrayItemUrl[1]=='club' && $arrayItemUrl[3]==$club->id) selected @endif
+             >{{ $club->name }}</option>
+            @endforeach
+           <optgroup label="Статьи">
            @foreach ($articles as $article)
             <option value="/article/id/{{ $article->id }}"
               @if ($arrayItemUrl[1]=='article' && $arrayItemUrl[3]==$article->id) selected @endif

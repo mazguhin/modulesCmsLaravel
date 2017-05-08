@@ -50,9 +50,16 @@ class BackMenuItemController extends Controller
 
  public function create($id_menu)
  {
+   $articles = collect([]);
+   foreach (\Modules\Article\Entities\Article::all() as $article) {
+     if ($article->category->club==false) $articles->push($article);
+   }
+
    return view('template::back.'.$this->backTemplate.'.menu.item.create',[
-     'articles' => \Modules\Article\Entities\Article::all(),
-     'categories' => \Modules\Category\Entities\Category::all(),
+     'articles' => $articles,
+     'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
+     'clubs' => \Modules\Club\Entities\Club::all(),
+     'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
      'roles' => \Modules\Dashboard\Entities\Role::all(),
      'id_menu' => $id_menu,
    ]);
@@ -84,11 +91,18 @@ class BackMenuItemController extends Controller
    $item = MenuItem::where('id',$id_item)->firstOrFail();
    $arrayItemUrl = explode("/",$item->url);
 
+   $articles = collect([]);
+   foreach (\Modules\Article\Entities\Article::all() as $article) {
+     if ($article->category->club==false) $articles->push($article);
+   }
+
    return view('template::back.'.$this->backTemplate.'.menu.item.edit',[
      'item' => $item,
      'arrayItemUrl' => $arrayItemUrl,
-     'articles' => \Modules\Article\Entities\Article::all(),
-     'categories' => \Modules\Category\Entities\Category::all(),
+     'articles' => $articles,
+     'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
+     'clubs' => \Modules\Club\Entities\Club::all(),
+     'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
      'roles' => \Modules\Dashboard\Entities\Role::all(),
    ]);
  }
@@ -117,7 +131,7 @@ class BackMenuItemController extends Controller
  public function destroy(Request $request, $id_item)
  {
    $menuItem = MenuItem::where('id',$id_item)->firstOrFail();
-   
+
    if ($menuItem->required==1)
     return redirect()->back()->with(['result'=>'Нельзя удалить обязательный пункт меню']);
 

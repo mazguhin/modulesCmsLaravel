@@ -41,7 +41,15 @@
                   @if ($article->id==$startPageId)
                   <i class="fa fa-home" aria-hidden="true"></i>
                   @endif
-                  <a href="/article/id/{{ $article->id }}">{{ $article->title }}</a>
+
+                  <?php $type = (explode("-",$article->category->slug)) ?>
+
+                  @if (count($type)==3 && $type[0]=='clubcode' && ($type[2]=='info' || $type[2]=='news'))
+                    <a href="/club/id/{{$type[1]}}/{{$type[2]}}/id/{{$article->id}}">{{ $article->title }}</a>
+                  @else
+                    <a href="/article/id/{{ $article->id }}">{{ $article->title }}</a>
+                  @endif
+
                 </td>
                 <td>{{ $article->category->name }}</td>
                 <td>{{ $article->role->title }}</td>
@@ -49,6 +57,7 @@
                 <td>{{ $article->updated_at->format('d/m/Y h:m:s') }}</td>
                 <td>
 
+                  @if ($article->category->club==false)
                   <p>
                     <!-- EDIT -->
                     <a href="/dashboard/article/edit/id/{{ $article->id }}">
@@ -91,6 +100,8 @@
 
                 @endif
                   </p>
+                @endif
+
                 </td>
             </tr>
             @endforeach

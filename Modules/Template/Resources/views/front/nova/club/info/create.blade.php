@@ -8,7 +8,7 @@
    </div>
   @endif
 
- <h1 class="page-header">Создать новость</h1>
+ <h1 class="page-header">Создать страницу</h1>
 
   @include ('template::front.nova.club.errors')
 

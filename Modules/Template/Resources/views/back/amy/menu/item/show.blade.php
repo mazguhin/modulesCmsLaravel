@@ -36,7 +36,11 @@
         <tbody>
             @foreach ($items as $item)
             <tr>
-                <td><i class="fa fa-get-pocket"></i> {{ $item->title }}</td>
+                <td>
+                  @if ($item->required==1)
+                  <i class="fa fa-get-pocket"></i>
+                  @endif
+                  {{ $item->title }}</td>
                 <td>{{ $item->description }}</td>
                 <td>{{ $item->url }}</td>
                 <td>

@@ -1,6 +1,6 @@
 @extends ('template::front.nova.layouts.main')
 @section ('content')
-  <h1 class="page-header">Редактировать новость</h1>
+  <h1 class="page-header">Редактировать страницу</h1>
 
    @if (session('result'))
     <div class="alert alert-info" role="alert">

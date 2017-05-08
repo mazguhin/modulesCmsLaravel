@@ -48,10 +48,18 @@ class BackMenuController extends Controller
 
  public function create()
  {
+
+   $articles = collect([]);
+   foreach (\Modules\Article\Entities\Article::all() as $article) {
+     if ($article->category->club==false) $articles->push($article);
+   }
+
    return view('template::back.'.$this->backTemplate.'.menu.create',[
-     'articles' => \Modules\Article\Entities\Article::all(),
-     'categories' => \Modules\Category\Entities\Category::all(),
-     'roles' => \Modules\Dashboard\Entities\Role::all()
+     'articles' => $articles,
+     'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
+     'roles' => \Modules\Dashboard\Entities\Role::all(),
+     'clubs' => \Modules\Club\Entities\Club::all(),
+     'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
    ]);
  }
 
@@ -85,12 +93,19 @@ class BackMenuController extends Controller
    else
      $arrayItemUrl = array ('','','','');
 
+     $articles = collect([]);
+     foreach (\Modules\Article\Entities\Article::all() as $article) {
+       if ($article->category->club==false) $articles->push($article);
+     }
+
    return view('template::back.'.$this->backTemplate.'.menu.edit',[
      'arrayItemUrl' => $arrayItemUrl,
-     'articles' => \Modules\Article\Entities\Article::all(),
-     'categories' => \Modules\Category\Entities\Category::all(),
+     'articles' => $articles,
+     'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
      'menu' => Menu::where('id',$id_menu)->firstOrFail(),
-     'roles' => \Modules\Dashboard\Entities\Role::all()
+     'roles' => \Modules\Dashboard\Entities\Role::all(),
+     'clubs' => \Modules\Club\Entities\Club::all(),
+     'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
    ]);
  }
 

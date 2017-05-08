@@ -78,8 +78,8 @@ class BackClubController extends Controller
     }
 
     $cnews = new Category();
-    $cnews->name = 'Новости';
-    $cnews->description = 'Новостная категория клуба '.$club->name;
+    $cnews->name = 'Новости [Club'.$club->name.']';
+    $cnews->description = 'Новостная категория клуба ['.$club->name.']';
     $cnews->slug = 'clubcode-'.$club->id.'-news';
     $cnews->role_id = 1;
     $cnews->user_id = $request->user()->id;
@@ -87,7 +87,7 @@ class BackClubController extends Controller
     $cnews->save();
 
     $cinfo = new Category();
-    $cinfo->name = 'Информация';
+    $cinfo->name = 'Информация ['.$club->name.']';
     $cinfo->description = 'Информационная категория клуба '.$club->name;
     $cinfo->slug = 'clubcode-'.$club->id.'-info';
     $cinfo->role_id = 1;
@@ -135,6 +135,13 @@ class BackClubController extends Controller
       }
     }
 
+    $club->news->name = 'Новости ['.$club->name.']';
+    $club->news->description = 'Новостная категория клуба ['.$club->name.']';
+    $club->news->save();
+    $club->info->name = 'Информация ['.$club->name.']';
+    $club->info->description = 'Информационная категория клуба '.$club->name;
+    $club->info->save();
+
     if ($club->save())
       return redirect()->back()->with([
         'result' => 'Клуб успешно обновлен',
@@ -166,7 +173,7 @@ class BackClubController extends Controller
       return redirect()->back()->with(['result'=>'Клуб успешно удален']);
     } else {
       // request from front
-      return redirect('/club')->with(['result'=>'Клуб успешно удален']);
+      return redirect('/')->with(['result'=>'Клуб успешно удален']);
     }
   }
 
