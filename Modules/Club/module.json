@@ -1,0 +1,16 @@
+{
+    "name": "Club",
+    "alias": "club",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Club\\Providers\\ClubServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

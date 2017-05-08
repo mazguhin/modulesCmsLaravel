@@ -81,6 +81,14 @@
             </li>
 
             <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Клубы <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/dashboard/club/create">Создать клуб</a></li>
+                <li><a href="/dashboard/club">Список клубов</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Меню <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <!-- <li><a href="/dashboard/menu/create">Создать</a></li> -->

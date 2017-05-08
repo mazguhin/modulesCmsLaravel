@@ -39,6 +39,7 @@ class User extends Authenticatable
       return $this->belongsTo('Modules\Dashboard\Entities\Role');
     }
 
+
     public function categories()
     {
       return $this->hasMany('Modules\Category\Entities\Category');
@@ -52,5 +53,10 @@ class User extends Authenticatable
     public function staffs()
     {
       return $this->hasMany('Modules\Staff\Entities\Staff');
+    }
+
+    public function clubs()
+    {
+      return $this->belongsToMany('Modules\Club\Entities\Club');
     }
 }

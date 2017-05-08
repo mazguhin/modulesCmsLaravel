@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableCategories extends Migration
+class CreateClubsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +13,13 @@ class CreateTableCategories extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('clubs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->integer('role_id')->unsigned()->default(1);
-            $table->string('slug');
-            $table->integer('user_id')->unsigned()->default(0);
-            $table->boolean('club')->default(false);
+            $table->boolean('pay')->default(false);
+            $table->integer('cnews_id')->unsigned()->index()->default(0);
+            $table->integer('cinfo_id')->unsigned()->index()->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateTableCategories extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('clubs');
     }
 }

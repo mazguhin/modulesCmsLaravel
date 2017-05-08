@@ -23,4 +23,14 @@ class Category extends Model
     {
       return $this->belongsTo('Modules\Dashboard\Entities\Role');
     }
+
+    public function cinfo()
+    {
+      return $this->belongsTo('Modules\Club\Entities\Club', 'cinfo_id', 'id');
+    }
+
+    public function cnews()
+    {
+      return $this->belongsTo('Modules\Club\Entities\Club', 'cnews_id', 'id');
+    }
 }

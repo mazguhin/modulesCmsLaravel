@@ -33,6 +33,16 @@
 
     <!-- local styles -->
     <style>
+      .infopages {
+        padding: 10px;
+      }
+
+      .infopages:hover {
+        background-color: #EDEDED;
+      }
+    </style>
+
+    <style>
       @yield('localcss')
     </style>
   </head>
