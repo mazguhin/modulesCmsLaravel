@@ -1,0 +1,16 @@
+{
+    "name": "Guestbook",
+    "alias": "guestbook",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Guestbook\\Providers\\GuestbookServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

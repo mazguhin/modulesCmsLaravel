@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
       return $this->belongsToMany('Modules\Club\Entities\Club');
     }
+
+    public function answers()
+    {
+      return $this->hasMany('Modules\Guestbook\Entities\Answer');
+    }
+
+    public function questions()
+    {
+      return $this->hasMany('Modules\Guestbook\Entities\Question');
+    }
 }
