@@ -97,6 +97,10 @@
             </li>
 
             <li>
+              <a href="/dashboard/guestbook">Гостевая книга</a>
+            </li>
+
+            <li>
               <a href="/dashboard/setting">Настройки</a>
             </li>
 

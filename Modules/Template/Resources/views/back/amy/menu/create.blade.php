@@ -46,6 +46,10 @@
           </optgroup>
           <optgroup label="Сотрудники">
            <option value="/staff/category">Список категорий</option>
+         </optgroup>
+         <optgroup label="Гостевая книга">
+          <option value="/guestbook">Страница гостевой книги</option>
+        </optgroup>
           <optgroup label="Клубы">
            @foreach ($clubs as $club)
             <option value="/club/id/{{ $club->id }}">{{ $club->name }}</option>

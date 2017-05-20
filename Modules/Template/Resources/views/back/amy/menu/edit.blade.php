@@ -50,6 +50,12 @@
             <option value="/staff/category"
             @if ($arrayItemUrl[1]=='staff' && $arrayItemUrl[2]=='category') selected @endif
             >Список категорий</option>
+          </optgroup>
+          <optgroup label="Гостевая книга">
+            <option value="/guestbook"
+            @if ($arrayItemUrl[1]=='guestbook') selected @endif
+            >Страница гостевой книги</option>
+          </optgroup>
            <optgroup label="Клубы">
             @foreach ($clubs as $club)
              <option value="/club/id/{{ $club->id }}"
