@@ -28,6 +28,11 @@
 
   @include ('template::back.amy.club.errors')
 
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/club">Клубы</a></li>
+    <li class="active">Создание клуба</li>
+  </ol>
+
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/club/create">
        <div class="form-group">

@@ -27,6 +27,10 @@
   @endif
 
   @include ('template::back.amy.user.errors')
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/user">Пользователи</a></li>
+    <li class="active">Создание пользователя</li>
+  </ol>
 
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/user/create">

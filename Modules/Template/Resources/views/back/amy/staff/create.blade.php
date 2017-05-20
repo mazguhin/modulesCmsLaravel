@@ -27,6 +27,10 @@
    @endif
 
   @include ('template::back.amy.staff.errors')
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/staff">Сотрудники</a></li>
+    <li class="active">Создание сотрудника</li>
+  </ol>
 
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/staff/create" enctype="multipart/form-data">

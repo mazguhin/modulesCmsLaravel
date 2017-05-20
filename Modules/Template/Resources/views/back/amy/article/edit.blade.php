@@ -28,6 +28,11 @@
 
   @include ('template::back.amy.article.errors')
 
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/article">Статьи</a></li>
+    <li class="active">Редактирование статьи</li>
+  </ol>
+
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/article/edit/id/{{ $article->id }}">
        <div class="form-group">

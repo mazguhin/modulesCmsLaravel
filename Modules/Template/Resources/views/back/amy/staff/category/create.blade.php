@@ -27,6 +27,10 @@
   @endif
 
   @include ('template::back.amy.staff.category.errors')
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/staff/category">Категории сотрудников</a></li>
+    <li class="active">Создание категории</li>
+  </ol>
 
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/staff/category/create">

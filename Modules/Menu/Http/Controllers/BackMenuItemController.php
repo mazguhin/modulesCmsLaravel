@@ -98,6 +98,7 @@ class BackMenuItemController extends Controller
 
    return view('template::back.'.$this->backTemplate.'.menu.item.edit',[
      'item' => $item,
+     'id_menu' => $item->menu->id,
      'arrayItemUrl' => $arrayItemUrl,
      'articles' => $articles,
      'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),

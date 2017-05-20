@@ -13,6 +13,10 @@
   @endif
 
   @include ('template::back.amy.article.errors')
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/menu">Меню</a></li>
+    <li class="active">Создание меню</li>
+  </ol>
 
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/menu/create">

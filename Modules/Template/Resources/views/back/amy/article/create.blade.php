@@ -28,6 +28,11 @@
 
   @include ('template::back.amy.article.errors')
 
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/article">Статьи</a></li>
+    <li class="active">Создание статьи</li>
+  </ol>
+
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/article/create">
        <div class="form-group">

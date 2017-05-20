@@ -28,6 +28,11 @@
 
   @include ('template::back.amy.category.errors')
 
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/category">Категории</a></li>
+    <li class="active">Редактирование категории</li>
+  </ol>
+
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/category/edit/id/{{ $category->id }}">
        <div class="form-group">

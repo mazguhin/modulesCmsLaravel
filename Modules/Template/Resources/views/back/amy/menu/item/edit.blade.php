@@ -13,6 +13,11 @@
   @endif
 
   @include ('template::back.amy.menu.item.errors')
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/menu">Меню</a></li>
+    <li><a href="/dashboard/menu/item/id/{{$id_menu}}">Пункты меню</a></li>
+    <li class="active">Редактирование пункта меню</li>
+  </ol>
 
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/menu/item/edit/id/{{ $item->id }}">

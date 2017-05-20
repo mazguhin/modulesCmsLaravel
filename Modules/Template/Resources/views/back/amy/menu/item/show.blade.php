@@ -19,6 +19,11 @@
      </div>
     @endif
 
+    <ol class="breadcrumb">
+      <li><a href="/dashboard/menu">Меню</a></li>
+      <li class="active">Пункты меню</li>
+    </ol>
+
     @if (count($items) > 0)
     <table class="table table-striped">
         <thead>

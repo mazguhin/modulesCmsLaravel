@@ -13,8 +13,12 @@
   @endif
 
   @include ('template::back.amy.guestbook.errors')
-   <div class="panel-body">
+  <ol class="breadcrumb">
+    <li><a href="/dashboard/guestbook">Гостевая книга</a></li>
+    <li class="active">Ответ на вопрос</li>
+  </ol>
 
+   <div class="panel-body">
      <div class="list-group">
      <div href="#" class="list-group-item">
        <h4 class="list-group-item-heading">{{ $question->user->name }}
