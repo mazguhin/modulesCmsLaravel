@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "mazguhin/smans",
+    "description": "Smans CMS for school site",
+    "keywords": ["cms", "school", "framework", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {

@@ -1,10 +1,9 @@
 {
-    "name": "nwidart/club",
+    "name": "mazguhin/club",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Mazguhin Evgeny",
         }
     ],
     "autoload": {

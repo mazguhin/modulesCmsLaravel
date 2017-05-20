@@ -1,10 +1,9 @@
 {
-    "name": "nwidart/article",
+    "name": "mazguhin/article",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Mazguhin Evgeny",
         }
     ],
     "autoload": {
