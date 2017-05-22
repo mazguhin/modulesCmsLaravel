@@ -136,23 +136,23 @@ class BackUserController extends Controller
      * @return Response
      */
 
-    public function destroy(Request $request, $id_user)
-    {
-      if ($id_user==1) return redirect()->back()->with('result', 'Невозможно удалить данного пользователя');
-
-      $user = User::where('id',$id_user)->firstOrFail();
-
-      foreach ($user->articles as $article)
-        $article->delete();
-
-      foreach ($user->categories as $category)
-        $category->delete();
-
-      if ($user->delete())
-        return redirect()->back()->with(['result' => 'Пользователь успешно удален']);
-      else
-        return redirect()->back()->with('result', 'Возникла ошибка');
-    }
+    // public function destroy(Request $request, $id_user)
+    // {
+    //   if ($id_user==1) return redirect()->back()->with('result', 'Невозможно удалить данного пользователя');
+    //
+    //   $user = User::where('id',$id_user)->firstOrFail();
+    //
+    //   foreach ($user->articles as $article)
+    //     $article->delete();
+    //
+    //   foreach ($user->categories as $category)
+    //     $category->delete();
+    //
+    //   if ($user->delete())
+    //     return redirect()->back()->with(['result' => 'Пользователь успешно удален']);
+    //   else
+    //     return redirect()->back()->with('result', 'Возникла ошибка');
+    // }
 
     public function ban(Request $request, $id_user)
     {

@@ -1,10 +1,5 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'block', 'namespace' => 'Modules\Block\Http\Controllers'], function()
-{
-    Route::get('/', 'BlockController@index');
-});
-
 // BACK Routes
 Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/block', 'namespace' => 'Modules\Block\Http\Controllers'], function()
 {

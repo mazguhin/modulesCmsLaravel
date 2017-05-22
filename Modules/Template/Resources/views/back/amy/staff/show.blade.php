@@ -57,18 +57,16 @@
                     </a>
 
                     <!-- DELETE -->
-                    <a href="/dashboard/staff/delete/id/{{ $staff->id }}">
-                      <a class="btn btn-danger btn-sm" href="/dashboard/staff/{{ $staff->id }}"
-                          onclick="event.preventDefault();
-                                   document.getElementById('destroy-form{{ $staff->id }}').submit();">
-                                   <i class="fa fa-trash" aria-hidden="true"></i>
-                      </a>
-
-                      <form id="destroy-form{{ $staff->id }}" action="/dashboard/staff/{{ $staff->id }}" method="POST" style="display: none;">
-                          {{ csrf_field() }}
-                          {{ method_field('DELETE') }}
-                      </form>
+                    <a class="btn btn-danger btn-sm" href="/dashboard/staff/{{ $staff->id }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('destroy-form{{ $staff->id }}').submit();">
+                                 <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
+
+                    <form id="destroy-form{{ $staff->id }}" action="/dashboard/staff/{{ $staff->id }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
                   </p>
 
                 </td>

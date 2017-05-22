@@ -79,12 +79,10 @@
                     </a>
 
                     <!-- DELETE -->
-                    <a href="/dashboard/article/delete/id/{{ $article->id }}">
-                      <a class="btn btn-danger btn-sm" href="/dashboard/article/{{ $article->id }}"
-                          onclick="event.preventDefault();
-                                   document.getElementById('destroy-form{{ $article->id }}').submit();">
-                                   <i class="fa fa-trash" aria-hidden="true"></i>
-                      </a>
+                    <a class="btn btn-danger btn-sm" href="/dashboard/article/{{ $article->id }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('destroy-form{{ $article->id }}').submit();">
+                                 <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
 
                     <form id="setStartPage-form{{ $article->id }}" action="/dashboard/setting/startpage/{{ $article->id }}" method="POST" style="display: none;">

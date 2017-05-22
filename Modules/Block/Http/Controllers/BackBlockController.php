@@ -5,8 +5,6 @@ namespace Modules\Block\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Auth;
-use RoleHelper;
 use Settings;
 use Modules\Block\Entities\Block;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -29,10 +27,11 @@ class BackBlockController extends Controller
  public function validateForm(Request $request)
  {
    return ($this->validate($request, [
-     'description' => 'max:255',
+     'description' => 'required|max:255',
      'editor' => 'required',
      'role' => 'required|max:255',
    ],[
+     'description.required' => 'Заполните описание',
      'editor.required' => 'Заполните текст блока',
      'role.required' => 'Назначьте доступ',
      'max' => 'Макс. кол-во символов: 255 (Описание)'

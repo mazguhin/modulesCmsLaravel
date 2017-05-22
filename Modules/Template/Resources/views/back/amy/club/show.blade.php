@@ -47,18 +47,16 @@
                     </button>
                   </a>
 
-                  <a href="/dashboard/club/delete/id/{{ $club->id }}">
-                    <a class="btn btn-danger btn-sm" href="/dashboard/club/{{ $club->id }}"
-                        onclick="event.preventDefault();
-                                 document.getElementById('destroy-form{{ $club->id }}').submit();">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
+                  <a class="btn btn-danger btn-sm" href="/dashboard/club/{{ $club->id }}"
+                      onclick="event.preventDefault();
+                               document.getElementById('destroy-form{{ $club->id }}').submit();">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
                   </a>
 
-                    <form id="destroy-form{{ $club->id }}" action="/dashboard/club/{{ $club->id }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                    </form>
+                  <form id="destroy-form{{ $club->id }}" action="/dashboard/club/{{ $club->id }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                      {{ method_field('DELETE') }}
+                  </form>
               </p>
               </td>
             </tr>

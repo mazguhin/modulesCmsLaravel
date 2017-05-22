@@ -67,21 +67,7 @@
 
 
                   @endif
-
-                    <!-- DELETE -->
-                    <a href="/dashboard/user/delete/id/{{ $user->id }}">
-                      <a class="btn btn-danger btn-sm" href="/dashboard/user/{{ $user->id }}"
-                          onclick="event.preventDefault();
-                                   document.getElementById('destroy-form{{ $user->id }}').submit();">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                      </a>
-                    </a>
-
-                      <form id="destroy-form{{ $user->id }}" action="/dashboard/user/{{ $user->id }}" method="POST" style="display: none;">
-                          {{ csrf_field() }}
-                          {{ method_field('DELETE') }}
-                      </form>
-
+                  
                       <form id="ban-form{{ $user->id }}" action="/dashboard/user/ban/id/{{ $user->id }}" method="POST" style="display: none;">
                           {{ csrf_field() }}
                       </form>

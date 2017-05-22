@@ -48,12 +48,10 @@
                     </a>
 
                     <!-- DELETE -->
-                    <a href="/dashboard/block/delete/id/{{ $block->id }}">
-                      <a class="btn btn-danger btn-sm" href="/dashboard/block/{{ $block->id }}"
-                          onclick="event.preventDefault();
-                                   document.getElementById('destroy-form{{ $block->id }}').submit();">
-                                   <i class="fa fa-trash" aria-hidden="true"></i>
-                      </a>
+                    <a class="btn btn-danger btn-sm" href="/dashboard/block/{{ $block->id }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('destroy-form{{ $block->id }}').submit();">
+                                 <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
 
                     <form id="destroy-form{{ $block->id }}" action="/dashboard/block/{{ $block->id }}" method="POST" style="display: none;">
