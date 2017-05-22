@@ -87,6 +87,7 @@ class SettingController extends Controller
         'frontTemplate' => 'required|max:255',
         'backTemplate' => 'required|max:255',
         'projectName' => 'required|max:20',
+        'displayErrorsBlocks' => 'required|max:20',
       ],[
         'required' => 'Заполните все поля',
         'max' => 'Превышен допустимый лимит символов',

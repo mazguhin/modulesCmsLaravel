@@ -25,7 +25,11 @@
         </li>
         @endif
       @endforeach
+
       </ul>
+      
+      {{ Blocks::get(1) }}
+
     </div>
   </div>
 @endif

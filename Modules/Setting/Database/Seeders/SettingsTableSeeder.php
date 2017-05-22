@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class SettingsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
       Model::unguard();
@@ -51,7 +46,15 @@ class SettingsTableSeeder extends Seeder
           'description' => 'Отображается в главном меню и ведет на главную страницу. Макс. кол-во символов: 20',
           'created_at' => \Carbon\Carbon::now(),
           'updated_at' => \Carbon\Carbon::now(),
-        ]
+        ],
+        [
+          'name' => 'displayErrorsBlocks',
+          'value' => '1',
+          'title' => '[Блоки] Отображать ошибки',
+          'description' => 'Отображение ошибок об отсутствующих блоках.',
+          'created_at' => \Carbon\Carbon::now(),
+          'updated_at' => \Carbon\Carbon::now(),
+        ],
       ]);
 
     }

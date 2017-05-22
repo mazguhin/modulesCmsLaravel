@@ -32,11 +32,9 @@ class RoleHelper {
 
     public function validatePermissionForPage($pagePermission)
     {
-        $permission = 0;
+        $permission = 1;
         if (Auth::check()) {
           $permission = Auth::user()->role->permission;
-        } else {
-          $permission = 1;
         }
         return $permission>=$pagePermission;
     }

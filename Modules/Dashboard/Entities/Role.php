@@ -32,4 +32,9 @@ class Role extends Model
     {
       return $this->hasMany('Modules\MenuItem\Entities\MenuItem');
     }
+
+    public function blocks()
+    {
+      return $this->hasMany('Modules\Block\Entities\Block');
+    }
 }

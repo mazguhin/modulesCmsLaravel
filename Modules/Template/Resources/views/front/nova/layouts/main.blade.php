@@ -245,9 +245,7 @@
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Footer
-          </div>
+          @includeIf ('template::front.nova.layouts.footer')
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->

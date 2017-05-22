@@ -46,6 +46,15 @@
                             >{{ $template }}</option>
                           @endforeach
                         </select>
+                     @elseif ($setting->name=='displayErrorsBlocks')
+                       <select class="form-control" name="{{ $setting->name }}">
+                            <option value="1"
+                              @if ('1'==$setting->value) selected @endif
+                            >Да</option>
+                            <option value="0"
+                              @if ('1'!=$setting->value) selected @endif
+                            >Нет</option>
+                        </select>
                      @else
                         <input type="text" class="form-control" value="{{ $setting->value }}" name="{{ $setting->name }}" placeholder="Введите значение" required>
                      @endif
