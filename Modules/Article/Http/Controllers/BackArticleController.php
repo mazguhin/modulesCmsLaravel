@@ -52,7 +52,7 @@ class BackArticleController extends Controller
         $arrayFromStartPageString[3]=0;
 
       return view('template::back.'.$this->backTemplate.'.article.show',[
-        'articles' => Article::orderBy('created_at', 'desc')->paginate(10),
+        'articles' => Article::orderBy('created_at', 'desc')->paginate(100),
         'startPageId' => $arrayFromStartPageString[3]
       ]);
     }

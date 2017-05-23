@@ -52,6 +52,8 @@
       }
     </style>
 
+    @yield('importcss')
+
     <style>
       @yield('localcss')
     </style>
@@ -110,9 +112,10 @@
     </div>
 
     <!-- jQuery -->
-    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+      <script src="/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <script src="{{ elixir('/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
     <!-- Bootstrap -->
@@ -122,6 +125,10 @@
 
     <!-- Custom Theme Scripts -->
     <script src="/build/js/custom.min.js"></script>
+    <script src="{{ elixir('/js/app.js') }}"></script>
+
+
+    @yield('importjs')
 
     <!-- local js -->
     <script>
