@@ -5,7 +5,6 @@ namespace Modules\Club\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use RoleHelper;
 use Settings;
 use Modules\Club\Entities\Club;
 use Modules\Category\Entities\Category;

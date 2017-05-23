@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Staff\Entities\StaffCategory;
-use Settings;
-use RoleHelper;
 
 class ApiStaffCategoryController extends Controller
 {

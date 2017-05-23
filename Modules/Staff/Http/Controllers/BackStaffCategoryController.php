@@ -5,8 +5,6 @@ namespace Modules\Staff\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Auth;
-use RoleHelper;
 use Settings;
 use Modules\Staff\Entities\StaffCategory;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -21,10 +19,6 @@ class BackStaffCategoryController extends Controller
      {
        $this->backTemplate = Settings::getBackTemplate();
      }
-
-    public function index()
-    {
-    }
 
     public function validateForm(Request $request)
     {
@@ -41,14 +35,10 @@ class BackStaffCategoryController extends Controller
     public function show()
     {
       return view('template::back.'.$this->backTemplate.'.staff.category.show',[
-        'staffCategories' => StaffCategory::orderBy('created_at', 'desc')->paginate(10)
+        'staffCategories' => StaffCategory::orderBy('created_at', 'desc')->paginate(100)
       ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
       return view('template::back.'.$this->backTemplate.'.staff.category.create',[
@@ -56,11 +46,6 @@ class BackStaffCategoryController extends Controller
       ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
       // validation
@@ -123,11 +108,6 @@ class BackStaffCategoryController extends Controller
        else
          return redirect()->back()->with('result', 'Возникла ошибка');
      }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
 
     public function destroy(Request $request, $id_category)
     {

@@ -11,7 +11,6 @@ use Modules\Guestbook\Entities\Answer;
 
 class GuestbookController extends Controller
 {
-
   protected $frontTemplate = '';
 
   public function __construct()

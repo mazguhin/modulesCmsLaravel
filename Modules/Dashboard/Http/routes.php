@@ -14,8 +14,6 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/user', '
   Route::post ('/ban/id/{id_user}', 'BackUserController@ban'); // ban user
   Route::post ('/unban/id/{id_user}', 'BackUserController@unban'); // unban user
   Route::get ('/', 'BackUserController@show'); // show all users
-  // Route::delete ('/{id_user}', 'BackUserController@destroy'); // destroy user
-  Route::get ('/search', 'BackUserController@search'); // search user
 });
 
 

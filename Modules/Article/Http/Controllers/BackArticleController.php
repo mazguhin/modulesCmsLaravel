@@ -5,15 +5,12 @@ namespace Modules\Article\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Auth;
-use RoleHelper;
 use Settings;
 use Modules\Article\Entities\Article;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackArticleController extends Controller
 {
-
      use ValidatesRequests;
 
      protected $backTemplate = '';
@@ -22,10 +19,6 @@ class BackArticleController extends Controller
      {
        $this->backTemplate = Settings::getBackTemplate();
      }
-
-    public function index()
-    {
-    }
 
     public function validateForm(Request $request)
     {
@@ -57,10 +50,6 @@ class BackArticleController extends Controller
       ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
       return view('template::back.'.$this->backTemplate.'.article.create',[
@@ -69,11 +58,6 @@ class BackArticleController extends Controller
       ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
       //validation
@@ -104,11 +88,6 @@ class BackArticleController extends Controller
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-
     public function editById($id_article)
     {
       return view('template::back.'.$this->backTemplate.'.article.edit',[
@@ -118,11 +97,6 @@ class BackArticleController extends Controller
       ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function update(Request $request, $id_article)
     {
       // validation
@@ -155,11 +129,6 @@ class BackArticleController extends Controller
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-
     public function destroy(Request $request, $id_article)
     {
       // check start page
@@ -182,19 +151,4 @@ class BackArticleController extends Controller
         return redirect('/category/id/'.$category)->with(['result'=>'Статья успешно удалена']);
       }
     }
-
-    public function search(Request $request){
-        $member = $request->keyword;
-        $preResults = Article::where('title', 'like', "$member%")
-            ->orWhere('description', 'like', "$member%")->get();
-
-        $results = collect([]);
-
-        foreach ($preResults as $res) {
-            if ($res->category->club==false) $results->push($res);
-        }
-
-        return $results;
-    }
-
 }

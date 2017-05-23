@@ -35,7 +35,6 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/staff', 
     Route::post ('/edit/id/{id_staff}', 'BackStaffController@update'); // update staff
     Route::get ('/', 'BackStaffController@show'); // show all staff
     Route::delete ('/{id_staff}', 'BackStaffController@destroy'); // destroy staff
-    Route::get ('/search', 'BackStaffController@search'); // search user
 });
 
 // API Front

@@ -20,10 +20,6 @@ class BackBlockController extends Controller
     $this->backTemplate = Settings::getBackTemplate();
   }
 
- public function index()
- {
- }
-
  public function validateForm(Request $request)
  {
    return ($this->validate($request, [
@@ -41,7 +37,7 @@ class BackBlockController extends Controller
  public function show()
  {
    return view('template::back.'.$this->backTemplate.'.block.show',[
-     'blocks' => Block::orderBy('created_at', 'desc')->paginate(10),
+     'blocks' => Block::orderBy('created_at', 'desc')->paginate(100),
    ]);
  }
 

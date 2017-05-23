@@ -23,8 +23,8 @@
               <!-- dashboard for admin -->
               @if (RoleHelper::isAdmin())
               <li>
-                  <a href="{{ url('/dashboard') }}">
-                      Панель управления
+                  <a href="{{ url('/') }}">
+                      Перейти на сайт
                   </a>
               </li>
               @endif

@@ -17,7 +17,6 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/article'
     Route::post ('/edit/id/{id_article}', 'BackArticleController@update'); // update article
     Route::get ('/', 'BackArticleController@show'); // show all articles
     Route::delete ('/{id_article}', 'BackArticleController@destroy'); // destroy article
-    Route::get ('/search', 'BackArticleController@search'); // search article
 });
 
 

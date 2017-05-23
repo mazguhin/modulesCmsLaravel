@@ -145,18 +145,4 @@ class ClubInfoController extends Controller
     else
       return redirect()->back()->with('result', 'Возникла ошибка');
   }
-
-  public function delete(Request $request, $id_club, $id_article)
-  {
-    // validation permission for this page
-    if (!RoleHelper::validatePermissionForClub($id_club))
-      return view('template::front.'.$this->frontTemplate.'.club.accsesDenied');
-
-    $article = Article::where('id',$id_article)->firstOrFail();
-    if ($article->delete()) {
-      return redirect('/club/id/'.$id_club)->with([
-        'result' => 'Страница успешно удалена'
-      ]);
-    }
-  }
 }

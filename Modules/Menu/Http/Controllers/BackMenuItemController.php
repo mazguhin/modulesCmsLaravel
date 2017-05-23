@@ -21,10 +21,6 @@ class BackMenuItemController extends Controller
     $this->backTemplate = Settings::getBackTemplate();
   }
 
- public function index()
- {
- }
-
  public function validateForm(Request $request)
  {
    return ($this->validate($request, [

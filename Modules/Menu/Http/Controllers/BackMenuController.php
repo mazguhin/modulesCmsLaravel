@@ -20,10 +20,6 @@ class BackMenuController extends Controller
     $this->backTemplate = Settings::getBackTemplate();
   }
 
- public function index()
- {
- }
-
  public function validateForm(Request $request)
  {
    return ($this->validate($request, [
@@ -41,14 +37,12 @@ class BackMenuController extends Controller
  public function show()
  {
    return view('template::back.'.$this->backTemplate.'.menu.show',[
-     'menus' => Menu::orderBy('created_at', 'desc')->paginate(10)
+     'menus' => Menu::orderBy('created_at', 'desc')->paginate(100)
    ]);
  }
 
-
  public function create()
  {
-
    $articles = collect([]);
    foreach (\Modules\Article\Entities\Article::all() as $article) {
      if ($article->category->club==false) $articles->push($article);
@@ -66,7 +60,6 @@ class BackMenuController extends Controller
 
  public function store(Request $request)
  {
-
    //validation
    $this->validateForm($request);
 

@@ -5,7 +5,6 @@ namespace Modules\Club\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Auth;
 use RoleHelper;
 use Settings;
 use Modules\Club\Entities\Club;
@@ -49,7 +48,7 @@ class BackClubController extends Controller
   public function show()
   {
     return view('template::back.'.$this->backTemplate.'.club.show',[
-      'clubs' => Club::orderBy('created_at', 'desc')->paginate(10)
+      'clubs' => Club::orderBy('created_at', 'desc')->paginate(100)
     ]);
   }
 
@@ -175,13 +174,5 @@ class BackClubController extends Controller
       // request from front
       return redirect('/')->with(['result'=>'Клуб успешно удален']);
     }
-  }
-
-  public function search(Request $request){
-      $member = $request->keyword;
-      $results = Club::where('name', 'like', "$member%")
-          ->orWhere('description', 'like', "$member%")->get();
-
-      return $results;
   }
 }

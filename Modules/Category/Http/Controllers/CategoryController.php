@@ -11,10 +11,6 @@ use RoleHelper;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
      protected $frontTemplate = '';
 
      public function __construct()
@@ -55,49 +51,5 @@ class CategoryController extends Controller
       return view('template::front.'.$this->frontTemplate.'.category.index', [
         'categories' => Category::orderBy('created_at', 'desc')->paginate(5)
       ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
     }
 }

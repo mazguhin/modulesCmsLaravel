@@ -11,11 +11,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-
      use ValidatesRequests;
 
      protected $backTemplate = '';
@@ -25,21 +20,13 @@ class BackUserController extends Controller
        $this->backTemplate = Settings::getBackTemplate();
      }
 
-    public function index()
-    {
-    }
-
     public function show()
     {
       return view('template::back.'.$this->backTemplate.'.user.show',[
-        'users' => User::orderBy('created_at', 'desc')->paginate(10)
+        'users' => User::orderBy('created_at', 'desc')->paginate(100)
       ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
       return view('template::back.'.$this->backTemplate.'.user.create',[
@@ -47,11 +34,6 @@ class BackUserController extends Controller
       ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
       // validation
@@ -83,11 +65,6 @@ class BackUserController extends Controller
       return redirect()->back()->with('result', 'Возникла ошибка');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-
     public function editById($id_user)
     {
       return view('template::back.'.$this->backTemplate.'.user.edit',[
@@ -96,11 +73,6 @@ class BackUserController extends Controller
       ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
      public function update(Request $request, $id_user)
      {
        // validation
@@ -131,29 +103,6 @@ class BackUserController extends Controller
          return redirect()->back()->with('result', 'Возникла ошибка');
      }
 
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-
-    // public function destroy(Request $request, $id_user)
-    // {
-    //   if ($id_user==1) return redirect()->back()->with('result', 'Невозможно удалить данного пользователя');
-    //
-    //   $user = User::where('id',$id_user)->firstOrFail();
-    //
-    //   foreach ($user->articles as $article)
-    //     $article->delete();
-    //
-    //   foreach ($user->categories as $category)
-    //     $category->delete();
-    //
-    //   if ($user->delete())
-    //     return redirect()->back()->with(['result' => 'Пользователь успешно удален']);
-    //   else
-    //     return redirect()->back()->with('result', 'Возникла ошибка');
-    // }
-
     public function ban(Request $request, $id_user)
     {
       if ($id_user==1) return redirect()->back()->with('result', 'Невозможно заблокировать данного пользователя');
@@ -182,13 +131,5 @@ class BackUserController extends Controller
         return redirect()->back()->with(['result' => 'Пользователь успешно разблокирован']);
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
-    }
-
-    public function search(Request $request){
-        $member = $request->keyword;
-        $results = User::where('name', 'like', "$member%")
-            ->orWhere('email', 'like', "$member%")->get();
-
-        return $results;
     }
 }

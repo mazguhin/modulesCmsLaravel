@@ -34,5 +34,4 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/club', '
     Route::post ('/edit/id/{id_club}', 'BackClubController@update'); // update club
     Route::get ('/', 'BackClubController@show'); // show all clubs
     Route::delete ('/{id_club}', 'BackClubController@destroy'); // destroy club
-    Route::get ('/search', 'BackClubController@search'); // search club
 });

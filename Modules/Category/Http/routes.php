@@ -20,7 +20,6 @@ Route::group(['middleware' => ['web','isAdmin'], 'prefix' => 'dashboard/category
     Route::post ('/edit/id/{id_category}', 'BackCategoryController@update'); // update category
     Route::get ('/', 'BackCategoryController@show'); // show all categories
     Route::delete ('/{id_category}', 'BackCategoryController@destroy'); // destroy category
-    Route::get ('/search', 'BackCategoryController@search'); // search article
 });
 
 // API Front

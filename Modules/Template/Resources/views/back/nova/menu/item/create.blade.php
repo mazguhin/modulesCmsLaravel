@@ -1,16 +1,17 @@
 @extends ('template::back.nova.layouts.main')
 
 @section ('content')
+
+@if (session('result'))
+ <div class="alert alert-info" role="alert">
+   {{ session('result') }}
+ </div>
+@endif
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Создание пункта меню</div>
    </div>
-
-  @if (session('result'))
-   <div class="alert alert-info" role="alert">
-     {{ session('result') }}
-   </div>
-  @endif
 
   @include ('template::back.nova.menu.item.errors')
   <ol class="breadcrumb">

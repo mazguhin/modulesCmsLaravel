@@ -5,19 +5,12 @@ namespace Modules\Category\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Auth;
-use RoleHelper;
 use Settings;
 use Modules\Category\Entities\Category;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-
      use ValidatesRequests;
 
      protected $backTemplate = '';
@@ -26,10 +19,6 @@ class BackCategoryController extends Controller
      {
        $this->backTemplate = Settings::getBackTemplate();
      }
-
-    public function index()
-    {
-    }
 
     public function validateForm(Request $request)
     {
@@ -60,15 +49,11 @@ class BackCategoryController extends Controller
         $startPage[3] = 0;
 
       return view('template::back.'.$this->backTemplate.'.category.show',[
-        'categories' => Category::where('club',false)->orderBy('created_at', 'desc')->paginate(10),
+        'categories' => Category::where('club',false)->orderBy('created_at', 'desc')->paginate(100),
         'startPageId' => $startPage[3]
       ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
       return view('template::back.'.$this->backTemplate.'.category.create',[
@@ -76,11 +61,6 @@ class BackCategoryController extends Controller
       ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
       // validation
@@ -109,11 +89,6 @@ class BackCategoryController extends Controller
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-
     public function editById($id_category)
     {
       return view('template::back.'.$this->backTemplate.'.category.edit',[
@@ -122,11 +97,6 @@ class BackCategoryController extends Controller
       ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
      public function update(Request $request, $id_category)
      {
        // validation
@@ -157,11 +127,6 @@ class BackCategoryController extends Controller
          return redirect()->back()->with('result', 'Возникла ошибка');
      }
 
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-
     public function destroy(Request $request, $id_category)
     {
       $startPage = $this->getStartPage();
@@ -189,21 +154,5 @@ class BackCategoryController extends Controller
         // request from front
         return redirect('/category')->with(['result'=>'Категория успешно удалена']);
       }
-    }
-
-    public function search(Request $request){
-        $member = $request->keyword;
-        $preResults = Category::where('name', 'like', "$member%")
-            ->orWhere('description', 'like', "$member%")->get();
-
-        $results = collect([]);
-
-        foreach ($preResults as $res) {
-            if ($res->club==false) $results->push($res);
-        }
-
-        //if (Request::wantsJson()) return $results;
-
-        return $results;
     }
 }

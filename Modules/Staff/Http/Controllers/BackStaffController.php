@@ -5,8 +5,6 @@ namespace Modules\Staff\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Auth;
-use RoleHelper;
 use Settings;
 use Modules\Staff\Entities\Staff;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class BackStaffController extends Controller
 {
-
      use ValidatesRequests;
 
      protected $backTemplate = '';
@@ -23,10 +20,6 @@ class BackStaffController extends Controller
      {
        $this->backTemplate = Settings::getBackTemplate();
      }
-
-    public function index()
-    {
-    }
 
     public function validateForm(Request $request)
     {
@@ -52,14 +45,10 @@ class BackStaffController extends Controller
     public function show()
     {
       return view('template::back.'.$this->backTemplate.'.staff.show',[
-        'staffs' => Staff::orderBy('created_at', 'desc')->paginate(10)
+        'staffs' => Staff::orderBy('created_at', 'desc')->paginate(100)
       ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
       return view('template::back.'.$this->backTemplate.'.staff.create',[
@@ -184,12 +173,5 @@ class BackStaffController extends Controller
         // request from front
         return redirect('/staff/category')->with(['result'=>'Сотрудник успешно удален']);
       }
-    }
-
-    public function search(Request $request){
-        $member = $request->keyword;
-        $results = Staff::where('fullName', 'like', "$member%")->get();
-
-        return $results;
     }
 }

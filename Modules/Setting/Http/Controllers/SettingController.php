@@ -8,15 +8,9 @@ use Illuminate\Routing\Controller;
 use Modules\Setting\Entities\Setting;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Settings;
-use Storage;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-
      use ValidatesRequests;
 
      protected $backTemplate = '';
@@ -49,38 +43,6 @@ class SettingController extends Controller
       ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('setting::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        return view('setting::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function update(Request $request)
     {
       $this->validate($request, [
@@ -114,21 +76,11 @@ class SettingController extends Controller
       ]);
 
       $type = $request->type;
-      $id;
 
-      $startPage = \Modules\Setting\Entities\Setting::where('name','startPage')->firstOrFail();
+      $startPage = Setting::where('name','startPage')->firstOrFail();
       $startPage->value='/'.$type.'/id/'.$id;
 
       if ($startPage->save())
       return redirect()->back()->with(['result' => 'Главная страница установлена']);
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
     }
 }

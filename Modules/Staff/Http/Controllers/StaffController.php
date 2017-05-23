@@ -7,26 +7,15 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Staff\Entities\Staff;
 use Settings;
-use RoleHelper;
 
 class StaffController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-
      protected $frontTemplate = '';
 
      public function __construct()
      {
        $this->frontTemplate = Settings::getFrontTemplate();
      }
-
-    public function index()
-    {
-        return view('staff::index');
-    }
 
     public function showId($id_staff)
     {

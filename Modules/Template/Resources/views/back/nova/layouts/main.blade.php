@@ -25,8 +25,6 @@
     <!-- bootstrap-progressbar -->
     <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
 
-
-
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.css" rel="stylesheet">
 
@@ -65,7 +63,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/" class="site_title"><i class="fa fa-home"></i> <span>{{ Settings::get('projectName') }}</span></a>
+              <a href="/dashboard" class="site_title">Панель управления</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -78,7 +76,7 @@
             <br />
 
             <!-- sidebar menu -->
-            @includeIf ('template::back.nova.menu.main')
+            @includeIf ('template::back.nova.layouts.partials.menu')
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->

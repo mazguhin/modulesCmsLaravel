@@ -1,30 +1,32 @@
 @extends ('template::back.nova.layouts.main')
 
 @section ('content')
+
+@if (session('result'))
+<div class="alert alert-info" role="alert">
+  {{ session('result') }}
+
+  @if (session('user_id'))
+  <div class="btn-group">
+    <a href="/user/{{ session('user_id') }}" type="button" class="btn btn-default">Просмотр</a>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="/user/id/{{ session('user_id') }}" target="_blank">В новом окне</a></li>
+    </ul>
+  </div>
+  @endif
+
+</div>
+@endif
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Редактирование пользователя</div>
    </div>
 
-   @if (session('result'))
-    <div class="alert alert-info" role="alert">
-      {{ session('result') }}
-
-      @if (session('user_id'))
-       <div class="btn-group">
-         <a href="/user/{{ session('user_id') }}" type="button" class="btn btn-default">Просмотр</a>
-         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <span class="caret"></span>
-           <span class="sr-only">Toggle Dropdown</span>
-         </button>
-         <ul class="dropdown-menu">
-           <li><a href="/user/id/{{ session('user_id') }}" target="_blank">В новом окне</a></li>
-         </ul>
-       </div>
-      @endif
-
-    </div>
-   @endif
 
   @include ('template::back.nova.user.errors')
   <ol class="breadcrumb">

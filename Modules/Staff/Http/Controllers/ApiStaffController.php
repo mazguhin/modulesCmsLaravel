@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Staff\Entities\Staff;
-//use Settings;
-//use RoleHelper;
-
 class ApiStaffController extends Controller
 {
     public function showId($id_staff)
