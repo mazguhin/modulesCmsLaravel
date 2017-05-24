@@ -22,12 +22,12 @@
 </div>
 @endif
 
+@include ('template::back.nova.article.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Редактирование статьи</div>
    </div>
-
-  @include ('template::back.nova.article.errors')
 
   <ol class="breadcrumb">
     <li><a href="/dashboard/article">Статьи</a></li>

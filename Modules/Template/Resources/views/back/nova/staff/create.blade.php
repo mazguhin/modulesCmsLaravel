@@ -22,13 +22,14 @@
 </div>
 @endif
 
+@include ('template::back.nova.staff.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Создать нового сотрудника</div>
    </div>
 
 
-  @include ('template::back.nova.staff.errors')
   <ol class="breadcrumb">
     <li><a href="/dashboard/staff">Сотрудники</a></li>
     <li class="active">Создание сотрудника</li>

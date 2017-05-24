@@ -22,12 +22,13 @@
  </div>
 @endif
 
+@include ('template::back.nova.club.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Редактирование клуба</div>
    </div>
 
-  @include ('template::back.nova.club.errors')
 
   <ol class="breadcrumb">
     <li><a href="/dashboard/club">Клубы</a></li>

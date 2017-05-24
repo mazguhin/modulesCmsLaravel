@@ -8,6 +8,8 @@
 </div>
 @endif
 
+@include ('template::back.nova.block.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Создать новый блок</div>
@@ -17,8 +19,6 @@
      <li><a href="/dashboard/block">Блоки</a></li>
      <li class="active">Создание блока</li>
    </ol>
-
-  @include ('template::back.nova.block.errors')
 
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/block/create">

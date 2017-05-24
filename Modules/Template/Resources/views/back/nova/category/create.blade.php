@@ -21,12 +21,13 @@
 </div>
 @endif
 
+@include ('template::back.nova.category.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Создать новую категорию</div>
    </div>
 
-  @include ('template::back.nova.category.errors')
 
   <ol class="breadcrumb">
     <li><a href="/dashboard/category">Категории</a></li>

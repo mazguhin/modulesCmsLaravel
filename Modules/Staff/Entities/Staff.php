@@ -3,6 +3,7 @@
 namespace Modules\Staff\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class Staff extends Model
 {
@@ -17,5 +18,14 @@ class Staff extends Model
     public function user()
     {
       return $this->belongsTo('\App\User');
+    }
+
+    public function getPhoto()
+    {
+      if ($this->photo=="") {
+        return '/images/user.png';
+      }
+
+      return Storage::url($this->photo);
     }
 }

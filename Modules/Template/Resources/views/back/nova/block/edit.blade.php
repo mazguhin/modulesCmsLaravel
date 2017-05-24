@@ -8,12 +8,12 @@
 </div>
 @endif
 
+  @include ('template::back.nova.block.errors')
+  
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Редактирование блока</div>
    </div>
-
-  @include ('template::back.nova.block.errors')
 
   <ol class="breadcrumb">
     <li><a href="/dashboard/block">Блоки</a></li>

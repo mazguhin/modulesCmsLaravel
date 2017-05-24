@@ -21,13 +21,13 @@
 </div>
 @endif
 
+@include ('template::back.nova.staff.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Редактирование сотрудника</div>
    </div>
 
-
-    @include ('template::back.nova.staff.errors')
     <ol class="breadcrumb">
       <li><a href="/dashboard/staff">Сотрудники</a></li>
       <li class="active">Редактирование сотрудника</li>
@@ -114,8 +114,8 @@
 
        <div class="form-group">
         <label for="photo">Фото</label>
+        <img src="{{ $staff->getPhoto() }}" alt="{{$staff->fullName}}" class="img-circle img-responsive">
         <input type="file" name="photo" accept="image/*,image/jpeg">
-        <p class="help-block"><img src="{{ Storage::url($staff->photo) }}" class="img-responsive" alt="Фото"></p>
        </div>
 
        {{ csrf_field() }}

@@ -22,13 +22,13 @@
 </div>
 @endif
 
+@include ('template::back.nova.staff.category.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Редактирование категории</div>
    </div>
 
-
-  @include ('template::back.nova.staff.category.errors')
   <ol class="breadcrumb">
     <li><a href="/dashboard/staff/category">Категории сотрудников</a></li>
     <li class="active">Редактирование категории</li>

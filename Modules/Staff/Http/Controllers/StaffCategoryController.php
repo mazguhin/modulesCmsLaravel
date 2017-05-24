@@ -23,7 +23,7 @@ class StaffCategoryController extends Controller
 
        return view('template::front.'.$this->frontTemplate.'.staff.category.showCategory', [
          'category' => $category,
-         'staffs' => $category->staffs()->orderBy('created_at', 'asc')->paginate(10)
+         'staffs' => $category->staffs()->orderBy('created_at', 'asc')->paginate(5)
        ]);
      }
 
@@ -34,7 +34,7 @@ class StaffCategoryController extends Controller
 
        return view('template::front.'.$this->frontTemplate.'.staff.category.showCategory', [
          'category' => $category,
-         'staffs' => $category->staffs()->orderBy('created_at', 'asc')->paginate(10)
+         'staffs' => $category->staffs()->orderBy('created_at', 'asc')->paginate(5)
        ]);
      }
 

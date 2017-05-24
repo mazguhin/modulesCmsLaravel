@@ -94,8 +94,7 @@ class BackStaffController extends Controller
       }
 
         return redirect()->back()->with([
-          'result' => 'Сотрудник успешно добавлен',
-          'slug' => $slug
+          'result' => 'Сотрудник успешно добавлен'
         ]);
     }
 
@@ -152,8 +151,7 @@ class BackStaffController extends Controller
       }
 
         return redirect()->back()->with([
-          'result' => 'Сотрудник успешно изменен',
-          'slug' => $slug
+          'result' => 'Сотрудник успешно изменен'
         ]);
     }
 

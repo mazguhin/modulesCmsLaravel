@@ -8,13 +8,13 @@
 </div>
 @endif
 
+@include ('template::back.nova.menu.item.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Редактирование пункта меню</div>
    </div>
 
-
-  @include ('template::back.nova.menu.item.errors')
   <ol class="breadcrumb">
     <li><a href="/dashboard/menu">Меню</a></li>
     <li><a href="/dashboard/menu/item/id/{{$id_menu}}">Пункты меню</a></li>

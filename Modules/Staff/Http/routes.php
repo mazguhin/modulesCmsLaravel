@@ -13,10 +13,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'staff', 'namespace' => 'Module
     // show members in category
     Route::get ('/category/id/{id_category}', 'StaffCategoryController@showId');
     Route::get ('/category/{slug_category}', 'StaffCategoryController@showSlug');
-
-    // show staff
-    Route::get ('/id/{id_staff}', 'StaffController@showId');
-    Route::get ('/{slug_staff}', 'StaffController@showSlug');
 });
 
 // BACK Routes
