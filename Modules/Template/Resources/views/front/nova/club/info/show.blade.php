@@ -1,35 +1,66 @@
-  @extends ('template::front.nova.layouts.main')
+@extends ('template::front.nova.layouts.main')
 
 @section ('content')
 
-@includeIf ('template::front.nova.club.header')
+@if (session('result'))
+ <div class="alert alert-info" role="alert">
+   {{ session('result') }}
+ </div>
+@endif
 
 <div class="row">
-  <div class="col-sm-12">
-    <h3>{{ $article->title }}
-      @if (RoleHelper::validatePermissionForClub($club->id))
-      <a href="/club/id/{{ $club->id }}/info/edit/{{$article->id}}">
-        <button type="button" class="btn btn-primary btn-sm">
-          <i class="fa fa-pencil" aria-hidden="true"></i>
-        </button>
-      </a>
+  <div class="col-md-12">
+    <div class="x_panel">
 
-        <a class="btn btn-danger btn-sm" href="/club/id/{{ $club->id }}/info/delete/{{ $article->id }}"
-            onclick="event.preventDefault();
-                     document.getElementById('destroy-form{{$article->id}}').submit();">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
+      <div class="x_content">
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          @includeIf ('template::front.nova.club.header')
+          <br />
 
-        <form id="destroy-form{{$article->id}}" action="/club/id/{{ $club->id }}/info/delete/{{ $article->id }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-        </form>
-      @endif
-    </h3>
-    <p><i class="fa fa-bullhorn" aria-hidden="true"></i> Опубликовано: {{ $article->created_at->format('d.m.Y') }}</p>
-    <p><i class="fa fa-user" aria-hidden="true"></i> Создал: {{ $article->user->name }}</p>
+          <!-- info -->
+          <div>
+            <h4>{{ $article->title }}</h4>
+            <p>{!! $article->body !!}</p>
+          </div>
 
-    <p>{!! $article->body !!}</p>
+          <hr>
+          <p class="text">
+            <img src="images/img.jpg" class="avatar" alt="Avatar">
+            &nbsp;
+            <b>{{ $article->user->name }}</b>
+            <br> &nbsp;
+            {{ $article->created_at->diffForHumans() }}
+          </p>
+
+          @if (RoleHelper::validatePermissionForClub($club->id))
+          <a href="/club/id/{{ $club->id }}/info/edit/{{$article->id}}">
+            <button type="button" class="btn btn-primary btn-xs">
+              <i class="fa fa-pencil" aria-hidden="true"></i> Редактировать
+            </button>
+          </a>
+
+            <a class="btn btn-danger btn-xs" href="/club/id/{{ $club->id }}/info/delete/{{ $article->id }}"
+                onclick="event.preventDefault();
+                         document.getElementById('destroy-form{{$article->id}}').submit();">
+                <i class="fa fa-trash" aria-hidden="true"></i> Удалить
+            </a>
+
+            <form id="destroy-form{{$article->id}}" action="/club/id/{{ $club->id }}/info/delete/{{ $article->id }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+            </form>
+          @endif
+          <!-- end info -->
+
+        </div>
+
+        <!-- start club-detail sidebar -->
+        @includeIf ('template::front.nova.club.detail')
+        <!-- end club-detail sidebar -->
+
+      </div>
+    </div>
   </div>
 </div>
+
 @stop

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Settings;
 use Auth;
+use Modules\Log\Entities\Log;
 
 class HomeController extends Controller
 {
@@ -24,8 +25,10 @@ class HomeController extends Controller
      */
     public function profile()
     {
+      $user = Auth::user();
       return view('template::front.'.$this->frontTemplate.'.user.profile', [
-        'user' => Auth::user()
+        'user' => $user,
+        'logs' => \Modules\Log\Entities\Log::where('user_id', $user->id)->latest()->paginate(10),
       ]);
     }
 }

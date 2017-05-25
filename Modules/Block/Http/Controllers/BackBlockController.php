@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Settings;
+use Logs;
 use Modules\Block\Entities\Block;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -58,10 +59,12 @@ class BackBlockController extends Controller
    $block->body = $request->editor;
    $block->role_id = $request->role;
 
-   if ($block->save())
+   if ($block->save()) {
+     Logs::set('Добавлен блок [ID: '.$block->id.']');
      return redirect()->back()->with([
        'result' => 'Блок успешно добавлен [ID: '.$block->id.']',
      ]);
+   }
    else
      return redirect()->back()->with('result', 'Возникла ошибка');
  }
@@ -83,10 +86,12 @@ class BackBlockController extends Controller
    $block->body = $request->editor;
    $block->role_id = $request->role;
 
-   if ($block->save())
+   if ($block->save()) {
+     Logs::set('Изменен блок [ID: '.$block->id.']');
      return redirect()->back()->with([
        'result' => 'Блок успешно обновлен',
      ]);
+   }
    else
      return redirect()->back()->with('result', 'Возникла ошибка');
  }
@@ -95,6 +100,7 @@ class BackBlockController extends Controller
  {
    $block = Block::where('id',$block)->firstOrFail();
    $block->delete();
+   Logs::set('Удален блок [ID: '.$block->id.']');
    return redirect()->back()->with(['result'=>'Блок успешно удален']);
  }
 }

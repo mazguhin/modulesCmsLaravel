@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Settings;
+use Logs;
 use Modules\Staff\Entities\Staff;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Storage;
@@ -93,6 +94,7 @@ class BackStaffController extends Controller
         \Modules\Staff\Entities\StaffCategory::findOrFail($cat)->staffs()->save($staff);
       }
 
+        Logs::set('Добавлен сотрудник ['.$staff->fullName.']');
         return redirect()->back()->with([
           'result' => 'Сотрудник успешно добавлен'
         ]);
@@ -150,6 +152,7 @@ class BackStaffController extends Controller
         \Modules\Staff\Entities\StaffCategory::findOrFail($cat)->staffs()->save($staff);
       }
 
+        Logs::set('Изменен сотрудник ['.$staff->fullName.']');
         return redirect()->back()->with([
           'result' => 'Сотрудник успешно изменен'
         ]);
@@ -163,6 +166,8 @@ class BackStaffController extends Controller
       }
       Storage::delete($staff->photo);
       $staff->delete();
+
+      Logs::set('Удален сотрудник ['.$staff->fullName.']');
 
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
         //request from dashboard

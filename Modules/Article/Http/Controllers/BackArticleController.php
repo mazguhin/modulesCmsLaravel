@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Settings;
+use Logs;
 use Modules\Article\Entities\Article;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -79,11 +80,13 @@ class BackArticleController extends Controller
       else
         $article->slug = $slug;
 
-      if ($request->user()->articles()->save($article))
+      if ($request->user()->articles()->save($article)) {
+        Logs::set('Добавлена статья ['.$article->title.']');
         return redirect()->back()->with([
           'result' => 'Статья успешно добавлена',
           'slug' => $slug
         ]);
+      }
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
@@ -120,11 +123,13 @@ class BackArticleController extends Controller
          $article->slug = $slug;
       }
 
-      if ($article->save())
+      if ($article->save()) {
+        Logs::set('Изменена статья ['.$article->title.']');
         return redirect()->back()->with([
           'result' => 'Статья успешно обновлена',
           'slug' => $article->slug
         ]);
+      }
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
@@ -143,11 +148,13 @@ class BackArticleController extends Controller
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
         // request from dashboard
         $article->delete();
+        Logs::set('Удалена статья ['.$article->title.']');
         return redirect()->back()->with(['result'=>'Статья успешно удалена']);
       } else {
         // request from front
         $category = $article->category->id;
         $article->delete();
+        Logs::set('Удалена статья ['.$article->title.']');
         return redirect('/category/id/'.$category)->with(['result'=>'Статья успешно удалена']);
       }
     }

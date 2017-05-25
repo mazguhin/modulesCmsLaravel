@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
 use Settings;
+use Logs;
 use Modules\Guestbook\Entities\Question;
 use Modules\Guestbook\Entities\Answer;
 
@@ -54,7 +55,7 @@ class BackGuestbookController extends Controller
     $answer->save();
     $question->answer_id = $answer->id;
     $question->save();
-
+    Logs::set('Добавлен ответ на вопрос [Вопрос: '.$question->id.'] [Ответ: '.$answer->id.']');
     return redirect('/dashboard/guestbook')->with(['result'=>'Ответ успешно добавлен']);
   }
 
@@ -68,11 +69,11 @@ class BackGuestbookController extends Controller
   public function save(Question $question)
   {
     $this->validateForm(request());
-    
+
     $question->answer->body = request('body');
     $question->answer->user_id = request()->user()->id;
     $question->answer->save();
-
+    Logs::set('Изменен ответ на вопрос [Вопрос: '.$question->id.'] [Ответ: '.$question->answer->id.']');
     return redirect('/guestbook')->with(['result'=>'Ответ успешно изменен']);
   }
 
@@ -83,6 +84,7 @@ class BackGuestbookController extends Controller
     }
 
     $question->delete();
-    return back()->with(['result'=>'Ответ успешно удален']);
+    Logs::set('Удален вопрос [Вопрос: '.$question->id.'] [Ответ: '.$question->answer->id.']');
+    return back()->with(['result'=>'Вопрос успешно удален']);
   }
 }

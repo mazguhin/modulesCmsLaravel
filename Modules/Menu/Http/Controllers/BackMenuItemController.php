@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Menu\Entities\Menu;
 use Modules\Menu\Entities\MenuItem;
 use Settings;
+use Logs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackMenuItemController extends Controller
@@ -74,10 +75,12 @@ class BackMenuItemController extends Controller
    $itemMenu->url = $request->url;
    $itemMenu->target = $request->target;
 
-   if (Menu::where('id',$id_menu)->firstOrFail()->menuAllItems()->save($itemMenu))
+   if (Menu::where('id',$id_menu)->firstOrFail()->menuAllItems()->save($itemMenu)) {
+     Logs::set('Добавлен пункт меню ['.$itemMenu->title.']');
      return redirect('/dashboard/menu/item/id/'.$id_menu)->with([
        'result' => 'Пункт меню успешно добавлен'
      ]);
+   }
    else
      return redirect()->back()->with('result', 'Возникла ошибка');
  }
@@ -117,23 +120,27 @@ class BackMenuItemController extends Controller
    $itemMenu->url = $request->url;
    $itemMenu->target = $request->target;
 
-   if ($itemMenu->save())
+   if ($itemMenu->save()) {
+     Logs::set('Изменен пункт меню ['.$itemMenu->title.']');
      return redirect()->back()->with([
        'result' => 'Меню успешно обновлено'
      ]);
+   }
    else
      return redirect()->back()->with('result', 'Возникла ошибка');
  }
 
  public function destroy(Request $request, $id_item)
  {
-   $menuItem = MenuItem::where('id',$id_item)->firstOrFail();
+   $itemMenu = MenuItem::where('id',$id_item)->firstOrFail();
 
-   if ($menuItem->required==1)
+   if ($itemMenu->required==1)
     return redirect()->back()->with(['result'=>'Нельзя удалить обязательный пункт меню']);
 
-     if ($menuItem->delete())
-      return redirect()->back()->with('result', 'Пункт меню успешно удален');
+     if ($itemMenu->delete()) {
+       Logs::set('Удален пункт меню ['.$itemMenu->title.']');
+       return redirect()->back()->with('result', 'Пункт меню успешно удален');
+      }
      else
       return redirect()->back()->with('result', 'Возникла ошибка');
  }

@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use RoleHelper;
 use Settings;
+use Logs;
 use Modules\Club\Entities\Club;
 use Modules\Category\Entities\Category;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -97,11 +98,13 @@ class BackClubController extends Controller
     $club->cnews_id = $cnews->id;
     $club->cinfo_id = $cinfo->id;
 
-    if ($club->save())
+    if ($club->save()) {
+      Logs::set('Добавлен клуб ['.$club->name.']');
       return redirect()->back()->with([
         'result' => 'Клуб успешно добавлен',
         'club_id' => $club->id
       ]);
+    }
     else
       return redirect()->back()->with('result', 'Возникла ошибка');
   }
@@ -141,11 +144,13 @@ class BackClubController extends Controller
     $club->info->description = 'Информационная категория клуба '.$club->name;
     $club->info->save();
 
-    if ($club->save())
+    if ($club->save()) {
+      Logs::set('Изменен клуб ['.$club->name.']');
       return redirect()->back()->with([
         'result' => 'Клуб успешно обновлен',
         'club_id' => $club->id
       ]);
+    }
     else
       return redirect()->back()->with('result', 'Возникла ошибка');
   }
@@ -166,6 +171,7 @@ class BackClubController extends Controller
     $club->info()->delete();
     $club->news()->delete();
     $club->delete();
+    Logs::set('Удален клуб ['.$club->name.']');
 
     if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
       // request from dashboard

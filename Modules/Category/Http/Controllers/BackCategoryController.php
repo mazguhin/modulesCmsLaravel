@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Settings;
+use Logs;
 use Modules\Category\Entities\Category;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -80,11 +81,13 @@ class BackCategoryController extends Controller
       else
         $category->slug = $slug;
 
-      if ($request->user()->categories()->save($category))
+      if ($request->user()->categories()->save($category)) {
+        Logs::set('Добавлена категория ['.$category->title.']');
         return redirect()->back()->with([
           'result' => 'Категория успешно добавлена',
           'slug' => $slug
         ]);
+      }
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
@@ -118,11 +121,13 @@ class BackCategoryController extends Controller
           $category->slug = $slug;
        }
 
-       if ($category->save())
+       if ($category->save()) {
+         Logs::set('Изменена категория ['.$category->title.']');
          return redirect()->back()->with([
            'result' => 'Категория успешно обновлена',
            'slug' => $category->slug
          ]);
+       }
        else
          return redirect()->back()->with('result', 'Возникла ошибка');
      }
@@ -146,6 +151,7 @@ class BackCategoryController extends Controller
         $article->delete();
       }
       $category->delete();
+      Logs::set('Удалена категория ['.$category->title.']');
 
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
         // request from dashboard

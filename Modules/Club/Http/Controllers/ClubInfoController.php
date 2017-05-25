@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use RoleHelper;
 use Settings;
+use Logs;
 use Modules\Club\Entities\Club;
 use Modules\Category\Entities\Category;
 use Modules\Article\Entities\Article;
@@ -51,9 +52,9 @@ class ClubInfoController extends Controller
     if (!RoleHelper::validatePermissionForClub($id_club))
       return view('template::front.'.$this->frontTemplate.'.club.accsesDenied');
 
-    if (count(Club::findOrFail($id_club)->info->articles)>=4)
+    if (count(Club::findOrFail($id_club)->info->articles)>=2)
       return redirect()->back()->with([
-        'result' => 'Достигнут лимит информационных страниц клуба (4)'
+        'result' => 'Достигнут лимит информационных страниц клуба (3)'
       ]);
 
     return view('template::front.'.$this->frontTemplate.'.club.info.create', [
@@ -72,9 +73,9 @@ class ClubInfoController extends Controller
 
     $club = Club::findOrFail($id_club);
 
-    if (count(Club::findOrFail($id_club)->info->articles)>=4)
+    if (count(Club::findOrFail($id_club)->info->articles)>=2)
       return redirect('/club/id/'.$id_club)->with([
-        'result' => 'Достигнут лимит информационных страниц клуба (4)'
+        'result' => 'Достигнут лимит информационных страниц клуба (3)'
       ]);
 
     $article = new Article;
@@ -93,11 +94,13 @@ class ClubInfoController extends Controller
     else
       $article->slug = $slug;
 
-    if ($request->user()->articles()->save($article))
+    if ($request->user()->articles()->save($article)) {
+      Logs::set('Добавлена страница в клубе [CLUB: '.$club->id.'] ['.$article->title.']');
       return redirect('/club/id/'.$id_club)->with([
         'result' => 'Страница успешно добавлена',
         'article_id' => $article->id
       ]);
+    }
     else
       return redirect()->back()->with('result', 'Возникла ошибка');
   }
@@ -137,12 +140,29 @@ class ClubInfoController extends Controller
     else
       $article->slug = $slug;
 
-    if ($article->save())
+    if ($article->save()) {
+      Logs::set('Изменена страница в клубе [CLUB: '.$id_club.'] ['.$article->title.']');
       return redirect('/club/id/'.$id_club.'/info/id/'.$article->id)->with([
         'result' => 'Страница успешно обновлена',
         'article_id' => $article->id
       ]);
+    }
     else
       return redirect()->back()->with('result', 'Возникла ошибка');
+  }
+
+  public function delete(Request $request, $id_club, $id_article)
+  {
+    // validation permission for this page
+    if (!RoleHelper::validatePermissionForClub($id_club))
+      return view('template::front.'.$this->frontTemplate.'.club.accsesDenied');
+
+    $article = Article::where('id',$id_article)->firstOrFail();
+    if ($article->delete()) {
+      Logs::set('Удалена страница в клубе [CLUB: '.$id_club.'] ['.$article->title.']');
+      return redirect('/club/id/'.$id_club)->with([
+        'result' => 'Страница успешно удалена'
+      ]);
+    }
   }
 }

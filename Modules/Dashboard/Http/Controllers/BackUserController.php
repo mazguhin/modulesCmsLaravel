@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Settings;
 use App\User;
+use Logs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackUserController extends Controller
@@ -56,11 +57,13 @@ class BackUserController extends Controller
       $user->password = bcrypt($request->password);
       $user->role_id = $request->role;
 
-      if ($user->save())
-      return redirect()->back()->with([
-        'result' => 'Пользователь успешно добавлен',
-        'user_id' => $user->id
-      ]);
+      if ($user->save()) {
+        Logs::set('Добавлен пользователь ['.$user->name.'] ['.$name->email.']');
+        return redirect()->back()->with([
+          'result' => 'Пользователь успешно добавлен',
+          'user_id' => $user->id
+        ]);
+      }
       else
       return redirect()->back()->with('result', 'Возникла ошибка');
     }
@@ -94,11 +97,13 @@ class BackUserController extends Controller
        $user->password = bcrypt($request->password);
        $user->role_id = $request->role;
 
-       if ($user->save())
+       if ($user->save()) {
+         Logs::set('Изменен пользователь ['.$user->name.'] ['.$name->email.']');
          return redirect()->back()->with([
            'result' => 'Пользователь успешно обновлен',
            'user_id' => $user->id
          ]);
+       }
        else
          return redirect()->back()->with('result', 'Возникла ошибка');
      }
@@ -113,8 +118,10 @@ class BackUserController extends Controller
 
       $user->role_id=$role;
 
-      if ($user->save())
+      if ($user->save()) {
+        Logs::set('Заблокирован пользователь ['.$user->name.'] ['.$name->email.']');
         return redirect()->back()->with(['result' => 'Пользователь успешно заблокирован']);
+      }
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
@@ -127,8 +134,10 @@ class BackUserController extends Controller
 
       $user->role_id=$role;
 
-      if ($user->save())
+      if ($user->save()) {
+        Logs::set('Разблокирован пользователь ['.$user->name.'] ['.$name->email.']');
         return redirect()->back()->with(['result' => 'Пользователь успешно разблокирован']);
+      }
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
     }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Settings;
+use Logs;
 use Modules\Staff\Entities\StaffCategory;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -64,11 +65,13 @@ class BackStaffCategoryController extends Controller
       else
         $category->slug = $slug;
 
-      if ($request->user()->staffCategories()->save($category))
+      if ($request->user()->staffCategories()->save($category)) {
+        Logs::set('Добавлена категория ['.$category->name.']');
         return redirect()->back()->with([
           'result' => 'Категория успешно добавлена',
           'slug' => $slug
         ]);
+      }
       else
         return redirect()->back()->with('result', 'Возникла ошибка');
     }
@@ -100,11 +103,13 @@ class BackStaffCategoryController extends Controller
           $category->slug = $slug;
        }
 
-       if ($category->save())
+       if ($category->save()) {
+         Logs::set('Изменена категория ['.$category->name.']');
          return redirect()->back()->with([
            'result' => 'Категория успешно обновлена',
            'slug' => $category->slug
          ]);
+       }
        else
          return redirect()->back()->with('result', 'Возникла ошибка');
      }
@@ -125,6 +130,7 @@ class BackStaffCategoryController extends Controller
         $staff->delete();
       }
       $category->delete();
+      Logs::set('Удалена категория ['.$category->name.']');
 
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
         // request from dashboard

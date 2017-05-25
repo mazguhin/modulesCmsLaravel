@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Menu\Entities\Menu;
 use Settings;
+use Logs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackMenuController extends Controller
@@ -71,10 +72,12 @@ class BackMenuController extends Controller
    $menu->role_id = $request->access;
    $menu->activated = $request->activated;
 
-   if ($menu->save())
+   if ($menu->save()) {
+     Logs::set('Добавлено меню ['.$menu->title.']');
      return redirect()->back()->with([
        'result' => 'Меню успешно добавлено'
      ]);
+   }
    else
      return redirect()->back()->with('result', 'Возникла ошибка');
  }
@@ -115,10 +118,12 @@ class BackMenuController extends Controller
    $menu->role_id = $request->access;
    $menu->activated = $request->activated;
 
-   if ($menu->save())
+   if ($menu->save()) {
+     Logs::set('Изменено меню ['.$menu->title.']');
      return redirect()->back()->with([
        'result' => 'Меню успешно обновлено'
      ]);
+   }
    else
      return redirect()->back()->with('result', 'Возникла ошибка');
  }
@@ -135,6 +140,7 @@ class BackMenuController extends Controller
        $item->delete();
      }
      $menu->delete();
+     Logs::set('Удалено меню ['.$menu->title.']');
      return redirect()->back()->with(['result'=>'Меню успешно удалено']);
   }
 }

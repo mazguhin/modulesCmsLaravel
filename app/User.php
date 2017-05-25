@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
       return $this->hasMany('Modules\Guestbook\Entities\Question');
     }
+
+    public function logs()
+    {
+      return $this->hasMany('Modules\Log\Entities\Log');
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use RoleHelper;
 use Settings;
+use Logs;
 use Modules\Club\Entities\Club;
 use Modules\Category\Entities\Category;
 use Modules\Article\Entities\Article;
@@ -82,11 +83,13 @@ class ClubNewsController extends Controller
     else
       $article->slug = $slug;
 
-    if ($request->user()->articles()->save($article))
+    if ($request->user()->articles()->save($article)) {
+      Logs::set('Добавлена новость в клубе [CLUB: '.$club->id.'] ['.$article->title.']');
       return redirect('/club/id/'.$id_club)->with([
         'result' => 'Новость успешно добавлена',
         'article_id' => $article->id
       ]);
+    }
     else
       return redirect()->back()->with('result', 'Возникла ошибка');
   }
@@ -126,11 +129,13 @@ class ClubNewsController extends Controller
     else
       $article->slug = $slug;
 
-    if ($article->save())
+    if ($article->save()) {
+      Logs::set('Изменена новость в клубе [CLUB: '.$id_club.'] ['.$article->title.']');
       return redirect('/club/id/'.$id_club)->with([
         'result' => 'Новость успешно обновлена',
         'article_id' => $article->id
       ]);
+    }
     else
       return redirect()->back()->with('result', 'Возникла ошибка');
   }
@@ -143,6 +148,7 @@ class ClubNewsController extends Controller
 
     $article = Article::where('id',$id_article)->firstOrFail();
     if ($article->delete()) {
+      Logs::set('Удалена новость в клубе [CLUB: '.$id_club.'] ['.$article->title.']');
       return redirect('/club/id/'.$id_club)->with([
         'result' => 'Новость успешно удалена'
       ]);

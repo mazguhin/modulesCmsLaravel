@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Setting\Entities\Setting;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Settings;
+use Logs;
 
 class SettingController extends Controller
 {
@@ -64,6 +65,7 @@ class SettingController extends Controller
           }
       }
 
+      Logs::set('Изменены настройки системы');
       return redirect()->back()->with(['result' => 'Настройки успешно обновлены']);
     }
 
@@ -80,7 +82,9 @@ class SettingController extends Controller
       $startPage = Setting::where('name','startPage')->firstOrFail();
       $startPage->value='/'.$type.'/id/'.$id;
 
-      if ($startPage->save())
-      return redirect()->back()->with(['result' => 'Главная страница установлена']);
+      if ($startPage->save()) {
+        Logs::set('Изменена главная страница');
+        return redirect()->back()->with(['result' => 'Главная страница установлена']);
+      }
     }
 }
