@@ -9,7 +9,7 @@
         <li class="">
           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             @if (Auth::check())
-              <img src="/images/user.png" alt="">{{ Auth::user()->name }}
+              <img src="{{ Auth::user()->getPhoto() }}" alt="">{{ Auth::user()->name }}
             @else
               <img src="/images/user.png" alt="">Гость
             @endif

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Storage;
 
 class User extends Authenticatable
 {
@@ -28,6 +29,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getPhoto()
+    {
+      if ($this->photo=="") {
+        return '/images/user.png';
+      }
+
+      return Storage::url($this->photo);
+    }
 
     public function articles()
     {

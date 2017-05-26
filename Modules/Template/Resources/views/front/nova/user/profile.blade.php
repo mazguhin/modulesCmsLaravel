@@ -2,6 +2,14 @@
 
 @section ('content')
 
+@if (session('result'))
+<div class="alert alert-info" role="alert">
+  {{ session('result') }}
+</div>
+@endif
+
+@include ('template::front.nova.user.errors')
+
 <div class="x_panel">
   <div class="x_title">
     <h2>Профиль</h2>
@@ -12,7 +20,7 @@
       <div class="profile_img">
         <div id="crop-avatar">
           <!-- Current avatar -->
-          <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
+          <img class="img-responsive avatar-view" src="{{ $user->getPhoto() }}" alt="Avatar" title="Change the avatar">
         </div>
       </div>
       <h3>{{ $user->name }}</h3>
@@ -26,8 +34,54 @@
         </li>
       </ul>
 
-      <a class="btn btn-success btn-sm"><i class="fa fa-photo m-right-xs"></i> Изменить аватар</a>
-      <a class="btn btn-success btn-sm"><i class="fa fa-lock m-right-xs"></i> Изменить пароль</a>
+      <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".modal-avatar"><i class="fa fa-photo m-right-xs"></i> Изменить аватар</button>
+
+      <div class="modal fade modal-avatar" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <form action="/profile/avatar" method="post" enctype="multipart/form-data">
+                  {{ csrf_field() }}
+
+                  <div class="form-group">
+                   <input type="file" name="photo" accept="image/*,image/jpeg">
+                  </div>
+
+                  <button type="submit" class="btn btn-success">Сохранить</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-lock m-right-xs"></i> Изменить пароль</button>
+
+      <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <form action="/profile/password" method="post">
+                  {{ csrf_field() }}
+
+                  <div class="form-group">
+                    <label for="password">Новый пароль</label>
+                    <input type="password" class="form-control" name="password" value="" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password_confirmation">Подтвердите новый пароль</label>
+                    <input type="password" class="form-control" name="password_confirmation" value="" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-success">Изменить пароль</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <br />
 
     </div>

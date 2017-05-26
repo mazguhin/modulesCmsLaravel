@@ -82,7 +82,6 @@ class BackUserController extends Controller
        $this->validate($request, [
          'name' => 'required|max:255',
          'email' => 'max:255|required|email',
-         'password' => 'min:6|required|max:255',
          'role' => 'max:255|required',
        ],[
          'required' => 'Заполните все поля',
@@ -94,18 +93,33 @@ class BackUserController extends Controller
        $user = User::where('id',$id_user)->firstOrFail();
        $user->name = $request->name;
        $user->email = $request->email;
-       $user->password = bcrypt($request->password);
        $user->role_id = $request->role;
 
        if ($user->save()) {
-         Logs::set('Изменен пользователь ['.$user->name.'] ['.$name->email.']');
+         Logs::set('Изменен пользователь ['.$user->name.'] ['.$user->email.']');
          return redirect()->back()->with([
            'result' => 'Пользователь успешно обновлен',
-           'user_id' => $user->id
+          //  'user_id' => $user->id
          ]);
        }
        else
          return redirect()->back()->with('result', 'Возникла ошибка');
+     }
+
+     public function updatePassword(User $user, Request $request)
+     {
+       $this->validate($request, [
+         'password' => 'required|min:6|confirmed',
+       ],
+       [
+         'confirmed' => 'Пароли не совпадают',
+         'min' => 'Минимальное кол-во знаков: 6'
+       ]);
+
+       $user->password = bcrypt($request->password);
+       $user->save();
+       Logs::set('Изменен пароль пользователя ['.$user->name.'] ['.$user->email.']');
+       return back()->with(['result'=>'Пароль успешно изменен']);
      }
 
     public function ban(Request $request, $id_user)

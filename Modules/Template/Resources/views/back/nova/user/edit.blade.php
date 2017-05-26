@@ -47,11 +47,6 @@
        </div>
 
        <div class="form-group">
-        <label for="password">Пароль*</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
-       </div>
-
-       <div class="form-group">
          <label for="role">Доступ*</label>
          <select class="form-control" id="role" name="role">
            @foreach ($roles as $role)
@@ -65,6 +60,29 @@
        {{ csrf_field() }}
        <button type="submit" class="btn btn-success">Применить</button>
       </form>
+
+
+   </div>
+ </div>
+
+ <div class="panel panel-default">
+   <div class="panel-heading"><div class="panel-title">Изменение пароля пользователя</div></div>
+   <div class="panel-body">
+     <form action="/dashboard/user/password/id/{{ $user->id }}" method="post">
+       {{ csrf_field() }}
+
+       <div class="form-group">
+         <label for="password">Новый пароль</label>
+         <input type="password" class="form-control" name="password" value="" required>
+       </div>
+
+       <div class="form-group">
+         <label for="password_confirmation">Подтвердите новый пароль</label>
+         <input type="password" class="form-control" name="password_confirmation" value="" required>
+       </div>
+
+       <button type="submit" class="btn btn-success">Изменить пароль</button>
+     </form>
    </div>
  </div>
 @stop

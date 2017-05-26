@@ -1,7 +1,7 @@
 <div class="profile">
   @if (Auth::check())
     <div class="profile_pic">
-      <a href="/profile"><img src="/images/user.png" class="img-circle profile_img"></a>
+      <a href="/profile"><img src="{{ Auth::user()->getPhoto() }}" class="img-circle profile_img"></a>
     </div>
     <div class="profile_info">
       <span>Добро пожаловать,</span>
