@@ -51,6 +51,13 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+        ],
+        [
+          'required' => 'Заполните обязательные поля',
+          'max' => 'Макс. количество символов: 255',
+          'confirmed' => 'Пароли не совпадают',
+          'unique' => 'Данный email уже используется',
+          'min' => 'Мин. длина пароля: 6 символов',
         ]);
     }
 

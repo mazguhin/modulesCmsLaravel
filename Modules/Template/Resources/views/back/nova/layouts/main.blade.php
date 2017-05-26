@@ -80,7 +80,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            @includeIf ('template::back.nova.layouts.partials.menuFooterButtons')
+            <!-- @includeIf ('template::back.nova.layouts.partials.menuFooterButtons') -->
             <!-- /menu footer buttons -->
           </div>
         </div>

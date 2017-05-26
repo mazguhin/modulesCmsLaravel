@@ -31,13 +31,23 @@
 </h1>
 
 @foreach ($articles as $article)
-<h2>
-    <a href="/article/{{ $article->slug }}">{{ $article->title }}</a>
-</h2>
-<p><i class="fa fa-bullhorn" aria-hidden="true"></i> Опубликовано {{ $article->created_at->format('d.m.Y') }}</p>
-<p>{!! $article->body !!}</p>
-<a class="btn btn-primary" href="/article/{{ $article->slug }}">Читать далее...</a>
-<hr>
+<div class="panel panel-default">
+  <div class="panel-heading"><a href="/article/{{ $article->slug }}">{{ $article->title }}</a></div>
+  <div class="panel-body">
+    <p>{!! str_limit($article->body, $limit = 800, $end = '...') !!}</p>
+    <br>
+    <div class="clearfix"></div>
+    <p><a class="btn btn-primary btn-sm" href="/article/{{ $article->slug }}">Читать далее...</a></p>
+    <hr>
+    <p class="text">
+      <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">
+      &nbsp;
+      <b>{{ $article->user->name }}</b>
+      <br> &nbsp;
+      {{ $article->created_at->diffForHumans() }}
+    </p>
+  </div>
+</div>
 @endforeach
 {{ $articles->links() }}
 @stop

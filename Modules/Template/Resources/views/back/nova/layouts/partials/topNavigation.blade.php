@@ -17,8 +17,8 @@
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
             @if (Auth::guest())
-            <li><a href="{{ url('/login') }}">Войти</a></li>
-            <li><a href="{{ url('/register') }}">Регистрация</a></li>
+            <li><a href="{{ url('/login#signin') }}">Войти</a></li>
+            <li><a href="{{ url('/login#signup') }}">Регистрация</a></li>
             @else
               <!-- dashboard for admin -->
               @if (RoleHelper::isAdmin())

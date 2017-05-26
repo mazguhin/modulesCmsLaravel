@@ -1,18 +1,19 @@
 @extends ('template::back.nova.layouts.main')
 
 @section ('content')
+
+@if (session('result'))
+ <div class="alert alert-info" role="alert">
+   {{ session('result') }}
+ </div>
+@endif
+
+@include ('template::back.nova.article.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Настройки</div>
    </div>
-
-  @if (session('result'))
-   <div class="alert alert-info" role="alert">
-     {{ session('result') }}
-   </div>
-  @endif
-
-  @include ('template::back.nova.article.errors')
 
    <div class="panel-body">
      <form role="form" method="POST" action="/dashboard/setting">

@@ -70,7 +70,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            @includeIf ('template::front.nova.layouts.partials.menuFooterButtons')
+            <!-- @includeIf ('template::front.nova.layouts.partials.menuFooterButtons') -->
             <!-- /menu footer buttons -->
           </div>
         </div>
