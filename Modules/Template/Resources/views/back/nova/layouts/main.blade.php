@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ Settings::get('projectName') }}</title>
+    <title>Панель управления</title>
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/dashboard" class="site_title">Панель управления</span></a>
+              <a href="/dashboard" class="site_title"><i class="fa fa-home"></i> <span>Админка</span></a>
             </div>
 
             <div class="clearfix"></div>

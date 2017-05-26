@@ -25,7 +25,7 @@
 
           <hr>
           <p class="text">
-            <img src="images/img.jpg" class="avatar" alt="Avatar">
+            <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">
             &nbsp;
             <b>{{ $article->user->name }}</b>
             <br> &nbsp;

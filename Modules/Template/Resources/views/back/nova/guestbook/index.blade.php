@@ -8,12 +8,12 @@
  </div>
 @endif
 
+@include ('template::back.nova.guestbook.errors')
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">Неотвеченные вопросы</div>
     </div>
-
-    @include ('template::back.nova.guestbook.errors')
 
     <div class="panel panel-body">
       @if (count($questions)>0)

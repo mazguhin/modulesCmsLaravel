@@ -79,12 +79,15 @@ class BackGuestbookController extends Controller
 
   public function delete(Question $question)
   {
+    $oldAnswer = 'None';
     if (null!==$question->answer) {
+      $oldAnswer = $question->answer->id;
       $question->answer->delete();
     }
 
+    $oldQuestion = $question->id;
     $question->delete();
-    Logs::set('Удален вопрос [Вопрос: '.$question->id.'] [Ответ: '.$question->answer->id.']');
+    Logs::set('Удален вопрос [Вопрос: '.$oldQuestion.'] [Ответ: '.$oldAnswer.']');
     return back()->with(['result'=>'Вопрос успешно удален']);
   }
 }

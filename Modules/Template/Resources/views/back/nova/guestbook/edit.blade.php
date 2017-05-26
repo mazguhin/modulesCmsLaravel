@@ -8,12 +8,13 @@
  </div>
 @endif
 
+@include ('template::back.nova.guestbook.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Ответить на вопрос</div>
    </div>
 
-  @include ('template::back.nova.guestbook.errors')
   <ol class="breadcrumb">
     <li><a href="/guestbook">Гостевая книга</a></li>
     <li class="active">Редактирование ответа</li>

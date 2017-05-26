@@ -25,7 +25,7 @@
             <ul class="messages">
               @foreach ($articles as $article)
               <li>
-                <img src="images/img.jpg" class="avatar" alt="Avatar">
+                <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">
                 <div class="message_date">
                   <h3 class="date text-info">{{ $club->created_at->day }}</h3>
                   <p class="month">{{ $club->created_at->format('F') }}</p>

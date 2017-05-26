@@ -1,4 +1,6 @@
-@extends ('template::back.nova.layouts.main') @section ('content')
+@extends ('template::back.nova.layouts.main')
+
+@section ('content')
 
 @if (session('result'))
  <div class="alert alert-info" role="alert">
@@ -6,12 +8,13 @@
  </div>
 @endif
 
+@include ('template::back.nova.guestbook.errors')
+
  <div class="panel panel-default">
    <div class="panel-heading">
      <div class="panel-title">Ответить на вопрос</div>
    </div>
 
-  @include ('template::back.nova.guestbook.errors')
   <ol class="breadcrumb">
     <li><a href="/dashboard/guestbook">Гостевая книга</a></li>
     <li class="active">Ответ на вопрос</li>
