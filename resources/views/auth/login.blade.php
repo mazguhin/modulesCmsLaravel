@@ -32,6 +32,10 @@
         <br><br>
 
           @foreach ($errors->all() as $error)
+            @if ($error=='auth.failed')
+              Ошибка авторизации
+              @continue
+            @endif
             <p>{{ $error }}</p>
           @endforeach
 

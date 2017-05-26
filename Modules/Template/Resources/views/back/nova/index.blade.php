@@ -55,7 +55,7 @@
               <p class="day">{{ $user->created_at->day }}</p>
             </a>
             <div class="media-body">
-              <a class="title" href="#">{{ $user->name }}</a>
+              <a class="title" href="/dashboard/user/edit/id/{{ $user->id }}">{{ $user->name }}</a>
               <p>{{ $user->email }}</p>
               <p>{{ $user->role->title }}</p>
             </div>
@@ -113,7 +113,7 @@
               <p class="day">{{ $category->created_at->day }}</p>
             </a>
             <div class="media-body">
-              <a class="title" href="#">{{ $category->name }}</a>
+              <a class="title" href="/category/id/{{ $category->id }}">{{ $category->name }}</a>
               <p>{{ $category->user->name }}</p>
             </div>
           </article>

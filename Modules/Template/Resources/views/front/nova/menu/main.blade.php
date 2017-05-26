@@ -27,8 +27,6 @@
       @endforeach
 
       </ul>
-      
-      {{ Blocks::get(1) }}
 
     </div>
   </div>
