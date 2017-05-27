@@ -17,7 +17,7 @@ class isModer
      */
     public function handle(Request $request, Closure $next)
     {
-        if (RoleHelper::isModer()) {
+        if (RoleHelper::isAdminOrModer()) {
           return $next($request);
         }
         return redirect('/');

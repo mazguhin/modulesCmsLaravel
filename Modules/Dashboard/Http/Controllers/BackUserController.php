@@ -58,7 +58,7 @@ class BackUserController extends Controller
       $user->role_id = $request->role;
 
       if ($user->save()) {
-        Logs::set('Добавлен пользователь ['.$user->name.'] ['.$name->email.']');
+        Logs::set('Добавлен пользователь ['.$user->name.'] ['.$user->email.']');
         return redirect()->back()->with([
           'result' => 'Пользователь успешно добавлен',
           'user_id' => $user->id
@@ -133,7 +133,7 @@ class BackUserController extends Controller
       $user->role_id=$role;
 
       if ($user->save()) {
-        Logs::set('Заблокирован пользователь ['.$user->name.'] ['.$name->email.']');
+        Logs::set('Заблокирован пользователь ['.$user->name.'] ['.$user->email.']');
         return redirect()->back()->with(['result' => 'Пользователь успешно заблокирован']);
       }
       else
@@ -149,7 +149,7 @@ class BackUserController extends Controller
       $user->role_id=$role;
 
       if ($user->save()) {
-        Logs::set('Разблокирован пользователь ['.$user->name.'] ['.$name->email.']');
+        Logs::set('Разблокирован пользователь ['.$user->name.'] ['.$user->email.']');
         return redirect()->back()->with(['result' => 'Пользователь успешно разблокирован']);
       }
       else

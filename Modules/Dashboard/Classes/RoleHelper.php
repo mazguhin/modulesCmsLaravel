@@ -14,6 +14,11 @@ class RoleHelper {
         return (Auth::check() && Auth::user()->role->name=="moderator");
     }
 
+    public function isAdminOrModer()
+    {
+        return (Auth::check() && (Auth::user()->role->name=="moderator" || Auth::user()->role->name=="administrator"));
+    }
+
     public function checkAdmin(\App\User $user)
     {
         return ($user->role->name=="administrator");

@@ -106,6 +106,9 @@
     <!-- bootstrap-progressbar -->
     <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
+    <!-- file manager -->
+    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="/build/js/custom.min.js"></script>
   </body>

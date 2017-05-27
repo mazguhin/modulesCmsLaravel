@@ -22,4 +22,9 @@ class Logs
       ]);
     }
   }
+
+  public function latestOtherLogs()
+  {
+    return Log::where('user_id', '<>', Auth::user()->id)->latest()->limit(5)->get();
+  }
 }

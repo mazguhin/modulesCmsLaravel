@@ -154,7 +154,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------
@@ -203,6 +204,6 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
-
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 ];
