@@ -1,3 +1,3 @@
 <div class="row">
-  {{ Blocks::get(2) }}
+  {{ Blocks::get(1) }}
 </div>

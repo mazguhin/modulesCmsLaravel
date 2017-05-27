@@ -28,17 +28,17 @@
 
       <div class="mtop20">
         @if (RoleHelper::validatePermissionForClub($club->id))
-        <a href="/club/id/{{ $club->id }}/news/create" class="btn btn-sm btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Добавить новость</a>
-        <a href="/club/id/{{ $club->id }}/info/create" class="btn btn-sm btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Добавить страницу</a>
+        <p><a href="/club/id/{{ $club->id }}/news/create" class="btn btn-sm btn-default col-xs-12"><i class="fa fa-plus-circle" aria-hidden="true"></i> Добавить новость</a></p>
+        <p><a href="/club/id/{{ $club->id }}/info/create" class="btn btn-sm btn-primary col-xs-12"><i class="fa fa-plus" aria-hidden="true"></i> Добавить страницу</a></p>
         @endif
 
         @if (RoleHelper::isAdmin())
-        <a href="/dashboard/club/edit/id/{{ $club->id }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Редактировать клуб</a>
-        <a class="btn btn-sm btn-danger" href="/dashboard/club/{{ $club->id }}"
+        <p><a href="/dashboard/club/edit/id/{{ $club->id }}" class="btn btn-sm btn-warning col-xs-12"><i class="fa fa-pencil" aria-hidden="true"></i> Редактировать клуб</a></p>
+        <p><a class="btn btn-sm btn-danger col-xs-12" href="/dashboard/club/{{ $club->id }}"
             onclick="event.preventDefault();
                      document.getElementById('destroy-form{{$club->id}}').submit();">
             <i class="fa fa-trash" aria-hidden="true"></i> Удалить клуб
-        </a>
+        </a></p>
 
         <form id="destroy-form{{$club->id}}" action="/dashboard/club/{{ $club->id }}" method="POST" style="display: none;">
             {{ csrf_field() }}

@@ -24,7 +24,7 @@
               @if (RoleHelper::isAdmin())
               <li>
                   <a href="{{ url('/') }}">
-                      Перейти на сайт
+                    <i class="fa fa-home pull-right"></i>  Перейти на сайт
                   </a>
               </li>
               @endif
@@ -32,7 +32,7 @@
               <!-- Profile -->
               <li>
                   <a href="{{ url('/profile') }}">
-                      Профиль
+                    <i class="fa fa-qq pull-right"></i>  Профиль
                   </a>
               </li>
 
@@ -60,8 +60,8 @@
             <span class="fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
-            <li><a href="/laravel-filemanager?type=Images"><span class="fa fa-file-image-o fa-lg"></span> Изображения</a></li>
-            <li><a href="/laravel-filemanager?type=Files"><span class="fa fa-file-o fa-lg"></span> Файлы</a></li>
+            <li><a href="/laravel-filemanager?type=Images"><i class="fa fa-file-image-o fa-lg pull-right"></i> Изображения</a></li>
+            <li><a href="/laravel-filemanager?type=Files"><i class="fa fa-file-o fa-lg pull-right"></i> Файлы</a></li>
           </ul>
         </li>
         @endif

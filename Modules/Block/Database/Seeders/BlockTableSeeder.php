@@ -14,17 +14,36 @@ class BlockTableSeeder extends Seeder
 
         DB::table('blocks')->insert([
           [
-            'description' => 'Блок под левым меню',
-            'body' => '<h3>Заголовок</h3>
-            <p style="text-align:center"><span style="color:#d3d3d3">Здесь располагается текст данного блока.
-            Он может содержать в себе ссылки на иные ресурсы или любой другой контент.</span></p>',
-            'role_id' => 1,
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now(),
-          ],
-          [
             'description' => 'Подвал',
-            'body' => '<div class="text-center">Текст подвала</div>',
+            'body' => '<p style="text-align:center">Smans CMS / 2017</p>
+
+            <hr />
+            <div class="row text-center">
+            <div class="col-sm-4">
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+            </div>
+
+            <div class="col-sm-4">
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+            </div>
+
+            <div class="col-sm-4">
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+
+            <p><a href="#">Пример ссылки на внешний ресурс</a></p>
+            </div>
+            </div>
+            ',
             'role_id' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),

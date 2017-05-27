@@ -34,7 +34,7 @@
         </li>
       </ul>
 
-      <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".modal-avatar"><i class="fa fa-photo m-right-xs"></i> Изменить аватар</button>
+      <button type="button" class="btn btn-success btn-sm col-xs-12" data-toggle="modal" data-target=".modal-avatar"><i class="fa fa-photo m-right-xs"></i> Изменить аватар</button>
 
       <div class="modal fade modal-avatar" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm" role="document">
@@ -48,14 +48,14 @@
                    <input type="file" name="photo" accept="image/*,image/jpeg">
                   </div>
 
-                  <button type="submit" class="btn btn-success">Сохранить</button>
+                  <button type="submit" class="btn btn-success col-xs-12">Сохранить</button>
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-lock m-right-xs"></i> Изменить пароль</button>
+      <button type="button" class="btn btn-success btn-sm col-xs-12" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-lock m-right-xs"></i> Изменить пароль</button>
 
       <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm" role="document">
@@ -75,7 +75,7 @@
                     <input type="password" class="form-control" name="password_confirmation" value="" required>
                   </div>
 
-                  <button type="submit" class="btn btn-success">Изменить пароль</button>
+                  <button type="submit" class="btn btn-success col-xs-12">Изменить пароль</button>
                 </form>
               </div>
             </div>
