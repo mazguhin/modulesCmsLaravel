@@ -25,7 +25,7 @@ class ClubController extends Controller
 
     return view('template::front.'.$this->frontTemplate.'.club.show', [
       'club' => $club,
-      'articles' => $club->news->articles()->orderBy('created_at', 'desc')->paginate(5),
+      'articles' => $club->news->articles()->with('user')->orderBy('created_at', 'desc')->paginate(5),
       'pages' => $club->info->articles()->orderBy('created_at', 'desc')->get(),
     ]);
   }

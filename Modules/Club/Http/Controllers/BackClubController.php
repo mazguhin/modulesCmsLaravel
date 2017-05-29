@@ -39,7 +39,7 @@ class BackClubController extends Controller
   public function getModers()
   {
     $moders = collect([]);
-    foreach (\App\User::all() as $user){
+    foreach (\App\User::with('role')->get() as $user){
         if (RoleHelper::checkModer($user))
           $moders->push($user);
     }

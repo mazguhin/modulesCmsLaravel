@@ -4,19 +4,31 @@ namespace Modules\Dashboard\Classes;
 use Auth;
 
 class RoleHelper {
+
+    private $role;
+
+    public function __construct()
+    {
+      if (Auth::check()) {
+        $this->role = Auth::user()->role->name;
+      } else {
+        $this->role = 'guest';
+      }
+    }
+
     public function isAdmin()
     {
-        return (Auth::check() && Auth::user()->role->name=="administrator");
+        return ($this->role=="administrator");
     }
 
     public function isModer()
     {
-        return (Auth::check() && Auth::user()->role->name=="moderator");
+        return ($this->role=="moderator");
     }
 
     public function isAdminOrModer()
     {
-        return (Auth::check() && (Auth::user()->role->name=="moderator" || Auth::user()->role->name=="administrator"));
+        return ($this->role=="moderator" || $this->role=="administrator");
     }
 
     public function checkAdmin(\App\User $user)
@@ -31,9 +43,8 @@ class RoleHelper {
 
     public function checkAdminOrModer(\App\User $user)
     {
-        return ($user->role->name=="moderator" || $user->role->name=="administrator");
+        return ($user->role=="moderator" || $user->role=="administrator");
     }
-
 
     public function validatePermissionForPage($pagePermission)
     {

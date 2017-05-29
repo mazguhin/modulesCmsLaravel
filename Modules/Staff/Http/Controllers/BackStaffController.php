@@ -46,7 +46,7 @@ class BackStaffController extends Controller
     public function show()
     {
       return view('template::back.'.$this->backTemplate.'.staff.show',[
-        'staffs' => Staff::orderBy('created_at', 'desc')->paginate(100)
+        'staffs' => Staff::orderBy('created_at', 'desc')->with('user')->paginate(100)
       ]);
     }
 

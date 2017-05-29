@@ -37,7 +37,7 @@ class BackStaffCategoryController extends Controller
     public function show()
     {
       return view('template::back.'.$this->backTemplate.'.staff.category.show',[
-        'staffCategories' => StaffCategory::orderBy('created_at', 'desc')->paginate(100)
+        'staffCategories' => StaffCategory::orderBy('created_at', 'desc')->with('user')->paginate(100)
       ]);
     }
 

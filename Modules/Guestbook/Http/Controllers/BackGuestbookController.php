@@ -34,7 +34,7 @@ class BackGuestbookController extends Controller
   public function index()
   {
     return view('template::back.'.$this->backTemplate.'.guestbook.index',[
-      'questions' => Question::where('answer_id','0')->orderBy('created_at','desc')->paginate(10),
+      'questions' => Question::where('answer_id','0')->orderBy('created_at','desc')->with('user')->paginate(10),
     ]);
   }
 

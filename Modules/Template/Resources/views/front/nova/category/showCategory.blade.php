@@ -32,12 +32,12 @@
 
 @foreach ($articles as $article)
 <div class="panel panel-default">
-  <div class="panel-heading"><a href="/article/{{ $article->slug }}">{{ $article->title }}</a></div>
+  <div class="panel-heading"><a href="/article/id/{{ $article->id }}">{{ $article->title }}</a></div>
   <div class="panel-body">
     <p>{!! str_limit($article->body, $limit = 800, $end = '...') !!}</p>
     <br>
     <div class="clearfix"></div>
-    <p><a class="btn btn-primary btn-sm" href="/article/{{ $article->slug }}">Читать далее...</a></p>
+    <p><a class="btn btn-primary btn-sm" href="/article/id/{{ $article->id }}">Читать далее...</a></p>
     <hr>
     <p class="text">
       <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">

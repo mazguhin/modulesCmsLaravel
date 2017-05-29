@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
        return view('template::front.'.$this->frontTemplate.'.category.showCategory', [
          'category' => $category,
-         'articles' => $category->articles()->orderBy('created_at', 'desc')->paginate(5)
+         'articles' => $category->articles()->orderBy('created_at', 'desc')->with('user')->paginate(5)
        ]);
      }
 
@@ -36,7 +36,7 @@ class CategoryController extends Controller
          $tmpCategory = Category::where('id',$id_category)->firstOrFail();
          Cache::add('category.'.$id_category, $tmpCategory, 30); // cache 30 min
          return $tmpCategory;
-       }));   
+       }));
      }
 
      public function showSlug($slug_category)

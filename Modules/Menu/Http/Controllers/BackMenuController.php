@@ -39,14 +39,14 @@ class BackMenuController extends Controller
  public function show()
  {
    return view('template::back.'.$this->backTemplate.'.menu.show',[
-     'menus' => Menu::orderBy('created_at', 'desc')->paginate(100)
+     'menus' => Menu::orderBy('created_at', 'desc')->with('access')->paginate(100)
    ]);
  }
 
  public function create()
  {
    $articles = collect([]);
-   foreach (\Modules\Article\Entities\Article::all() as $article) {
+   foreach (\Modules\Article\Entities\Article::with('category')->get() as $article) {
      if ($article->category->club==false) $articles->push($article);
    }
 
@@ -91,7 +91,7 @@ class BackMenuController extends Controller
      $arrayItemUrl = array ('','','','');
 
      $articles = collect([]);
-     foreach (\Modules\Article\Entities\Article::all() as $article) {
+     foreach (\Modules\Article\Entities\Article::with('category')->get() as $article) {
        if ($article->category->club==false) $articles->push($article);
      }
 

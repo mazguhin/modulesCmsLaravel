@@ -27,7 +27,7 @@ class Menu extends Model
     {
       return $this->hasMany(MenuItem::class)->where([
         'activated' => 1
-      ]);
+      ])->with('role');
     }
 
     // Activated and public menu_items

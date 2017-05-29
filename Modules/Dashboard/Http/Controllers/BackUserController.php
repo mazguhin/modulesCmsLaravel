@@ -24,7 +24,7 @@ class BackUserController extends Controller
     public function show()
     {
       return view('template::back.'.$this->backTemplate.'.user.show',[
-        'users' => User::orderBy('created_at', 'desc')->paginate(100)
+        'users' => User::orderBy('created_at', 'desc')->with('role')->paginate(100)
       ]);
     }
 

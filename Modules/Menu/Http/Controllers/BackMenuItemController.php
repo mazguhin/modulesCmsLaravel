@@ -40,7 +40,7 @@ class BackMenuItemController extends Controller
  public function show($id_menu)
  {
    return view('template::back.'.$this->backTemplate.'.menu.item.show',[
-     'items' => Menu::where('id',$id_menu)->firstOrFail()->menuAllItems,
+     'items' => Menu::where('id',$id_menu)->firstOrFail()->menuAllItems()->with('role')->get(),
      'id_menu' => $id_menu,
    ]);
  }
@@ -91,7 +91,7 @@ class BackMenuItemController extends Controller
    $arrayItemUrl = explode("/",$item->url);
 
    $articles = collect([]);
-   foreach (\Modules\Article\Entities\Article::all() as $article) {
+   foreach (\Modules\Article\Entities\Article::with('category') as $article) {
      if ($article->category->club==false) $articles->push($article);
    }
 

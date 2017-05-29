@@ -51,7 +51,7 @@ class BackCategoryController extends Controller
         $startPage[3] = 0;
 
       return view('template::back.'.$this->backTemplate.'.category.show',[
-        'categories' => Category::where('club',false)->orderBy('created_at', 'desc')->paginate(100),
+        'categories' => Category::where('club',false)->orderBy('created_at', 'desc')->with('role','user')->paginate(100),
         'startPageId' => $startPage[3]
       ]);
     }

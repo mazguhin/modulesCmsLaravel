@@ -24,13 +24,13 @@ class DashboardController extends Controller
     public function index()
     {
       return view('template::back.'.$this->backTemplate.'.index',[
-        'countArticles' => Article::all()->count(),
-        'countUsers' => User::all()->count(),
-        'countAnswers' => Answer::all()->count(),
-        'countClubs' => Club::all()->count(),
-        'users' => User::orderBy('created_at','desc')->limit(10)->get(),
-        'categories' => Category::orderBy('created_at','desc')->where('club',false)->limit(10)->get(),
-        'articles' => Article::orderBy('created_at','desc')->limit(10)->get(),
+        'countArticles' => Article::count(),
+        'countUsers' => User::count(),
+        'countAnswers' => Answer::count(),
+        'countClubs' => Club::count(),
+        'users' => User::orderBy('created_at','desc')->limit(10)->with('role')->get(),
+        'categories' => Category::orderBy('created_at','desc')->where('club',false)->limit(10)->with('user')->get(),
+        'articles' => Article::orderBy('created_at','desc')->limit(10)->with('user', 'category')->get(),
       ]);
     }
 }
