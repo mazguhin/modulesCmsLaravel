@@ -9,6 +9,7 @@ use Settings;
 use Logs;
 use Modules\Category\Entities\Category;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Cache;
 
 class BackCategoryController extends Controller
 {
@@ -82,6 +83,7 @@ class BackCategoryController extends Controller
         $category->slug = $slug;
 
       if ($request->user()->categories()->save($category)) {
+
         Logs::set('Добавлена категория ['.$category->title.']');
         return redirect()->back()->with([
           'result' => 'Категория успешно добавлена',
@@ -122,6 +124,7 @@ class BackCategoryController extends Controller
        }
 
        if ($category->save()) {
+         Cache::forget('category.'.$category->id);
          Logs::set('Изменена категория ['.$category->title.']');
          return redirect()->back()->with([
            'result' => 'Категория успешно обновлена',

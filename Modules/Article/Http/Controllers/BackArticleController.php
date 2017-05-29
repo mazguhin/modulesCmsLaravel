@@ -9,6 +9,7 @@ use Settings;
 use Logs;
 use Modules\Article\Entities\Article;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Cache;
 
 class BackArticleController extends Controller
 {
@@ -124,6 +125,7 @@ class BackArticleController extends Controller
       }
 
       if ($article->save()) {
+        Cache::forget('article.'.$article->id);
         Logs::set('Изменена статья ['.$article->title.']');
         return redirect()->back()->with([
           'result' => 'Статья успешно обновлена',
@@ -145,6 +147,7 @@ class BackArticleController extends Controller
         return redirect()->back()->with(['result'=>'Нельзя удалить главную страницу']);
 
       $article = Article::where('id',$id_article)->firstOrFail();
+      Cache::forget('article.'.$id_article);
       if (str_contains($request->server('HTTP_REFERER'),'dashboard')) {
         // request from dashboard
         $article->delete();

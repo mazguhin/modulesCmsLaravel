@@ -2,6 +2,7 @@
 
 namespace Modules\Menu\Classes;
 use Modules\Menu\Entities\Menu;
+use Cache;
 
 class MenuHelper {
     public function getMenuByRole($role)
@@ -10,6 +11,10 @@ class MenuHelper {
     }
 
     public function getAll() {
-      return Menu::all();
+      return Cache::get('menu.all', function () {
+        $tmpMenuAll = Menu::all();
+        Cache::add('menu.all', $tmpMenuAll, 1440);
+        return $tmpMenuAll;
+      });
     }
 }

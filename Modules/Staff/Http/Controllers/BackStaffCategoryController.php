@@ -9,6 +9,7 @@ use Settings;
 use Logs;
 use Modules\Staff\Entities\StaffCategory;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Cache;
 
 class BackStaffCategoryController extends Controller
 {
@@ -104,6 +105,7 @@ class BackStaffCategoryController extends Controller
        }
 
        if ($category->save()) {
+         Cache::forget('staffCategory.'.$category->id);
          Logs::set('Изменена категория ['.$category->name.']');
          return redirect()->back()->with([
            'result' => 'Категория успешно обновлена',
@@ -117,6 +119,7 @@ class BackStaffCategoryController extends Controller
     public function destroy(Request $request, $id_category)
     {
       $category = StaffCategory::where('id',$id_category)->firstOrFail();
+      Cache::forget('staffCategory.'.$category->id);
       $staffs = $category->staffs;
 
       foreach ($category->staffs as $staff) {

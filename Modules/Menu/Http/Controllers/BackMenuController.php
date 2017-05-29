@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Menu\Entities\Menu;
 use Settings;
 use Logs;
+use Cache;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class BackMenuController extends Controller
@@ -119,6 +120,7 @@ class BackMenuController extends Controller
    $menu->activated = $request->activated;
 
    if ($menu->save()) {
+     Cache::forget('menu.all');
      Logs::set('Изменено меню ['.$menu->title.']');
      return redirect()->back()->with([
        'result' => 'Меню успешно обновлено'
@@ -132,7 +134,7 @@ class BackMenuController extends Controller
  public function destroy(Request $request, $id_menu)
  {
      $menu = Menu::where('id',$id_menu)->firstOrFail();
-
+     Cache::forget('menu.all');
      if ($menu->required==1)
       return redirect()->back()->with(['result'=>'Нельзя удалить обязательное меню']);
 

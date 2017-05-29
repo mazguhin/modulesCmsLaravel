@@ -3,35 +3,32 @@
 namespace Modules\Setting\Classes;
 
 use Modules\Setting\Entities\Setting;
+use Cache;
 
 class Settings
 {
 
+  // CACHE: prefix - setting.
+
   //get value of settings
   public function get($name)
   {
-    return Setting::where('name',$name)->firstOrFail()->value;
+    $setting = Cache::get('setting.'.$name, function () use ($name) {
+      $tmpSetting = Setting::where('name',$name)->firstOrFail()->value;
+      Cache::add('setting.'.$name, $tmpSetting, 1440);
+      return $tmpSetting;
+    });
+
+    return $setting;
   }
 
-  //for front templates
   public function getFrontTemplate()
   {
-    return Setting::where('name','frontTemplate')->firstOrFail()->value;
+    return $this->get('frontTemplate');
   }
 
-  public function getFrontTemplatePath()
-  {
-    return 'template::templates.front.'.$this->getFrontTemplate().'.layouts.main';
-  }
-
-  // for back templates
   public function getBackTemplate()
   {
-    return Setting::where('name','backTemplate')->firstOrFail()->value;
-  }
-
-  public function getBackTemplatePath()
-  {
-    return 'template::templates.back.'.$this->getBackTemplate().'.layouts.main';
+    return $this->get('backTemplate');
   }
 }

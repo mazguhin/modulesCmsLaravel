@@ -9,6 +9,7 @@ use Settings;
 use Logs;
 use Modules\Block\Entities\Block;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Cache;
 
 class BackBlockController extends Controller
 {
@@ -87,6 +88,7 @@ class BackBlockController extends Controller
    $block->role_id = $request->role;
 
    if ($block->save()) {
+     Cache::forget('block.'.$block->id);
      Logs::set('Изменен блок [ID: '.$block->id.']');
      return redirect()->back()->with([
        'result' => 'Блок успешно обновлен',

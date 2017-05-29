@@ -9,6 +9,7 @@ use Modules\Setting\Entities\Setting;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Settings;
 use Logs;
+use Cache;
 
 class SettingController extends Controller
 {
@@ -60,6 +61,7 @@ class SettingController extends Controller
       {
           if($set = Setting::where('name', $setting)->first())
           {
+            Cache::forget('setting.'.$set->name);
             $set->value=$value;
             $set->save();
           }
@@ -83,6 +85,7 @@ class SettingController extends Controller
       $startPage->value='/'.$type.'/id/'.$id;
 
       if ($startPage->save()) {
+        Cache::forget('setting.startPage');
         Logs::set('Изменена главная страница');
         return redirect()->back()->with(['result' => 'Главная страница установлена']);
       }

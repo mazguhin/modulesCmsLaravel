@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Category\Entities\Category;
 use Settings;
 use RoleHelper;
+use Cache;
 
 class CategoryController extends Controller
 {
@@ -18,11 +19,8 @@ class CategoryController extends Controller
        $this->frontTemplate = Settings::getFrontTemplate();
      }
 
-     public function showId($id_category)
+     public function show($category)
      {
-       $category = Category::where('id',$id_category)->firstOrFail();
-
-       // validation permission for this page
        if (!RoleHelper::validatePermissionForPage($category->role->permission))
          return view('template::front.'.$this->frontTemplate.'.category.accsesDenied');
 
@@ -32,18 +30,18 @@ class CategoryController extends Controller
        ]);
      }
 
+     public function showId($id_category)
+     {
+       return $this->show(Cache::get('category.'.$id_category, function() use ($id_category) {
+         $tmpCategory = Category::where('id',$id_category)->firstOrFail();
+         Cache::add('category.'.$id_category, $tmpCategory, 30); // cache 30 min
+         return $tmpCategory;
+       }));   
+     }
+
      public function showSlug($slug_category)
      {
-       $category = Category::where('slug',$slug_category)->firstOrFail();
-
-       // validation permission for this page
-       if (!RoleHelper::validatePermissionForPage($category->role->permission))
-         return view('template::front.'.$this->frontTemplate.'.category.accsesDenied');
-
-       return view('template::front.'.$this->frontTemplate.'.category.showCategory', [
-         'category' => $category,
-         'articles' => $category->articles()->orderBy('created_at', 'desc')->paginate(5)
-       ]);
+       return $this->show(Category::where('slug',$slug_category)->firstOrFail());
      }
 
     public function index()
