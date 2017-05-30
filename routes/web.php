@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route::get('/profile/{User}', 'HomeController@user');
+
 Route::get('/profile', 'HomeController@profile');
+Route::get('/profile/{user}', 'HomeController@profile');
 Route::post('/profile/password', 'HomeController@updatePassword');
 Route::post('/profile/avatar', 'HomeController@updateAvatar');

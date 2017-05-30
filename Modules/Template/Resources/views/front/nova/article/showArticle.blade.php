@@ -14,9 +14,11 @@
     <p>{!! $article->body !!}</p>
     <hr>
     <p class="text">
-      <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">
-      &nbsp;
-      <b>{{ $article->user->name }}</b>
+      <a href="/profile/{{$article->user->id}}">
+        <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">
+        &nbsp;
+        <b>{{ $article->user->name }}</b>
+      </a>
       <br> &nbsp;
       {{ $article->created_at->diffForHumans() }}
     </p>

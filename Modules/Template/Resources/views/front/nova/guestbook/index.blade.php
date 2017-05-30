@@ -25,10 +25,13 @@
 
 @foreach ($answers as $answer)
   <div class="list-group">
-  <div href="#" class="list-group-item
-  @if (Auth::check() && $answer->question->user->id==Auth::user()->id) active @endif
-  ">
-    <h4 class="list-group-item-heading">Вопрос от {{ $answer->question->user->name }}
+  @if (Auth::check() && $answer->question->user->id==Auth::user()->id)
+  <div href="#" class="list-group-item active">
+    <h4 class="list-group-item-heading">Ваш вопрос
+  @else
+  <div href="#" class="list-group-item">
+    <h4 class="list-group-item-heading">Вопрос от <a href="/profile/{{ $answer->question->user->id }}">{{ $answer->question->user->name }}</a>
+  @endif
     <small>({{ $answer->question->created_at->diffForHumans() }})
       @if (RoleHelper::isAdmin())
       <a class="btn btn-danger btn-sm" href="/dashboard/guestbook/{{ $answer->question->id }}"
@@ -46,7 +49,7 @@
     <p class="list-group-item-text">{{ $answer->question->body }}</p>
   </div>
   <div href="#" class="list-group-item">
-    <h4 class="list-group-item-heading">Ответ от {{ $answer->user->name }}
+    <h4 class="list-group-item-heading">Ответ от <a href="/profile/{{ $answer->user->id }}">{{ $answer->user->name }}</a>
     <small>({{ $answer->updated_at->diffForHumans() }})
       @if (RoleHelper::isAdmin())
       <a class="btn btn-primary btn-sm" href="/dashboard/guestbook/edit/{{ $answer->question->id }}">

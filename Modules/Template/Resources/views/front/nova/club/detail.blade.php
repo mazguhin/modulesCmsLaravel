@@ -19,7 +19,7 @@
         <p class="title">Модераторы</p>
         <p>
         @foreach ($club->moders as $moder)
-          {{$moder->name}} <br>
+          <a href="/profile/{{ $moder->id }}">{{ $moder->name }}</a> <br>
         @endforeach
         </p>
       </div>

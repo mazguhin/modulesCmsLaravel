@@ -73,7 +73,7 @@ class RegisterController extends Controller
       $user->name = $data['name'];
       $user->email = $data['email'];
       $user->password = bcrypt($data['password']);
-      $user->role_id = 1;
+      $user->role_id = 2;
       $user->save();
       return $user;
 

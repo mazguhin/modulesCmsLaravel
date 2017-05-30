@@ -40,9 +40,11 @@
     <p><a class="btn btn-primary btn-sm" href="/article/id/{{ $article->id }}">Читать далее...</a></p>
     <hr>
     <p class="text">
-      <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">
-      &nbsp;
-      <b>{{ $article->user->name }}</b>
+      <a href="/profile/{{$article->user->id}}">
+        <img src="{{ $article->user->getPhoto() }}" class="avatar" alt="Avatar">
+        &nbsp;
+        <b>{{ $article->user->name }}</b>
+      </a>
       <br> &nbsp;
       {{ $article->created_at->diffForHumans() }}
     </p>

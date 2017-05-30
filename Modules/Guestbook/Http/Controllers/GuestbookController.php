@@ -22,7 +22,7 @@ class GuestbookController extends Controller
   public function index()
   {
     return view ('template::front.'.$this->frontTemplate.'.guestbook.index', [
-      'answers' => Answer::orderBy('created_at','desc')->paginate(10),
+      'answers' => Answer::orderBy('created_at','desc')->with('question.user')->paginate(10),
     ]);
   }
 

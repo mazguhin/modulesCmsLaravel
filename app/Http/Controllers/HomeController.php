@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Settings;
 use Auth;
 use Modules\Log\Entities\Log;
+use Modules\Article\Entities\Article;
 use Logs;
 
 class HomeController extends Controller
@@ -20,17 +21,28 @@ class HomeController extends Controller
         $this->frontTemplate = Settings::getFrontTemplate();
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
+    public function profile(\App\User $user = null)
     {
-      $user = Auth::user();
-      return view('template::front.'.$this->frontTemplate.'.user.profile', [
+      if (null==$user->id) {
+        $user = Auth::user();
+        return view('template::front.'.$this->frontTemplate.'.user.profile', [
+          'user' => $user,
+          'logs' => \Modules\Log\Entities\Log::where('user_id', $user->id)->latest()->paginate(10),
+        ]);
+      }
+
+      $role = $user->role->name;
+      if ($role == 'administrator') {
+        $faq = $user->answers()->count();
+      } else {
+        $faq = $user->questions()->count();
+      }
+
+      return view('template::front.'.$this->frontTemplate.'.user.user', [
         'user' => $user,
-        'logs' => \Modules\Log\Entities\Log::where('user_id', $user->id)->latest()->paginate(10),
+        'articles' => $user->articles()->count(),
+        'faq' => $faq,
+        'role' => $role,
       ]);
     }
 
