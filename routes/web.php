@@ -13,11 +13,9 @@
 
 Route::get('/', function () {
     return redirect(Settings::get('startPage'));
-});
+})->middleware(['isBanned']);
 
 Auth::routes();
-
-// Route::get('/profile/{User}', 'HomeController@user');
 
 Route::get('/profile', 'HomeController@profile');
 Route::get('/profile/{user}', 'HomeController@profile');

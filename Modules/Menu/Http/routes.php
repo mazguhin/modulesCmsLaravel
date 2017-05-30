@@ -1,7 +1,7 @@
 <?php
 
 //FRONT
-Route::group(['middleware' => 'web', 'prefix' => 'menu', 'namespace' => 'Modules\Menu\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isBanned'], 'prefix' => 'menu', 'namespace' => 'Modules\Menu\Http\Controllers'], function()
 {
     Route::get('/', 'MenuController@index');
 

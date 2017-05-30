@@ -21,6 +21,11 @@ class RoleHelper {
         return ($this->role=="administrator");
     }
 
+    public function isBanned()
+    {
+        return ($this->role=="banned");
+    }
+
     public function isModer()
     {
         return ($this->role=="moderator");

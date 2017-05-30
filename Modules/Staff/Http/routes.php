@@ -1,12 +1,12 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'staff', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isBanned'], 'prefix' => 'staff', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
 {
     Route::get('/', 'StaffController@index');
 });
 
 // FRONT Routes
-Route::group(['middleware' => 'web', 'prefix' => 'staff', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isBanned'], 'prefix' => 'staff', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
 {
     // show all categories
     Route::get('/category', 'StaffCategoryController@index');

@@ -2,7 +2,7 @@
 
 
 // FRONT Routes
-Route::group(['middleware' => 'web', 'prefix' => 'article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isBanned'], 'prefix' => 'article', 'namespace' => 'Modules\Article\Http\Controllers'], function()
 {
     Route::get ('/id/{id_article}', 'ArticleController@showId');
     Route::get ('/{slug_article}', 'ArticleController@showSlug');

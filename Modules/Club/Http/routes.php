@@ -1,7 +1,7 @@
 <?php
 
 // FRONT Routes
-Route::group(['middleware' => ['web'], 'prefix' => 'club/id/{id_club}', 'namespace' => 'Modules\Club\Http\Controllers'], function()
+Route::group(['middleware' => ['web', 'isBanned'], 'prefix' => 'club/id/{id_club}', 'namespace' => 'Modules\Club\Http\Controllers'], function()
 {
     Route::get ('/', 'ClubController@index'); // show club
 

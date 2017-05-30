@@ -1,11 +1,11 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'guestbook', 'namespace' => 'Modules\Guestbook\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isBanned'], 'prefix' => 'guestbook', 'namespace' => 'Modules\Guestbook\Http\Controllers'], function()
 {
     Route::get('/', 'GuestbookController@index');
 });
 
-Route::group(['middleware' => ['web','auth'], 'prefix' => 'guestbook', 'namespace' => 'Modules\Guestbook\Http\Controllers'], function()
+Route::group(['middleware' => ['web','auth','isBanned'], 'prefix' => 'guestbook', 'namespace' => 'Modules\Guestbook\Http\Controllers'], function()
 {
     Route::post('/', 'GuestbookController@store');
 });

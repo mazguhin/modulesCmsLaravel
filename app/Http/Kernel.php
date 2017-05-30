@@ -57,5 +57,6 @@ class Kernel extends HttpKernel
         'cors' => \Modules\Dashboard\Http\Middleware\Cors::class,
         'isAdmin' => \Modules\Dashboard\Http\Middleware\isAdmin::class,
         'isModer' => \Modules\Dashboard\Http\Middleware\isModer::class,
+        'isBanned' => \Modules\Dashboard\Http\Middleware\isBanned::class,
     ];
 }

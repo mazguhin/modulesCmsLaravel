@@ -1,7 +1,7 @@
 <?php
 
 // FRONT Routes
-Route::group(['middleware' => 'web', 'prefix' => 'category', 'namespace' => 'Modules\Category\Http\Controllers'], function()
+Route::group(['middleware' => ['web','isBanned'], 'prefix' => 'category', 'namespace' => 'Modules\Category\Http\Controllers'], function()
 {
     // show all categories
     Route::get('/', 'CategoryController@index');
