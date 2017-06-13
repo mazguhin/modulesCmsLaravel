@@ -91,7 +91,7 @@ class BackMenuItemController extends Controller
    $arrayItemUrl = explode("/",$item->url);
 
    $articles = collect([]);
-   foreach (\Modules\Article\Entities\Article::with('category') as $article) {
+   foreach (\Modules\Article\Entities\Article::with('category')->get() as $article) {
      if ($article->category->club==false) $articles->push($article);
    }
 

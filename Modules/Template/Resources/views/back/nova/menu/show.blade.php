@@ -25,9 +25,18 @@
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </button>
             </a>
+
+            <!-- INFO -->
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#infoModal">
+              <i class="fa fa-question" aria-hidden="true"></i>
+            </button>
+
           </h2>
           <div class="clearfix"></div>
         </div>
+
+        <!--  modal info -->
+        @includeIf ('template::back.nova.menu.info')
 
         <div class="x_content">
           <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">

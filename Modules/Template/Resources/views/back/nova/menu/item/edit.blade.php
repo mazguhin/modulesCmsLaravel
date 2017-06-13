@@ -61,6 +61,7 @@
              @if ($arrayItemUrl[1]=='club' && $arrayItemUrl[3]==$club->id) selected @endif
              >{{ $club->name }}</option>
             @endforeach
+           </optgroup>
            <optgroup label="Статьи">
            @foreach ($articles as $article)
             <option value="/article/id/{{ $article->id }}"

@@ -12,8 +12,18 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="panel-title">Неотвеченные вопросы</div>
+        <div class="panel-title">Неотвеченные вопросы
+
+          <!-- INFO -->
+          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#infoModal">
+            <i class="fa fa-question" aria-hidden="true"></i>
+          </button>
+
+        </div>
     </div>
+
+    <!--  modal info -->
+    @includeIf ('template::back.nova.guestbook.info')
 
     <div class="panel panel-body">
       @if (count($questions)>0)

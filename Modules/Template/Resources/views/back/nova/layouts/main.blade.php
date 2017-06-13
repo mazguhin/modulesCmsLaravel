@@ -14,11 +14,13 @@
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <!-- Font Awesome -->
     <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- bootstrap-select -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/plugins/bootstrap-select/bootstrap-select.min.css">
 
     <!-- iCheck -->
     <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
@@ -109,15 +111,12 @@
       </div>
     </div>
 
+
     <!-- jQuery -->
-      <script src="/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 
-    <!-- Bootstrap -->
-    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- bootstrap-progressbar -->
     <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 

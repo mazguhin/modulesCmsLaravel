@@ -79,10 +79,9 @@
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                           </button>
                         </a>
-                      </p>
 
                       @if ($item->required==0)
-                      <p>
+
                         <!-- DELETE -->
                         <a href="/dashboard/menu/item/{{ $item->id }}">
                           <a class="btn btn-danger btn-sm" href="/dashboard/menu/item/{{ $item->id }}"
@@ -96,8 +95,8 @@
                               {{ method_field('DELETE') }}
                           </form>
                         </a>
-                      </p>
                       @endif
+                      </p>
 
                     </td>
                 </tr>

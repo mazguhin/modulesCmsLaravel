@@ -45,7 +45,7 @@
        <div class="form-group">
         <label for="description">Описание</label>
         <input type="text" value="{{ $club->description }}" class="form-control" id="description" name="description" placeholder="Введите описание">
-        <p class="help-block">Описание может видеть только администратор</p>
+        <p class="help-block">Доступно всем пользователям при просмотре страницы клуба</p>
        </div>
 
        <div class="form-group">

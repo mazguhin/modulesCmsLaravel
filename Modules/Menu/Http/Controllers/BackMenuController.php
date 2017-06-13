@@ -74,6 +74,7 @@ class BackMenuController extends Controller
    $menu->activated = $request->activated;
 
    if ($menu->save()) {
+     Cache::forget('menu.all');
      Logs::set('Добавлено меню ['.$menu->title.']');
      return redirect()->back()->with([
        'result' => 'Меню успешно добавлено'
