@@ -28,6 +28,8 @@
 
       <li><a href="/dashboard/guestbook"><i class="fa fa-book"></i> Гостевая книга</a></li>
 
+      <li><a href="/dashboard/blog"><i class="fa fa-black-tie"></i> Блоги</a></li>
+
       <li><a href="/dashboard/setting"><i class="fa fa-gear"></i> Настройки</a></li>
     </ul>
   </div>

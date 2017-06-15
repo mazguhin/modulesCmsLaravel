@@ -57,7 +57,7 @@
        </div>
 
        <div class="form-group" id="fa-select">
-         <label for="moders">Категория*</label>
+         <label for="moders">Модераторы*</label>
          <select class="form-control selectpicker" id="moders" name="moders[]" title="Назначить модераторов клуба" multiple>
             @foreach ($moders as $moder)
               <option value="{{ $moder->id }}"

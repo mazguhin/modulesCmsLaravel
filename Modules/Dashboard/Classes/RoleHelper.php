@@ -48,7 +48,7 @@ class RoleHelper {
 
     public function checkAdminOrModer(\App\User $user)
     {
-        return ($user->role=="moderator" || $user->role=="administrator");
+        return ($user->role->name=="moderator" || $user->role->name=="administrator");
     }
 
     public function validatePermissionForPage($pagePermission)

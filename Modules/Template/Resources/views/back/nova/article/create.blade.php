@@ -85,5 +85,5 @@
  <script src="/plugins/ckeditor/ckeditor.js"></script>
  <script type="text/javascript">
     CKEDITOR.replace('editor');
-  </script>
+ </script>
 @stop

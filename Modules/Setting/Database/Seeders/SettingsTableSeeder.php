@@ -25,7 +25,7 @@ class SettingsTableSeeder extends Seeder
         ],
         [
           'name' => 'backTemplate',
-          'value' => 'amy',
+          'value' => 'nova',
           'title' => 'Шаблон панели управления',
           'description' => 'Данная опция отвечает за выбор шаблона отображения контента в панели управления',
           'created_at' => \Carbon\Carbon::now(),

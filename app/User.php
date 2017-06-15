@@ -84,4 +84,14 @@ class User extends Authenticatable
     {
       return $this->hasMany('Modules\Log\Entities\Log');
     }
+
+    public function blogArticles()
+    {
+      return $this->hasMany('Modules\Blog\Entities\Article');
+    }
+
+    public function blogsModer()
+    {
+      return $this->hasMany('Modules\Blog\Entities\Blog', 'moder_id', 'id');
+    }
 }
