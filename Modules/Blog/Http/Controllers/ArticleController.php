@@ -40,4 +40,33 @@ class ArticleController extends Controller
 
     return back()->with(['result' => 'Статья успешно добавлена']);
   }
+
+  public function show(Blog $blog, Article $article)
+  {
+    return view('blog::'.$blog->template.'.article', [
+      'blog' => $blog,
+      'categories' => $blog->categories,
+      'article' => $article,
+    ]);
+  }
+
+  public function save(Blog $blog, Article $article)
+  {
+    $this->validateForm(request());
+
+    $article->title = request()->title;
+    $article->body = request()->body;
+    $article->category_id = request()->category;
+    $article->save();
+
+    return back()->with(['result' => 'Статья успешно изменена']);
+  }
+
+  public function delete(Blog $blog, Article $article)
+  {
+    $category = $article->category->id;
+    $article->delete();
+
+    return redirect("/blog/id/{$blog->id}/category/{$category}")->with(['result' => 'Статья успешно удалена']);
+  }
 }

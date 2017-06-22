@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Блог</title>
+    <title>{{ $blog->title }}</title>
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,11 +33,23 @@
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Главная</a>
-          <a class="blog-nav-item" href="#">New features</a>
-          <a class="blog-nav-item" href="#">Press</a>
-          <a class="blog-nav-item" href="#">New hires</a>
-          <a class="blog-nav-item" href="#">About</a>
+          <a class="blog-nav-item active" href="/blog/{{ $blog->slug }}">Главная блога</a>
+          <a class="blog-nav-item" href="/">Главная школы</a>
+
+          @if (Auth::guest())
+          <a href="{{ url('/login#signin') }}" class="blog-nav-item">Войти</a>
+          <a href="{{ url('/login#signup') }}" class="blog-nav-item">Регистрация</a>
+          @else
+          <a class="blog-nav-item" href="{{ url('/logout') }}"
+              onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+              Выход
+          </a>
+          @endif
+
+          <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+          </form>
         </nav>
       </div>
     </div>
@@ -56,9 +68,11 @@
           @include ('blog::standard.errors')
 
           <h1 class="blog-title">{{ $blog->title }}
+            @if (RoleHelper::validatePermissionForBlog($blog))
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editTitle">
               <i class="fa fa-pencil" aria-hidden="true"></i> Изменить
             </a>
+            @endif
           </h1>
           <p class="lead blog-description">{{ $blog->description }}</p>
         </div>
@@ -68,25 +82,31 @@
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module text-center">
+            @if (RoleHelper::validatePermissionForBlog($blog))
             <a href="#" class="btn btn-default" data-toggle="modal" data-target="#createArticle">
               <i class="fa fa-plus" aria-hidden="true"></i> Добавить статью
             </a>
+            @endif
           </div>
 
           <div class="sidebar-module sidebar-module-inset">
             <h4>Об авторе
+              @if (RoleHelper::validatePermissionForBlog($blog))
               <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editAbout">
                 <i class="fa fa-pencil" aria-hidden="true"></i> Изменить
               </a>
+              @endif
             </h4>
             <p>{!! $blog->about !!}</p>
           </div>
 
           <div class="sidebar-module">
             <h4>Категории
+              @if (RoleHelper::validatePermissionForBlog($blog))
               <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#createCategory">
                 <i class="fa fa-plus" aria-hidden="true"></i> Добавить
               </a>
+              @endif
             </h4>
             <ol class="list-unstyled">
               @foreach ($categories as $category)
@@ -107,6 +127,7 @@
       </p>
     </div>
 
+    @if (RoleHelper::validatePermissionForBlog($blog))
     <!-- Modal [createArticle] -->
     <div class="modal fade" id="createArticle" tabindex="-1" role="dialog" aria-labelledby="createArticleLabel">
     <div class="modal-dialog modal-lg" role="document">
@@ -220,6 +241,7 @@
     </div>
     </div>
     </div>
+    @endif
 
     <!-- jQuery -->
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
@@ -230,6 +252,10 @@
     <script type="text/javascript">
        CKEDITOR.replace('editorNewArticle');
        CKEDITOR.replace('editorAbout');
+    </script>
+
+    <script type="text/javascript">
+      @yield ('localjs')
     </script>
   </body>
 </html>

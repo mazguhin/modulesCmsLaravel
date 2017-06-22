@@ -79,4 +79,21 @@ class RoleHelper {
 
         return 0;
     }
+
+    // true, если пользователь имеет право управлять клубом
+    public function validatePermissionForBlog(\Modules\Blog\Entities\Blog $blog)
+    {
+        if (!Auth::check())
+          return 0;
+
+        $user = Auth::user();
+
+        if ($this->checkAdmin($user))
+          return 1;
+
+        if ($blog->moder->id == $user->id)
+          return 1;
+
+        return 0;
+    }
 }

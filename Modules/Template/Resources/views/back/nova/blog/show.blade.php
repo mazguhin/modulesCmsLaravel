@@ -64,6 +64,12 @@
                     <td>
 
                     <p>
+                      <a href="/blog/id/{{ $blog->id }}">
+                        <button type="button" class="btn btn-default btn-sm">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                      </a>
+
                       <a href="/dashboard/blog/edit/id/{{ $blog->id }}">
                         <button type="button" class="btn btn-primary btn-sm">
                           <i class="fa fa-pencil" aria-hidden="true"></i>

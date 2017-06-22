@@ -29,6 +29,10 @@ Route::group(['middleware' => ['web'], 'prefix' => 'blog/id/{blog}', 'namespace'
     Route::post('/title/edit', 'BlogController@editTitle');
 
     Route::post('/category/create', 'CategoryController@store');
+    Route::post('/category/edit/{category}', 'CategoryController@save');
+    Route::delete('/category/{category}', 'CategoryController@delete');
 
     Route::post('/article/create', 'ArticleController@store');
+    Route::post('/article/edit/{article}', 'ArticleController@save');
+    Route::delete('/article/{article}', 'ArticleController@delete');
 });
