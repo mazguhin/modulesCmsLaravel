@@ -62,6 +62,13 @@
              >{{ $club->name }}</option>
             @endforeach
            </optgroup>
+           <optgroup label="Блоги">
+           @foreach ($blogs as $blog)
+            <option value="/blog/id/{{ $blog->id }}"
+              @if ($arrayItemUrl[1]=='blog' && $arrayItemUrl[3]==$blog->id) selected @endif
+              >{{ $blog->title }}</option>
+           @endforeach
+           </optgroup>
            <optgroup label="Статьи">
            @foreach ($articles as $article)
             <option value="/article/id/{{ $article->id }}"

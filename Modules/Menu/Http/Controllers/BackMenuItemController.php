@@ -56,6 +56,7 @@ class BackMenuItemController extends Controller
      'articles' => $articles,
      'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
      'clubs' => \Modules\Club\Entities\Club::all(),
+     'blogs' => \Modules\Blog\Entities\Blog::all(),
      'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
      'roles' => \Modules\Dashboard\Entities\Role::all(),
      'id_menu' => $id_menu,
@@ -103,6 +104,7 @@ class BackMenuItemController extends Controller
      'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
      'clubs' => \Modules\Club\Entities\Club::all(),
      'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
+     'blogs' => \Modules\Blog\Entities\Blog::all(),
      'roles' => \Modules\Dashboard\Entities\Role::all(),
    ]);
  }

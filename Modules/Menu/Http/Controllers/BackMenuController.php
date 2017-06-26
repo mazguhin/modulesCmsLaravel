@@ -55,6 +55,7 @@ class BackMenuController extends Controller
      'categories' => \Modules\Category\Entities\Category::where('club',false)->get(),
      'roles' => \Modules\Dashboard\Entities\Role::all(),
      'clubs' => \Modules\Club\Entities\Club::all(),
+     'blogs' => \Modules\Blog\Entities\Blog::all(),
      'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
    ]);
  }
@@ -103,6 +104,7 @@ class BackMenuController extends Controller
      'menu' => Menu::where('id',$id_menu)->firstOrFail(),
      'roles' => \Modules\Dashboard\Entities\Role::all(),
      'clubs' => \Modules\Club\Entities\Club::all(),
+     'blogs' => \Modules\Blog\Entities\Blog::all(),
      'staffCategories' => \Modules\Staff\Entities\StaffCategory::all(),
    ]);
  }

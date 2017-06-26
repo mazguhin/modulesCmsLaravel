@@ -53,6 +53,11 @@
             <option value="/club/id/{{ $club->id }}">{{ $club->name }}</option>
            @endforeach
           </optgroup>
+          <optgroup label="Блоги">
+           @foreach ($blogs as $blog)
+            <option value="/blog/id/{{ $blog->id }}">{{ $blog->title }}</option>
+           @endforeach
+          </optgroup>
           <optgroup label="Статьи">
            @foreach ($articles as $article)
             <option value="/article/id/{{ $article->id }}">{{ $article->title }}</option>
